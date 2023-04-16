@@ -1,0 +1,51 @@
+{
+    "nav": {
+        "home": "Dashboard",
+        "singleMenuItem": "Profile",
+        "collapseReports": {
+            "reports": "Reports",
+            "item1": "ภาพรวมรายวัน",
+            "item2": "ค่าคอมมิชชันรายเดือน",
+            "item3": "ค่าคอมมิชชันรายวัน",
+            "item4": "เปอร์เซ็นต์ที่ได้รับ",
+            "item5": "อับดับ User"
+        },
+        "collapseMenu": {
+            "collapseMenu": "Customers",
+            "item1": "ค้นหาลูกค้า",
+            "item2": "ประวัติการสมัครล่าสุด"
+        },
+        "collapseAdmin": {
+            "collapseAdmin": "Admin",
+            "item1": "จัดการบัญชี Agnet",
+            "item2": "โดเมนส่วนตัว"
+        },
+        "groupMenu": {
+            "groupMenu": "Other",
+            "editGame": {
+                "editGame": "Game",
+                "item1": "ตั้งค่า Winrate",
+                "item2": "ตั้งค่า Games"
+            },
+            "editAgent": {
+                "editAgent": "Agent",
+                "item1": "แก้ไขข้อมูล Agent"
+            },
+            "apis": {
+                "apis": "APIs",
+                "item1": "ผลเกมส์"
+            },
+            "userManual": {
+                "userManual": "User Manual",
+                "item1": "วิธีเพิ่มเครดิตให้ลูกค้า",
+                "item2": "วิธีเพิ่มผู้ใช้งาน",
+                "item3": "วิธีแจ้งปัญหาการใช้งาน",
+                "item4": "อธิบายกราฟต่างๆ",
+                "item5": "อธิบายสถิติต่างๆ"
+            },
+            "condition": "เงื่อนไขและข้อตกลง",
+            "updatereport": "รายงานการอัพเดทระบบ",
+            "manual": "คู่มือการใช้งาน Demo"
+        }
+    }
+}
