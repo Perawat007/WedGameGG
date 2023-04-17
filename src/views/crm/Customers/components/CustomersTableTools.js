@@ -1,4 +1,4 @@
-//clear All
+//clear All เปลี่ยนเป็น Add 
 
 import React, { useRef } from 'react'
 import { Button } from 'components/ui'
@@ -7,6 +7,30 @@ import CustomerTableSearch from './CustomerTableSearch'
 import CustomerTableFilter from './CustomerTableFilter'
 import { useDispatch, useSelector } from 'react-redux'
 import cloneDeep from 'lodash/cloneDeep'
+
+import {
+    setSelectedCustomer,
+    setDrawerOpen,
+} from '../store/stateSlice'
+import useThemeClass from 'utils/hooks/useThemeClass'
+
+const ActionColumn = ({ row }) => {
+    const { textTheme } = useThemeClass()
+    const dispatch = useDispatch()
+    const onEdit = () => {
+        dispatch(setDrawerOpen())
+        dispatch(setSelectedCustomer(row))
+    }
+
+    return (
+        <div
+            className={`${textTheme} cursor-pointer select-none font-semibold`}
+            onClick={onEdit}
+        >
+            Edit
+        </div>
+    )
+}
 
 const CustomersTableTools = () => {
     const dispatch = useDispatch()
@@ -52,7 +76,7 @@ const CustomersTableTools = () => {
             </div>
             <div className="mb-4">
                 <Button size="sm" onClick={onClearAll}>
-                    Clear All
+                    Add Agent
                 </Button>
             </div>
         </div>
