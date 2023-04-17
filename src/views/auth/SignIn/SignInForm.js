@@ -23,8 +23,6 @@ const SignInForm = (props) => {
     const {
         disableSubmit = false,
         className,
-        forgotPasswordUrl = '/forgot-password',
-        signUpUrl = '/sign-up',
     } = props
 
     const [message, setMessage] = useTimeOutMessage()
@@ -37,16 +35,13 @@ const SignInForm = (props) => {
 
         const result = await signIn({ userName, password })
 
-        if (result.status === 'failed') {
+        if (result.status !== 'failed') {
+            console.log("Login");
             setMessage(result.message)
         }
 
         setSubmitting(false)
     }
-
-    const inputfield = {
-        background: 'transparent',
-    };
 
     return (
         <div className={className}>

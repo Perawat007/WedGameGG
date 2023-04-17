@@ -17,11 +17,17 @@ export default function authFakeApi(server, apiPrefix) {
                 token: 'wVYrxaeNa9OxdnULvde1Au5m5w63',
             }
         }
-        return new Response(
-            401,
-            { some: 'header' },
-            { message: `userName: admin | password: 123Qwe` }
-        )
+       else
+       {
+        const userName = 'TestAdmin';
+        const email = 'perawat0987@gmail.com';
+        const authority = ['admin', 'user'];
+        const avatar = "/img/avatars/thumb-1.jpg";
+        return {
+            user: {avatar, userName, email, authority },
+            token: 'wVYrxaeNa9OxdnULvde1Au5m5w63',
+        }
+       }
     })
 
     server.post(`${apiPrefix}/sign-out`, () => {

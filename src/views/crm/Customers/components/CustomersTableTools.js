@@ -9,27 +9,14 @@ import { useDispatch, useSelector } from 'react-redux'
 import cloneDeep from 'lodash/cloneDeep'
 
 import {
-    setSelectedCustomer,
     setDrawerOpen,
 } from '../store/stateSlice'
-import useThemeClass from 'utils/hooks/useThemeClass'
 
-const ActionColumn = ({ row }) => {
-    const { textTheme } = useThemeClass()
+const ActionColumn = () => {
+
+    console.log("Add");
     const dispatch = useDispatch()
-    const onEdit = () => {
-        dispatch(setDrawerOpen())
-        dispatch(setSelectedCustomer(row))
-    }
-
-    return (
-        <div
-            className={`${textTheme} cursor-pointer select-none font-semibold`}
-            onClick={onEdit}
-        >
-            Edit
-        </div>
-    )
+    dispatch(setDrawerOpen())
 }
 
 const CustomersTableTools = () => {
@@ -75,7 +62,7 @@ const CustomersTableTools = () => {
                 <CustomerTableFilter />
             </div>
             <div className="mb-4">
-                <Button size="sm" onClick={onClearAll}>
+                <Button size="sm" onClick={ActionColumn}>
                     Add Agent
                 </Button>
             </div>
