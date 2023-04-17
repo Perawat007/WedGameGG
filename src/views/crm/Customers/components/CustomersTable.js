@@ -10,7 +10,6 @@ import {
 import useThemeClass from 'utils/hooks/useThemeClass'
 import CustomerEditDialog from './CustomerEditDialog'
 import { Link } from 'react-router-dom'
-import dayjs from 'dayjs'
 import cloneDeep from 'lodash/cloneDeep'
 
 const statusColor = {

@@ -15,15 +15,17 @@ export async function apiGetCrmCalendar() {
     })
 }
 
+//สร้างตัว Add Agent
+
 export async function apiGetCrmCustomers(data) {
-    return ApiService.fetchData({
+    return ApiService.fetchDataAg({
         url: '/post/admin',
         method: 'GET',
     })
 }
 
 export async function apiGetCrmCustomersStatistic(params) {
-    return ApiService.fetchData({
+    return ApiService.fetchDataAg({
         url: '/post/admin',
         method: 'get',
         params,
