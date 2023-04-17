@@ -40,7 +40,7 @@ const NameColumn = ({ row }) => {
 
     return (
         <div className="flex items-center">
-            <Avatar size={28} shape="circle" src={row.img} />
+            <Avatar size={28} shape="circle" src={"/img/avatars/thumb-1.jpg"} />
             <Link
                 className={`hover:${textTheme} ml-2 rtl:mr-2 font-semibold`}
                 to={`/app/crm/customer-details?id=${row.ID}`}

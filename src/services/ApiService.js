@@ -7,10 +7,20 @@ const ApiService = {
             BaseService(param)
                 .then((response) => {
                     resolve(response)
+                    console.log(response);
                 })
                 .catch((errors) => {
                     reject(errors)
                 })
+
+                /*return new Promise((resolve, reject) => {
+                    fetch('http://localhost:5000/post/agent')
+                    .then(response => response.json())
+                    .then(data => {
+                        resolve(data);
+                    })
+                    .catch(error => reject(error))
+            })*/
         })
     },
 
