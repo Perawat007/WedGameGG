@@ -8,7 +8,7 @@ import { onSignOutSuccess } from '../store/auth/sessionSlice'
 
 const unauthorizedCode = [401]
 
-const BaseService = axios.create({
+const BaseService = ({
     timeout: 60000,
     //baseURL: appConfig.apiPrefix,
 })
@@ -42,7 +42,6 @@ BaseService.interceptors.response.use(
     (response) => response,
     (error) => {
         const { response } = error
-
         if (response && unauthorizedCode.includes(response.status)) {
             store.dispatch(onSignOutSuccess())
         }
