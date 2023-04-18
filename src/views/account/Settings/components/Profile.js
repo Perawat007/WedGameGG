@@ -161,14 +161,12 @@ const Profile = (data) => {
                                 <Button
                                     className="ltr:mr-2 rtl:ml-2"
                                     type="button"
-                                    onClick={resetForm}
                                 >
                                     Reset
                                 </Button>
                                 <Button
                                     variant="solid"
                                     loading={isSubmitting}
-                                    type="submit"
                                 >
                                     {isSubmitting ? 'Updating' : 'Update'}
                                 </Button>
