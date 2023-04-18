@@ -31,7 +31,7 @@ const CustomerFormAddAg = forwardRef((props, ref) => {
                         <Tabs defaultValue="personalInfo">
                             <TabList>
                                 <TabNav value="personalInfo">
-                                    Personal Info
+                                    Add Agent
                                 </TabNav>
                             </TabList>
                             <div className="p-6">

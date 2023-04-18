@@ -75,6 +75,7 @@ const PersonalInfoForm = (props) => {
             >
                 <Field
                     name="username"
+                    placeholder="username"
                     component={Input}
                     prefix={<HiUserCircle className="text-xl" />}
                 />

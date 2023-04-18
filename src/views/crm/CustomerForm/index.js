@@ -44,7 +44,7 @@ const CustomerForm = forwardRef((props, ref) => {
                         <Tabs defaultValue="personalInfo">
                             <TabList>
                                 <TabNav value="personalInfo">
-                                    Personal Info
+                                    Edit
                                 </TabNav>
                             </TabList>
                             <div className="p-6">
