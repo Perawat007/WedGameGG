@@ -15,7 +15,7 @@ const settingsMenu = {
 
 const Settings = () => {
     const [currentTab, setCurrentTab] = useState('profile')
-    const [data, setData] = useState({})
+    const [data, setData] = useState('')
 
     const navigate = useNavigate()
 
@@ -32,8 +32,7 @@ const Settings = () => {
 
     const fetchData = async () => {
         const response = await apiGetAccountSettingData()
-        console.log(response.data);
-        setData(response.data)
+        setData(response.data[0])
     }
 
     useEffect(() => {

@@ -16,7 +16,6 @@ const PersonalInfoForm = (props) => {
 
     const onSetFormFile = (form, field, file) => {
         form.setFieldValue(field.name, URL.createObjectURL(file[0]))
-        console.log(field);
     }
 
     return (

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState} from 'react'
 import {
     Input,
     Avatar,
@@ -32,8 +32,7 @@ const validationSchema = Yup.object().shape({
     Status: Yup.string(),
 })
 
-const Profile = ({ data }) => {
-    console.log(data);
+const Profile = (data) => {
     const onSetFormFile = (form, field, file) => {
         form.setFieldValue(field.name, URL.createObjectURL(file[0]))
     }
@@ -47,7 +46,7 @@ const Profile = ({ data }) => {
 
     return (
         <Formik
-            initialValues={data}
+            initialValues={data.data}
             enableReinitialize
             validationSchema={validationSchema}
             onSubmit={(values, { setSubmitting }) => {
@@ -67,12 +66,12 @@ const Profile = ({ data }) => {
                                 desc="Basic info, like your name and address that will displayed in public"
                             />
                             <FormRow
-                                name="ID"
+                                name="id"
                                 label="ID"
                                 {...validatorProps}
                             >
                                 <Field
-                                    type="text"
+                                    type="number"
                                     autoComplete="off"
                                     name="id"
                                     placeholder="Id"
@@ -91,7 +90,7 @@ const Profile = ({ data }) => {
                                     type="text"
                                     autoComplete="off"
                                     name="username"
-                                    placeholder="Username"
+                                    placeholder="username"
                                     component={Input}
                                     prefix={
                                         <HiOutlineMail className="text-xl" />
