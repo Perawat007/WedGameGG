@@ -9,6 +9,7 @@ import {
 } from '../store/stateSlice'
 import useThemeClass from 'utils/hooks/useThemeClass'
 import CustomerEditDialog from './CustomerEditDialog'
+import CustomerAddDialog from './CustomerAddDialog'
 import { Link } from 'react-router-dom'
 import cloneDeep from 'lodash/cloneDeep'
 
@@ -40,34 +41,17 @@ const NameColumn = ({ row }) => {
 
     return (
         <div className="flex items-center">
-            <Avatar size={28} shape="circle" src={"/img/avatars/thumb-1.jpg"} />
             <Link
                 className={`hover:${textTheme} ml-2 rtl:mr-2 font-semibold`}
-                to={`/app/crm/customer-details?id=${row.ID}`}
+                to={`/app/crm/customer-details?id=${row.id}`}
             >
-                {row.ID}
+                {row.id}
             </Link>
         </div>
     )
 }
 
 const columns = [
-
-    {
-        header: 'Role',
-        accessorKey: 'role',
-        cell: (props) => {
-            const row = props.row.original
-            return (
-                <div className="flex items-center">
-                    <Badge className={statusColor[row.Role]} />
-                    <span className="ml-2 rtl:mr-2 capitalize">
-                        {row.Role}
-                    </span>
-                </div>
-            )
-        },
-    },
 
     {
         header: 'ID',
@@ -77,9 +61,26 @@ const columns = [
             return <NameColumn row={row} />
         },
     },
+
+    {
+        header: 'Name',
+        accessorKey: 'role',
+        cell: (props) => {
+            const row = props.row.original
+            return (
+                <div className="flex items-center">
+                     <Avatar size={28} shape="circle" src={"/img/avatars/thumb-1.jpg"} />
+                    <span className="ml-2 rtl:mr-2 capitalize">
+                        {row.name}
+                    </span>
+                </div>
+            )
+        },
+    },
+    
     {
         header: 'UserName',
-        accessorKey: 'Username',
+        accessorKey: 'username',
     },
 
     {
@@ -90,7 +91,7 @@ const columns = [
             return (
                 <div className="flex items-center">
                 <span className="ml-2 rtl:mr-2 capitalize">
-                    {row.AdminID}
+                    {row.member_code}
                 </span>
             </div>
             )
@@ -104,9 +105,9 @@ const columns = [
             const row = props.row.original
             return (
                 <div className="flex items-center">
-                    <Badge className={statusColor[row.Active]} />
+                    <Badge className={statusColor[row.status]} />
                     <span className="ml-2 rtl:mr-2 capitalize">
-                        {row.Active}
+                        {row.status}
                     </span>
                 </div>
             )
@@ -119,9 +120,9 @@ const columns = [
             const row = props.row.original
             return (
                 <div className="flex items-center">
-                    <Badge className={statusColor[row.Credit]} />
+                    <Badge className={statusColor[row.balance]} />
                     <span className="ml-2 rtl:mr-2 capitalize">
-                        {row.Credit}
+                        {row.balance}
                     </span>
                 </div>
             )
@@ -183,6 +184,7 @@ const Customers = () => {
 
     return (
         <>
+        
             <DataTable
                 columns={columns}
                 data={data}
@@ -195,6 +197,7 @@ const Customers = () => {
                 onSort={onSort}
             />
             <CustomerEditDialog />
+            <CustomerAddDialog />
         </>
     )
 }

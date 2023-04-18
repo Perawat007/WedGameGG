@@ -8,19 +8,16 @@ import CustomerTableFilter from './CustomerTableFilter'
 import { useDispatch, useSelector } from 'react-redux'
 import cloneDeep from 'lodash/cloneDeep'
 
-import {
-    setDrawerOpen,
-} from '../store/stateSlice'
+import {setDrawerOpen} from '../store/addSlice'
 
-const ActionColumn = () => {
-
-    console.log("Add");
-    const dispatch = useDispatch()
-    dispatch(setDrawerOpen())
-}
 
 const CustomersTableTools = () => {
+
     const dispatch = useDispatch()
+
+    const ActionColumn = () => {
+        dispatch(setDrawerOpen())
+    }
 
     const inputRef = useRef()
 
@@ -42,14 +39,6 @@ const CustomersTableTools = () => {
     const fetchData = (data) => {
         dispatch(setTableData(data))
         dispatch(getCustomers(data))
-    }
-
-    const onClearAll = () => {
-        const newTableData = cloneDeep(tableData)
-        newTableData.query = ''
-        inputRef.current.value = ''
-        dispatch(setFilterData({ status: '' }))
-        fetchData(newTableData)
     }
 
     return (

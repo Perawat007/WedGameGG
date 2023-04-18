@@ -3,6 +3,7 @@ import {
     apiGetCrmCustomers,
     apPutCrmCustomer,
     apiGetCrmCustomersStatistic,
+    apAddCrmCustomer,
 } from 'services/CrmService'
 
 export const getCustomerStatistic = createAsyncThunk(
@@ -17,7 +18,7 @@ export const getCustomers = createAsyncThunk(
     'crmCustomers/data/getCustomers',
     async (params) => {
         const response = await apiGetCrmCustomers(params)
-        return response.allPosts
+        return response.data
     }
 )
 
@@ -25,6 +26,14 @@ export const putCustomer = createAsyncThunk(
     'crmCustomers/data/putCustomer',
     async (data) => {
         const response = await apPutCrmCustomer(data)
+        return response.data
+    }
+)
+
+export const AddCustomer = createAsyncThunk(
+    'crmCustomers/data/AddCrmCustomer',
+    async (data) => {
+        const response = await apAddCrmCustomer(data)
         return response.data
     }
 )

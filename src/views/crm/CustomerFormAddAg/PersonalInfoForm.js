@@ -1,12 +1,9 @@
 //EditData Agent
 import React from 'react'
-import { DatePicker, Input, FormItem, Avatar, Upload } from 'components/ui'
+import { Input, FormItem, Avatar, Upload } from 'components/ui'
 import {
     HiUserCircle,
-    HiMail,
     HiLocationMarker,
-    HiPhone,
-    HiCake,
     HiOutlineUser,
 } from 'react-icons/hi'
 import { Field } from 'formik'
@@ -16,7 +13,6 @@ const PersonalInfoForm = (props) => {
 
     const onSetFormFile = (form, field, file) => {
         form.setFieldValue(field.name, URL.createObjectURL(file[0]))
-        console.log(field);
     }
 
     return (
@@ -59,55 +55,40 @@ const PersonalInfoForm = (props) => {
             </FormItem>
 
             <FormItem
-                label="Id"
+                label="name"
                 invalid={errors.name && touched.name}
                 errorMessage={errors.name}
             >
                 <Field
-                    name="id"
+                    type="text"
+                    autoComplete="off"
+                    name="name"
+                    placeholder="name"
                     component={Input}
                     prefix={<HiUserCircle className="text-xl" />}
                 />
             </FormItem>
-
             <FormItem
                 label="Username"
                 invalid={errors.name && touched.name}
                 errorMessage={errors.name}
             >
                 <Field
-                    type="text"
-                    autoComplete="off"
                     name="username"
-                    placeholder="username"
                     component={Input}
                     prefix={<HiUserCircle className="text-xl" />}
                 />
             </FormItem>
             <FormItem
-                label="Phone Number"
-                invalid={errors.phoneNumber && touched.phoneNumber}
-                errorMessage={errors.phoneNumber}
-            >
-                <Field
-                    type="text"
-                    autoComplete="off"
-                    name="phoneNumber"
-                    placeholder="Phone Number"
-                    component={Input}
-                    prefix={<HiPhone className="text-xl" />}
-                />
-            </FormItem>
-            <FormItem
-                label="Status"
+                label="password"
                 invalid={errors.location && touched.location}
                 errorMessage={errors.location}
             >
                 <Field
-                    type="text"
+                    type="password"
                     autoComplete="off"
-                    name="status"
-                    placeholder="Status"
+                    name="password"
+                    placeholder="Password"
                     component={Input}
                     prefix={<HiLocationMarker className="text-xl" />}
                 />

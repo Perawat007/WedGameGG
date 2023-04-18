@@ -17,9 +17,9 @@ const navigationConfig = [
     },
     /** Example purpose only, please remove */
     {
-        key: 'singleMenuItem',
-        path: '/single-menu-view',
-        title: 'Single menu item',
+        key: 'appsAccount.settings',
+        path: `/account/settings/profile`,
+        title: 'Settingss',
         translateKey: 'nav.singleMenuItem',
         icon: 'singleMenu',
         type: NAV_ITEM_TYPE_ITEM,

@@ -3,36 +3,23 @@ import { Tabs, FormContainer } from 'components/ui'
 import { Form, Formik } from 'formik'
 import dayjs from 'dayjs'
 import customParseFormat from 'dayjs/plugin/customParseFormat'
-import * as Yup from 'yup'
 import PersonalInfoForm from './PersonalInfoForm'
 
 dayjs.extend(customParseFormat)
 
-const validationSchema = Yup.object().shape({
-    id: Yup.string(),
-    username: Yup.string().required('User Name Required'),
-    phoneNumber: Yup.string().matches(
-        /^((\+[1-9]{1,4}[ -]?)|(\([0-9]{2,3}\)[ -]?)|([0-9]{2,4})[ -]?)*?[0-9]{3,4}[ -]?[0-9]{3,4}$/,
-        'Phone number is not valid'
-    ),
-    status: Yup.string(),
-})
-
 const { TabNav, TabList, TabContent } = Tabs
 
-const CustomerForm = forwardRef((props, ref) => {
-    const { customer, onFormSubmit } = props
+const CustomerFormAddAg = forwardRef((props, ref) => {
+    const { onFormSubmit } = props
 
     return (
         <Formik
             innerRef={ref}
             initialValues={{
-                id : customer.id || '',
-                username: customer.username || '',
-                phoneNumber: '0990825942' || '',
-                status: customer.status || '',
+                name : '',
+                username: '',
+                password:'',
             }}
-            validationSchema={validationSchema}
             onSubmit={(values, { setSubmitting }) => {
                 onFormSubmit?.(values)
                 setSubmitting(false)
@@ -63,4 +50,4 @@ const CustomerForm = forwardRef((props, ref) => {
     )
 })
 
-export default CustomerForm
+export default CustomerFormAddAg

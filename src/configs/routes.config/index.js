@@ -12,10 +12,14 @@ export const protectedRoutes = [
     },
     /** Example purpose only, please remove */
     {
-        key: 'singleMenuItem',
-        path: '/single-menu-view',
-        component: React.lazy(() => import('views/demo/SingleMenuView')),
-        authority: [],
+        key: 'appsAccount.settings',
+        path: '/account/settings/profile',
+        component: React.lazy(() => import('views/account/Settings')),
+        authority: ['admin', 'user'],
+        meta: {
+            header: 'Settings',
+            headerContainer: true,
+        },
     },
     {
         key: 'collapseMenu.item1',

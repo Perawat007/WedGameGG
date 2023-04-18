@@ -18,11 +18,10 @@ const stateSlice = createSlice({
         },
     },
 })
-
 export const {
     setSelectedCustomer,
     setDrawerOpen,
     setDrawerClose,
 } = stateSlice.actions
 
-export default stateSlice.reducer
+export default stateSlice.reducer;

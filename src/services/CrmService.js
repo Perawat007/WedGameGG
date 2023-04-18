@@ -33,10 +33,14 @@ export async function apiGetCrmCustomersStatistic(params) {
 }
 
 export async function apPutCrmCustomer(data) {
-    console.log(data);
     return ApiService.putData({
-        url: '/crm/customers',
-        method: 'put',
+        data,
+    })
+}
+
+//AddAgent
+export async function apAddCrmCustomer(data) {
+    return ApiService.addAgent({
         data,
     })
 }

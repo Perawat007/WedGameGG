@@ -1,3 +1,5 @@
+//ทำ Login ดูหน้านี้
+
 import { useSelector, useDispatch } from 'react-redux'
 import { setUser, initialState } from 'store/auth/userSlice'
 import { apiSignIn, apiSignOut, apiSignUp } from 'services/AuthService'
@@ -20,12 +22,13 @@ function useAuth() {
         try {
             const resp = await apiSignIn(values)
             if (resp.data) {
-                const { token } = resp.data
-                dispatch(onSignInSuccess(token))
-                if (resp.data.user) {
+                const { token } = resp.token
+                console.log(resp.token)
+                dispatch(onSignInSuccess(resp.token))
+                if (resp.data) {
                     dispatch(
                         setUser(
-                            resp.data.user || {
+                            resp.data || {
                                 avatar: '',
                                 userName: 'Anonymous',
                                 authority: ['USER'],
@@ -34,10 +37,12 @@ function useAuth() {
                         )
                     )
                 }
+
                 const redirectUrl = query.get(REDIRECT_URL_KEY)
                 navigate(
                     redirectUrl ? redirectUrl : appConfig.authenticatedEntryPath
                 )
+                
                 return {
                     status: 'success',
                     message: '',
@@ -93,7 +98,7 @@ function useAuth() {
     }
 
     const signOut = async () => {
-        await apiSignOut()
+        //await apiSignOut()
         handleSignOut()
     }
 

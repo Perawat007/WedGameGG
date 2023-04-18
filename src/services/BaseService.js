@@ -8,29 +8,29 @@ import { onSignOutSuccess } from '../store/auth/sessionSlice'
 
 const unauthorizedCode = [401]
 
-const BaseService = ({
-    timeout: 60000,
-    //baseURL: appConfig.apiPrefix,
-})
+const BaseService = axios.create({
+    timeout: 10000,
+    baseURL: 'https://relaxtimecafe.fun',
+});
 
 BaseService.interceptors.request.use(
     (config) => {
         const rawPersistData = localStorage.getItem(PERSIST_STORE_NAME)
         const persistData = deepParseJson(rawPersistData)
-
+        console.log(persistData);
         let accessToken = persistData.auth.session.token
 
         if (!accessToken) {
             const { auth } = store.getState()
             accessToken = auth.session.token
         }
-
+        
         if (accessToken) {
             config.headers[
                 REQUEST_HEADER_AUTH_KEY
             ] = `${TOKEN_TYPE}${accessToken}`
         }
-
+        console.log(config)
         return config
     },
     (error) => {

@@ -14,7 +14,7 @@ import * as Yup from 'yup'
 import useAuth from 'utils/hooks/useAuth'
 
 const validationSchema = Yup.object().shape({
-    userName: Yup.string().required('Please enter your user name'),
+    username: Yup.string().required('Please enter your user name'),
     password: Yup.string().required('Please enter your password'),
     rememberMe: Yup.bool(),
 })
@@ -30,16 +30,13 @@ const SignInForm = (props) => {
     const { signIn } = useAuth()
 
     const onSignIn = async (values, setSubmitting) => {
-        const { userName, password } = values
+        const { username, password } = values
         setSubmitting(true)
 
-        const result = await signIn({ userName, password })
-
-        if (result.status !== 'failed') {
-            console.log("Login");
+        const result = await signIn({ username, password })
+        if (result.status === 'failed') {
             setMessage(result.message)
         }
-
         setSubmitting(false)
     }
 
@@ -53,8 +50,8 @@ const SignInForm = (props) => {
             <Formik
                 // Remove this initial value
                 initialValues={{
-                    userName: 'admin',
-                    password: '123Qwe',
+                    username: 'admintest',
+                    password: '123456789',
                     rememberMe: true,
                 }}
                 validationSchema={validationSchema}
@@ -71,13 +68,13 @@ const SignInForm = (props) => {
                         <FormContainer>
                             <FormItem
                                 label="UserName"
-                                invalid={errors.userName && touched.userName}
-                                errorMessage={errors.userName}
+                                invalid={errors.username && touched.username}
+                                errorMessage={errors.username}
                             >
                                 <Field
                                     type="text"
                                     autoComplete="off"
-                                    name="userName"
+                                    name="username"
                                     placeholder="User Name"
                                     style={{ color: 'black' }} 
                                     component={Input}

@@ -39,7 +39,7 @@ export const UserDropdown = ({ className }) => {
             <Avatar size={32} shape="circle" src={avatar} />
             <div className="hidden md:block">
                 <div className="text-xs capitalize">
-                    {authority[0] || 'guest'}
+                    {'admin' || 'guest'}
                 </div>
                 <div className="font-bold">{userName}</div>
             </div>
