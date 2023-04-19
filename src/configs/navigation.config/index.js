@@ -6,26 +6,16 @@ import {
 
 const navigationConfig = [
     {
-        key: 'home',
+        key: 'dashboard',
         path: '/home',
-        title: 'Home',
-        translateKey: 'nav.home',
+        title: 'Dashboard',
+        translateKey: 'nav.dashboard',
         icon: 'home',
         type: NAV_ITEM_TYPE_ITEM,
-        authority: [],
+        authority: ['admin', 'user'],
         subMenu: [],
     },
     /** Example purpose only, please remove */
-    {
-        key: 'appsAccount.settings',
-        path: `/account/settings/profile`,
-        title: 'Settingss',
-        translateKey: 'nav.singleMenuItem',
-        icon: 'singleMenu',
-        type: NAV_ITEM_TYPE_ITEM,
-        authority: [],
-        subMenu: [],
-    },
     {
         key: 'collapseReports',
         path: '',
@@ -150,10 +140,10 @@ const navigationConfig = [
         ],
     },
     {
-        key: 'groupMenu',
+        key: '',
         path: '',
-        title: 'Group Menu',
-        translateKey: 'nav.groupMenu.groupMenu',
+        title: '',
+        translateKey: '',
         icon: '',
         type: NAV_ITEM_TYPE_TITLE,
         authority: [],

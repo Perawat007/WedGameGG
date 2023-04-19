@@ -116,6 +116,16 @@ const ApiService = {
             });
   });
   },
+  getValusData() {
+    return new Promise((resolve, reject) => {
+            fetch('https://relaxtimecafe.fun/getallData')
+            .then(response => response.json())
+            .then(data => {
+                resolve(data);
+            })
+            .catch(error => console.error(error))
+    })
+  },
 }
 
 export default ApiService

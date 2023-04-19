@@ -1,7 +1,7 @@
 {
     "nav": {
-        "home": "Dashboard",
-        "singleMenuItem": "Profile",
+        "dashboard": "Dashboard",
+        "singleMenuItem": "",
         "collapseReports": {
             "reports": "Reports",
             "item1": "ภาพรวมรายวัน",
@@ -17,11 +17,11 @@
         },
         "collapseAdmin": {
             "collapseAdmin": "Admin",
-            "item1": "จัดการบัญชี Agnet",
-            "item2": "โดเมนส่วนตัว"
+            "item1": "จัดการบัญชีผู้ดูแลระบบ",
+            "item2": "แก้ไขสิทธิ์"
         },
         "groupMenu": {
-            "groupMenu": "Other",
+
             "editGame": {
                 "editGame": "Game",
                 "item1": "ตั้งค่า Winrate",

@@ -12,7 +12,7 @@ import { FiActivity } from 'react-icons/fi'
 const dropdownItemList = [
     {
         label: 'Profile',
-        path: '/app/account/settings/profile',
+        path: '/account/settings/profile',
         icon: <HiOutlineUser />,
     },
     {
@@ -36,12 +36,12 @@ export const UserDropdown = ({ className }) => {
 
     const UserAvatar = (
         <div className={classNames(className, 'flex items-center gap-2')}>
-            <Avatar size={32} shape="circle" src={avatar} />
+            <Avatar size={32} shape="circle" src='/img/thumbs/litecoin.png' />
             <div className="hidden md:block">
                 <div className="text-xs capitalize">
                     {'admin' || 'guest'}
                 </div>
-                <div className="font-bold">{userName}</div>
+                <div className="font-bold">{'AdminTest'}</div>
             </div>
         </div>
     )
@@ -55,12 +55,12 @@ export const UserDropdown = ({ className }) => {
             >
                 <Dropdown.Item variant="header">
                     <div className="py-2 px-3 flex items-center gap-2">
-                        <Avatar shape="circle" src={avatar} />
+                        <Avatar shape="circle" src={'/img/thumbs/litecoin.png'} />
                         <div>
                             <div className="font-bold text-gray-900 dark:text-gray-100">
                                 {userName}
                             </div>
-                            <div className="text-xs">{email}</div>
+                            <div className="text-xs">{'AdminTest'}</div>
                         </div>
                     </div>
                 </Dropdown.Item>

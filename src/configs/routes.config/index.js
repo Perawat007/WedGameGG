@@ -5,12 +5,12 @@ export const publicRoutes = [...authRoute]
 
 export const protectedRoutes = [
     {
-        key: 'home',
+        key: 'dashboard',
         path: '/home',
-        component: React.lazy(() => import('views/Home')),
-        authority: [],
+        component: React.lazy(() => import('views/dashboard/index')),
+        authority: ['admin', 'user'],
     },
-    /** Example purpose only, please remove */
+
     {
         key: 'appsAccount.settings',
         path: '/account/settings/profile',

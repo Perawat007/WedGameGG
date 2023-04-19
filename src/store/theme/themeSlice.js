@@ -66,6 +66,7 @@ export const themeSlice = createSlice({
             ) {
                 state.navMode = NAV_MODE_LIGHT
             }
+            console.log('on');
             state.mode = action.payload
         },
         setLayout: (state, action) => {

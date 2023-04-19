@@ -45,6 +45,11 @@ export async function apAddCrmCustomer(data) {
     })
 }
 
+//Get จำนวน Data มาไว้ดูในหน้า Dashboard จำนวน ของ Admin Agent Member
+export async function getCustomer() {
+    return ApiService.getValusData()
+}
+
 export async function apiGetCrmCustomerDetails(params) {
     return ApiService.fetchData({
         url: '/crm/customer-details',
