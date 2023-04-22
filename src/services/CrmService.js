@@ -15,31 +15,63 @@ export async function apiGetCrmCalendar() {
     })
 }
 
-//สร้างตัว Add Agent
-
-export async function apiGetCrmCustomers(data) {
+//get Agent
+export async function apiGetAgent(data) {
     return ApiService.fetchDataAg({
-        url: '/post/admin',
-        method: 'GET',
+        data
+    })
+}
+
+//get Admin
+export async function apiGetCrmAdmin(data) {
+    return ApiService.fetchDataAd({
+        data
+    })
+}
+
+//get Member
+export async function apiGetCrmMember(data) {
+    return ApiService.fetchDataMember({
+        data
+    })
+}
+
+//get Log_Member
+export async function apiGetLogMember(data) {
+    return ApiService.fetchLogMember({
+        data
     })
 }
 
 export async function apiGetCrmCustomersStatistic(params) {
-    return ApiService.fetchDataAg({
-        url: '/post/admin',
-        method: 'get',
-        params,
+   return ApiService.fetchDataAg({
+        params
     })
 }
 
-export async function apPutCrmCustomer(data) {
-    return ApiService.putData({
+//PutAgent
+export async function apPutAgent(data) {
+    return ApiService.putDataAgent({
+        data,
+    })
+}
+
+//PutAdmin
+export async function apPutAdmin(data) {
+    return ApiService.putDataAdmin({
+        data,
+    })
+}
+
+//AddAdmin
+export async function AddAdmin(data) {
+    return ApiService.addAdmin({
         data,
     })
 }
 
 //AddAgent
-export async function apAddCrmCustomer(data) {
+export async function apAddAgent(data) {
     return ApiService.addAgent({
         data,
     })

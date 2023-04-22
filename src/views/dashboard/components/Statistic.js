@@ -5,10 +5,10 @@ import { GrowShrinkTag } from 'components/shared'
 import { useSelector } from 'react-redux'
 import dayjs from 'dayjs'
 import {
-    HiUserCircle,
+    HiOutlineUserGroup,
 } from 'react-icons/hi'
 
-const StatisticCard = ({ data = {}, label, valuePrefix, date }) => {
+const StatisticCard = ({ data = {},avatarClass , label, valuePrefix, date }) => {
     return (
         <Card>
             <h6 className="font-semibold mb-4 text-sm">{label}</h6>
@@ -17,8 +17,8 @@ const StatisticCard = ({ data = {}, label, valuePrefix, date }) => {
                     <h3 className="font-bold">
                     <Avatar
                     size={50}
-                    className="bg-indigo-100 text-indigo-600 dark:bg-indigo-500/20 dark:text-indigo-100"
-                    icon={<HiUserCircle />}
+                    className={avatarClass}
+                    icon={<HiOutlineUserGroup />}
                 />
                 &nbsp;
                 &nbsp;
@@ -49,21 +49,24 @@ const Statistic = ({ data = {} }) => {
     )
 
     return (
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 mb-6">
             <StatisticCard
                 data={data.dataAdmin}
+                avatarClass="!bg-indigo-600"
                 label="Admin จำนวน / คน"
                 tagSuffix="%"
                 date={startDate}
             />
             <StatisticCard
                 data={data.dataAgent}
+                avatarClass="!bg-blue-500"
                 label="Agent จำนวน / คน"
                 tagSuffix="%"
                 date={startDate}
             />
             <StatisticCard
                 data={data.dataMember}
+                avatarClass="!bg-emerald-500"
                 label="Member จำนวน / คน"
                 tagSuffix="%"
                 date={startDate}

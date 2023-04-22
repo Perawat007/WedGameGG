@@ -88,7 +88,7 @@ const navigationConfig = [
         subMenu: [
             {
                 key: 'collapseMenu.item1',
-                path: '/collapse-menu-item-view-1',
+                path: '/memderLog',
                 title: 'Collapse menu item 1',
                 translateKey: 'nav.collapseMenu.item1',
                 icon: '',
@@ -190,7 +190,7 @@ const navigationConfig = [
                 subMenu: [
                     {
                         key: 'groupMenu.editAgent.item1',
-                        path: '/group-collapse-menu-item-view-1',
+                        path: '/editDataAgent',
                         title: 'Menu item 1',
                         translateKey: 'nav.groupMenu.editAgent.item1',
                         icon: '',

@@ -1,9 +1,9 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import {
-    apiGetCrmCustomers,
-    apPutCrmCustomer,
+    apPutAdmin,
     apiGetCrmCustomersStatistic,
-    apAddCrmCustomer,
+    AddAdmin,
+    apiGetLogMember,
 } from 'services/CrmService'
 
 export const getCustomerStatistic = createAsyncThunk(
@@ -14,18 +14,19 @@ export const getCustomerStatistic = createAsyncThunk(
     }
 )
 
-export const getCustomers = createAsyncThunk(
+export const getCustomersLog = createAsyncThunk(
     'crmCustomers/data/getCustomers',
     async (params) => {
-        const response = await apiGetCrmCustomers(params)
-        return response.data
+        const response = await apiGetLogMember(params)
+        return response
+        
     }
 )
 
 export const putCustomer = createAsyncThunk(
     'crmCustomers/data/putCustomer',
     async (data) => {
-        const response = await apPutCrmCustomer(data)
+        const response = await apPutAdmin(data)
         return response.data
     }
 )
@@ -33,7 +34,7 @@ export const putCustomer = createAsyncThunk(
 export const AddCustomer = createAsyncThunk(
     'crmCustomers/data/AddCrmCustomer',
     async (data) => {
-        const response = await apAddCrmCustomer(data)
+        const response = await AddAdmin(data)
         return response.data
     }
 )
@@ -41,17 +42,19 @@ export const AddCustomer = createAsyncThunk(
 export const initialTableData = {
     total: 0,
     pageIndex: 1,
-    pageSize: 10,
+    pageSize: 5,
     query: '',
     sort: {
         order: '',
         key: '',
     },
+    id : 0,
 }
 
 export const initialFilterData = {
     status: '',
 }
+
 
 const dataSlice = createSlice({
     name: 'crmCustomers/data',
@@ -74,12 +77,12 @@ const dataSlice = createSlice({
         },
     },
     extraReducers: {
-        [getCustomers.fulfilled]: (state, action) => {
-            state.customerList = action.payload
+        [getCustomersLog.fulfilled]: (state, action) => {
+            state.customerList = action.payload.data
             state.tableData.total = action.payload.total
             state.loading = false
         },
-        [getCustomers.pending]: (state) => {
+        [getCustomersLog.pending]: (state) => {
             state.loading = true
         },
         [getCustomerStatistic.pending]: (state) => {

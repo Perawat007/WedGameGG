@@ -81,6 +81,7 @@ const DataTable = forwardRef((props, ref) => {
     }
 
     const handlePaginationChange = (page) => {
+
         if (!loading) {
             onPaginationChange?.(page)
         }

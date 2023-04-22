@@ -113,7 +113,6 @@ Dialog.propTypes = {
 
 Dialog.defaultProps = {
     closable: true,
-    width: 520,
     closeTimeoutMS: 150,
 }
 

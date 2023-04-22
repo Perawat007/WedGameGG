@@ -1,6 +1,6 @@
 import React, { forwardRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { setCustomerList, putCustomer } from '../store/dataSlice'
+import { setCustomerList, putCustomer } from '../store/dataSliceAdmin'
 import { setDrawerClose } from '../store/stateSlice'
 import cloneDeep from 'lodash/cloneDeep'
 import isEmpty from 'lodash/isEmpty'
@@ -45,7 +45,6 @@ const CustomerEditContent = forwardRef((_, ref) => {
             dispatch(putCustomer(editedCustomer))
         }
         dispatch(setDrawerClose())
-        window.location.reload();
     }
 
     return (

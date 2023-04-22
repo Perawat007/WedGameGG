@@ -23,8 +23,8 @@ export const protectedRoutes = [
     },
     {
         key: 'collapseMenu.item1',
-        path: '/collapse-menu-item-view-1',
-        component: React.lazy(() => import('views/demo/CollapseMenuItemView1')),
+        path: '/memderLog',
+        component: React.lazy(() => import('views/membergame/Customers/memderLog')),
         authority: [],
     },
     {
@@ -49,8 +49,8 @@ export const protectedRoutes = [
     },
     {
         key: 'groupMenu.editAgent.item1',
-        path: '/collapse-menu-item-view-3',
-        component: React.lazy(() => import('views/crm/Customers/CollapseMenuItemView3')),
+        path: '/editDataAgent',
+        component: React.lazy(() => import('views/editdataagent/Customers/EditAgent')),
         authority: [],
     },
     {
