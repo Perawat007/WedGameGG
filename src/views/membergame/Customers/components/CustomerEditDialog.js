@@ -3,12 +3,12 @@ import { Button, Drawer } from 'components/ui'
 import CustomerEditContent from './CustomerEditContent'
 import { useDispatch, useSelector } from 'react-redux'
 import { setDrawerClose, setSelectedCustomer } from '../store/stateSlice'
-import { DeleteAdmin } from '../store/dataSliceAdmin'
+import { DeleteMemBer } from '../store/dataSliceAdmin'
 
-const DrawerFooter = ({ onSaveClick, onCancel, onDelete}) => {
+const DrawerFooter = ({ onSaveClick, onCancel, onDelete }) => {
     return (
         <div className="text-right w-full">
-            <Button size="sm" className="mr-2" onClick={onDelete}>
+             <Button size="sm" className="mr-2" onClick={onDelete}>
                 Delete
             </Button>
             <Button size="sm" className="mr-2" onClick={onCancel}>
@@ -30,14 +30,14 @@ const CustomerEditDialog = () => {
     const customer = useSelector(
         (state) => state.crmCustomers.state.selectedCustomer
     )
-
+    
     const onDrawerClose = () => {
         dispatch(setDrawerClose())
         dispatch(setSelectedCustomer({}))
     }
 
-    const deleteAdmin =() =>{
-        dispatch(DeleteAdmin(customer.id))
+    const deleteMember =() =>{
+        dispatch(DeleteMemBer(customer.id, 'member'))
         dispatch(setDrawerClose())
         dispatch(setSelectedCustomer({}))
     }
@@ -57,7 +57,7 @@ const CustomerEditDialog = () => {
             bodyClass="p-0"
             footer={
                 <DrawerFooter
-                    onDelete={deleteAdmin}
+                    onDelete={deleteMember}
                     onCancel={onDrawerClose}
                     onSaveClick={formSubmit}
                 />

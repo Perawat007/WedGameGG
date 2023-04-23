@@ -16,8 +16,6 @@ const ApiService = {
             })
             .then(response => {
                 if (response) {
-
-                  
                   return response.json();
                 } else {
                   throw new Error('Error: ' + response.statusText);
@@ -107,12 +105,30 @@ const ApiService = {
      //GetDataMember //Search ด้วย ส่ง name มา
      fetchDataMember(param) {
       return new Promise((resolve, reject) => {
-        fetch('https://relaxtimecafe.fun/list_users')
-            .then(response => response.json())
-            .then(data => {
-                resolve(data);
-            })
-            .catch(error => console.error(error))
+        fetch('https://relaxtimecafe.fun/list_users', {
+          method: 'POST',
+          headers: {
+           'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            name: param.data.query,
+            pageIndex: param.data.pageIndex,
+            pageSize: param.data.pageSize
+          })
+      })
+      .then(response => {
+          if (response) {
+            return response.json();
+          } else {
+            throw new Error('Error: ' + response.statusText);
+          }
+        })
+        .then(data => {
+          resolve(data);
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
       })
   },
 
@@ -162,6 +178,34 @@ const ApiService = {
           });
       })
   },
+
+  //putMember
+  putDataMember(param) {
+    return new Promise((resolve, reject) => {
+      console.log(param);
+      fetch('http://localhost:5000/member/'+ param.data.id, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          member_code: param.data.member_code,
+          name: param.data.name,
+          username: param.data.username,
+          status: param.data.status,
+          balance: param.data.balance
+        })
+      })
+        .then(response => response.json())
+        .then(data => {
+          console.log(data);
+          //window.location.reload();
+        })
+        .catch(error => {
+          console.error(error);
+        });
+    })
+},
 
     //AddAgent
     addAgent(param) {
@@ -222,6 +266,39 @@ const ApiService = {
           .catch(error => {
             console.error('Error:', error);
           });
+});
+},
+
+//AddMember
+addMember(param) {
+  return new Promise((resolve, reject) => {
+
+    fetch('http://localhost:5000/signupMember', {
+          method: 'POST',
+          headers: {
+           'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+              agent_id : param.data.agent_id,
+              member_code: param.data.member_code,
+              name: param.data.name,
+              username: param.data.username,
+              password: param.data.password,
+          })
+      })
+      .then(response => {
+          if (response) {
+            return response.json();
+          } else {
+            throw new Error('Error: ' + response.statusText);
+          }
+        })
+        .then(data => {
+          resolve(data);
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
 });
 },
 

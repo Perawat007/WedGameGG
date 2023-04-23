@@ -8,52 +8,39 @@ import {
     setDrawerOpen,
 } from '../store/stateSlice'
 import useThemeClass from 'utils/hooks/useThemeClass'
-import { Link } from 'react-router-dom'
+import CustomerEditDialog from './CustomerEditDialog'
+import CustomerAddDialog from './CustomerAddDialog'
 import cloneDeep from 'lodash/cloneDeep'
-import DataLog from 'views/memberLog/Customers/dataLog'
+import DataLog from 'views/memberLog/Customers/DataLog'
 
 const statusColor = {
     active: 'bg-emerald-500',
     blocked: 'bg-red-500',
 }
 
-
-const NameColumn = ({ row }) => {
-    const { textTheme } = useThemeClass()
-
-    return (
-        <div className="flex items-center">
-            <Link
-                className={`hover:${textTheme} ml-2 rtl:mr-2 font-semibold`}
-                to={`/app/crm/customer-details?id=${row.id}`}
-            >
-                {row.id}
-            </Link>
-        </div>
-    )
-}
-
-const AgentNameColumn = ({ row }) => {
-    const { textTheme } = useThemeClass()
-
-    return (
-        <div className="flex items-center">
-            <Link
-                className={`hover:${textTheme} ml-2 rtl:mr-2 font-semibold`}
-                to={`/app/crm/customer-details?id=${row.agent_id}`}
-            >
-                {1}
-            </Link>
-        </div>
-    )
-}
-
 const ActionColumn = (row) => {
+    const { textTheme } = useThemeClass()
+    const dispatch = useDispatch()
+    const onEdit = () => {
+        dispatch(setDrawerOpen())
+        dispatch(setSelectedCustomer(row.rowLog))
+    }
+
+    return (
+        <div className="ltr:text-right rtl:text-left">
+            <Button size="sm" onClick={() => onEdit()}>
+                Edit
+            </Button>
+        </div>
+    )
+}
+
+const ActionColumnLog = (row) => {
     const [viewOpen, setViewOpen] = useState(false)
     const [rowIdLog, setLogId] = useState();
 
     const onViewOpen = (rowId) => {
-        setLogId(rowId.rowLog)
+        setLogId(rowId.rowLog.id)
         if (rowIdLog !== undefined)
         {
             setViewOpen(true)
@@ -86,6 +73,17 @@ const ActionColumn = (row) => {
     )
 }
 
+
+const NameColumn = ({ row }) => {
+    const { textTheme } = useThemeClass()
+
+    return (
+        <div className="flex items-center">
+           { row.id}
+        </div>
+    )
+}
+
 const columns = [
 
     {
@@ -98,11 +96,17 @@ const columns = [
     },
 
     {
-        header: 'Agent_id',
-        accessorKey: 'agent_id',
+        header: 'IdAgent',
+        accessorKey: 'idAgent',
         cell: (props) => {
             const row = props.row.original
-            return <AgentNameColumn row={row} />
+            return (
+                <div className="flex items-center">
+                    <span className="ml-2 rtl:mr-2 capitalize">
+                        {row.id}
+                    </span>
+                </div>
+            )
         },
     },
 
@@ -178,10 +182,20 @@ const columns = [
         id: 'action',
         cell: (props) => {
             const row = props.row.original
-            return <ActionColumn rowLog={row.id}/>
+            return <ActionColumn rowLog={row}/>
+        },
+    },
+
+    {
+        header: '',
+        id: 'actionLog',
+        cell: (props) => {
+            const row = props.row.original
+            return <ActionColumnLog rowLog={row}/>
         },
     },
 ]
+
 const Customers = () => {
     const dispatch = useDispatch()
     const data = useSelector((state) => state.crmCustomers.data.customerList)
@@ -239,6 +253,8 @@ const Customers = () => {
                 onSelectChange={onSelectChange}
                 onSort={onSort}
             />
+            <CustomerEditDialog />
+            <CustomerAddDialog />
         </>
     )
 }

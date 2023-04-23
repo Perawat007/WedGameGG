@@ -6,11 +6,11 @@ const addSlice = createSlice({
         drawerOpen: false,
     },
     reducers: {
-        setDrawerOpen: (addAgent) => {
-            addAgent.drawerOpen = true
+        setDrawerOpen: (addMenBer) => {
+            addMenBer.drawerOpen = true
         },
-        setDrawerClose: (addAgent) => {
-            addAgent.drawerOpen = false
+        setDrawerClose: (addMenBer) => {
+            addMenBer.drawerOpen = false
         },
     },
 })

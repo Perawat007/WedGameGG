@@ -4,7 +4,6 @@ const stateSlice = createSlice({
     name: 'crmCustomers/state',
     initialState: {
         drawerOpen: false,
-        tradeDialogOpen: false,
         selectedCustomer: {},
     },
     reducers: {
@@ -17,20 +16,12 @@ const stateSlice = createSlice({
         setDrawerClose: (state) => {
             state.drawerOpen = false
         },
-        toggleTradeDialog: (state, action) => {
-            state.tradeDialogOpen = action.payload
-        },
-        setSelectedRow: (state, action) => {
-            state.selectedRow = action.payload
-        },
     },
 })
 export const {
     setSelectedCustomer,
     setDrawerOpen,
     setDrawerClose,
-    toggleTradeDialog,
-    setSelectedRow,
 } = stateSlice.actions
 
 export default stateSlice.reducer;

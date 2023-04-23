@@ -1,5 +1,5 @@
 import React, { useEffect, useCallback, useMemo } from 'react'
-import { Avatar, Badge } from 'components/ui'
+import { Avatar, Badge, Button } from 'components/ui'
 import { DataTable } from 'components/shared'
 import { useDispatch, useSelector } from 'react-redux'
 import { getCustomers, setTableData } from '../store/dataSliceAdmin'
@@ -21,17 +21,17 @@ const statusColor = {
 const ActionColumn = ({ row }) => {
     const { textTheme } = useThemeClass()
     const dispatch = useDispatch()
+
     const onEdit = () => {
         dispatch(setDrawerOpen())
         dispatch(setSelectedCustomer(row))
     }
 
     return (
-        <div
-            className={`${textTheme} cursor-pointer select-none font-semibold`}
-            onClick={onEdit}
-        >
-            Edit
+        <div className="ltr:text-right rtl:text-left">
+            <Button size="sm" onClick={() => onEdit()}>
+                Edit
+            </Button>
         </div>
     )
 }
@@ -63,6 +63,11 @@ const columns = [
     },
 
     {
+        header: 'UserName',
+        accessorKey: 'username',
+    },
+
+    {
         header: 'Name',
         accessorKey: 'role',
         cell: (props) => {
@@ -76,11 +81,6 @@ const columns = [
                 </div>
             )
         },
-    },
-    
-    {
-        header: 'UserName',
-        accessorKey: 'username',
     },
 
     {
@@ -103,35 +103,30 @@ const columns = [
         accessorKey: 'status',
         cell: (props) => {
             const row = props.row.original
-            return (
-                <div className="flex items-center">
-                    <Badge className={statusColor[row.status]} />
-                    <span className="ml-2 rtl:mr-2 capitalize">
-                        {row.status}
-                    </span>
-                </div>
-            )
+            if (row.status === 'Y'){
+                return (
+                    <div className="flex items-center">
+                        <Badge className={statusColor['active']} />
+                        <span className="ml-2 rtl:mr-2 capitalize">
+                            {'Active'}
+                        </span>
+                    </div>
+                )
+            }
+            else{
+                return (
+                    <div className="flex items-center">
+                        <Badge className={statusColor['blocked']} />
+                        <span className="ml-2 rtl:mr-2 capitalize">
+                            {'Blocked'}
+                        </span>
+                    </div>
+                )
+            
+            }
         },
     },
-    {
-        header: 'Credit',
-        accessorKey: 'credit',
-        cell: (props) => {
-            const row = props.row.original
-            return (
-                <div className="flex items-center">
-                    <Badge className={statusColor[row.balance]} />
-                    <span className="ml-2 rtl:mr-2 capitalize">
-                        {row.balance}
-                    </span>
-                </div>
-            )
-        },
-    },
-    {
-        header: 'Add User Cash',
-        accessorKey: 'add user cash',
-    },
+
     {
         header: '',
         id: 'action',

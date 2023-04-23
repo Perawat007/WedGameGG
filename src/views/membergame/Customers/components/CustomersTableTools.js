@@ -8,10 +8,16 @@ import CustomerTableFilter from './CustomerTableFilter'
 import { useDispatch, useSelector } from 'react-redux'
 import cloneDeep from 'lodash/cloneDeep'
 
+import {setDrawerOpen} from '../store/addSlice'
+
 
 const CustomersTableTools = () => {
 
     const dispatch = useDispatch()
+
+    const ActionColumn = () => { //สั่งทำงาน Edit
+        dispatch(setDrawerOpen())
+    }
 
     const inputRef = useRef()
 
@@ -44,6 +50,11 @@ const CustomersTableTools = () => {
                     onInputChange={handleInputChange}
                 />
                 <CustomerTableFilter />
+            </div>
+            <div className="mb-4">
+                <Button size="sm" onClick={ActionColumn}>
+                    Add Member
+                </Button>
             </div>
         </div>
     )

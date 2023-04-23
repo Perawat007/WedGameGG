@@ -8,6 +8,7 @@ import CustomerForm from 'views/crm/CustomerForm'
 
 const CustomerEditContent = forwardRef((_, ref) => {
     
+    console.log()
     const dispatch = useDispatch()
 
     const customer = useSelector(

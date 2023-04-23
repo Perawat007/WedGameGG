@@ -1,5 +1,5 @@
 import ApiService from './ApiService'
-
+import ApiPutuser from './ApiPutuser'
 export async function apiGetCrmDashboardData(data) {
     return ApiService.fetchData({
         url: '/crm/dashboard',
@@ -63,6 +63,37 @@ export async function apPutAdmin(data) {
     })
 }
 
+//PutMember
+export async function apPutMember(data) {
+    return ApiService.putDataMember({
+        data,
+    })
+}
+
+//PutDeleteAgent
+export async function apPutDeleteAgent(data, type) {
+    return ApiPutuser.deleteData({
+        data,
+        type
+    })
+}
+
+//PutDeleteAdmin
+export async function apPutDeleteAdmin(data, type) {
+    return ApiPutuser.deleteData({
+        data,
+        type
+    })
+}
+
+//PutDeleteMember
+export async function apPutDeleteMember(data, type) {
+    return ApiPutuser.deleteData({
+        data,
+        type
+    })
+}
+
 //AddAdmin
 export async function AddAdmin(data) {
     return ApiService.addAdmin({
@@ -73,6 +104,13 @@ export async function AddAdmin(data) {
 //AddAgent
 export async function apAddAgent(data) {
     return ApiService.addAgent({
+        data,
+    })
+}
+
+//AddMember
+export async function apAddMember(data) {
+    return ApiService.addMember({
         data,
     })
 }

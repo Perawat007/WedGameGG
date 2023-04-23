@@ -1,13 +1,14 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import {
-    apPutAdmin,
+    apAddAgent,
     apiGetCrmCustomersStatistic,
-    AddAdmin,
+    apPutAgent,
     apiGetLogMember,
+    apPutDeleteAgent
 } from 'services/CrmService'
 
 export const getCustomerStatistic = createAsyncThunk(
-    'crmCustomers/data/getCustomerStatistic',
+    'logTest/data/getCustomerStatistic',
     async () => {
         const response = await apiGetCrmCustomersStatistic()
         return response.data
@@ -15,7 +16,7 @@ export const getCustomerStatistic = createAsyncThunk(
 )
 
 export const getCustomersLog = createAsyncThunk(
-    'crmCustomers/data/getCustomers',
+    'logTest/data/getCustomersLog',
     async (params) => {
         const response = await apiGetLogMember(params)
         return response
@@ -24,17 +25,25 @@ export const getCustomersLog = createAsyncThunk(
 )
 
 export const putCustomer = createAsyncThunk(
-    'crmCustomers/data/putCustomer',
+    'logTest/data/putCustomer',
     async (data) => {
-        const response = await apPutAdmin(data)
+        const response = await apPutAgent(data)
         return response.data
     }
 )
 
 export const AddCustomer = createAsyncThunk(
-    'crmCustomers/data/AddCrmCustomer',
+    'logTest/data/AddCustomer',
     async (data) => {
-        const response = await AddAdmin(data)
+        const response = await apAddAgent(data)
+        return response.data
+    }
+)
+
+export const DeleteAgent = createAsyncThunk(
+    'logTest/data/DeleteAgent',
+    async (data) => {
+        const response = await apPutDeleteAgent(data)
         return response.data
     }
 )
@@ -42,13 +51,12 @@ export const AddCustomer = createAsyncThunk(
 export const initialTableData = {
     total: 0,
     pageIndex: 1,
-    pageSize: 5,
+    pageSize: 10,
     query: '',
     sort: {
         order: '',
         key: '',
     },
-    id : 0,
 }
 
 export const initialFilterData = {
@@ -57,7 +65,7 @@ export const initialFilterData = {
 
 
 const dataSlice = createSlice({
-    name: 'crmCustomers/data',
+    name: 'logTest/data',
     initialState: {
         loading: false,
         customerList: [],

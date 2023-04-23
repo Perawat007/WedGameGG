@@ -1,9 +1,10 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import {
-    apPutAdmin,
+    apAddMember,
     apiGetCrmCustomersStatistic,
-    AddAdmin,
+    apPutMember,
     apiGetCrmMember,
+    apPutDeleteMember
 } from 'services/CrmService'
 
 export const getCustomerStatistic = createAsyncThunk(
@@ -26,15 +27,23 @@ export const getCustomers = createAsyncThunk(
 export const putCustomer = createAsyncThunk(
     'crmCustomers/data/putCustomer',
     async (data) => {
-        const response = await apPutAdmin(data)
+        const response = await apPutMember(data)
         return response.data
     }
 )
 
 export const AddCustomer = createAsyncThunk(
-    'crmCustomers/data/AddCrmCustomer',
+    'crmCustomers/data/AddCustomer',
     async (data) => {
-        const response = await AddAdmin(data)
+        const response = await apAddMember(data)
+        return response.data
+    }
+)
+
+export const DeleteMemBer = createAsyncThunk(
+    'crmCustomers/data/DeleteAgent',
+    async (data) => {
+        const response = await apPutDeleteMember(data, 'member')
         return response.data
     }
 )

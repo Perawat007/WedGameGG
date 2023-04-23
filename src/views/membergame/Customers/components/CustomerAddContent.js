@@ -1,38 +1,41 @@
 import React, { forwardRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { setCustomerList, putCustomer } from '../store/dataSliceAdmin'
-import { setDrawerClose } from '../store/stateSlice'
+import { AddCustomer } from '../store/dataSliceAdmin'
+import { setDrawerClose } from '../store/addSlice'
 import cloneDeep from 'lodash/cloneDeep'
 import isEmpty from 'lodash/isEmpty'
-import CustomerForm from 'views/crm/CustomerForm'
+import CustomerFormAddAg from 'views/membergame/CustomerFormAddAg/index'
 
-const CustomerEditContent = forwardRef((_, ref) => {
+const CustomerAddContent = forwardRef((_, ref) => {
     
     const dispatch = useDispatch()
 
     const customer = useSelector(
-        (state) => state.crmCustomers.state.selectedCustomer
+        (addMenBer) => addMenBer.crmCustomers.state.selectedCustomer
     )
-    const data = useSelector((state) => state.crmCustomers.data.customerList)
+    const data = useSelector((addMenBer) => addMenBer.crmCustomers.data.customerList)
     const { id } = customer
+
     const onFormSubmit = (values) => {
         const {
-            id,
+            agent_id,
+            member_code,
+            name,
             username,
-            phoneNumber,
-            status,
+            password,
         } = values
 
-        const basicInfo = { username, phoneNumber, status }
+        const basicInfo = {agent_id, member_code, name, username, password }
         const personalInfo = {
-            id,
+            agent_id,
+            member_code,
+            name,
             username,
-            status,
-            phoneNumber
+            password
         }
         let newData = cloneDeep(data)
         let editedCustomer = {}
-        newData = newData.map((elm) => {
+       newData = newData.map((elm) => {
             if (elm.id === id) {
                 elm = { ...elm, ...basicInfo }
                 elm.personalInfo = { ...elm.personalInfo, ...personalInfo }
@@ -40,15 +43,16 @@ const CustomerEditContent = forwardRef((_, ref) => {
             }
             return elm.personalInfo
         })
-        if (!isEmpty(editedCustomer)) {
-            dispatch(putCustomer(editedCustomer))
+
+        if (isEmpty(editedCustomer)) {
+            dispatch(AddCustomer(values)) //เรียกใช้งาน API 
         }
         dispatch(setDrawerClose())
         window.location.reload();
     }
 
     return (
-        <CustomerForm
+        <CustomerFormAddAg
             ref={ref}
             onFormSubmit={onFormSubmit}
             customer={customer}
@@ -56,4 +60,4 @@ const CustomerEditContent = forwardRef((_, ref) => {
     )
 })
 
-export default CustomerEditContent
+export default CustomerAddContent

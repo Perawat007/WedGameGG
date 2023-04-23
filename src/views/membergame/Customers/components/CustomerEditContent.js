@@ -4,7 +4,7 @@ import { setCustomerList, putCustomer } from '../store/dataSliceAdmin'
 import { setDrawerClose } from '../store/stateSlice'
 import cloneDeep from 'lodash/cloneDeep'
 import isEmpty from 'lodash/isEmpty'
-import CustomerForm from 'views/crm/CustomerForm'
+import CustomerForm from 'views/membergame/CustomerForm/index'
 
 const CustomerEditContent = forwardRef((_, ref) => {
     
@@ -18,17 +18,21 @@ const CustomerEditContent = forwardRef((_, ref) => {
     const onFormSubmit = (values) => {
         const {
             id,
+            member_code,
+            name,
             username,
-            phoneNumber,
             status,
+            balance,
         } = values
 
-        const basicInfo = { username, phoneNumber, status }
+        const basicInfo = {member_code, name, username, status, balance }
         const personalInfo = {
             id,
+            member_code,
             username,
+            name,
             status,
-            phoneNumber
+            balance
         }
         let newData = cloneDeep(data)
         let editedCustomer = {}
@@ -44,7 +48,7 @@ const CustomerEditContent = forwardRef((_, ref) => {
             dispatch(putCustomer(editedCustomer))
         }
         dispatch(setDrawerClose())
-        window.location.reload();
+        //window.location.reload();
     }
 
     return (

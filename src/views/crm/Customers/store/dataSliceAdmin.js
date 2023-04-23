@@ -4,6 +4,7 @@ import {
     apiGetCrmCustomersStatistic,
     AddAdmin,
     apiGetCrmAdmin,
+    apPutDeleteAdmin,
 } from 'services/CrmService'
 
 export const getCustomerStatistic = createAsyncThunk(
@@ -35,6 +36,14 @@ export const AddCustomer = createAsyncThunk(
     'crmCustomers/data/AddCrmCustomer',
     async (data) => {
         const response = await AddAdmin(data)
+        return response.data
+    }
+)
+
+export const DeleteAdmin = createAsyncThunk(
+    'crmCustomers/data/DeleteAdmin',
+    async (data) => {
+        const response = await apPutDeleteAdmin(data, 'admin')
         return response.data
     }
 )

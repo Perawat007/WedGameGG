@@ -24,8 +24,6 @@ const CustomerTableSearch = forwardRef((props, ref) => {
         startleInputChange("")
     },[])
 
-
-
     return (
         <Input
             ref={ref}

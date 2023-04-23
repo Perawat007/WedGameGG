@@ -4,6 +4,7 @@ import {
     apiGetCrmCustomersStatistic,
     apPutAgent,
     apiGetAgent,
+    apPutDeleteAgent
 } from 'services/CrmService'
 
 export const getCustomerStatistic = createAsyncThunk(
@@ -32,9 +33,18 @@ export const putCustomer = createAsyncThunk(
 )
 
 export const AddCustomer = createAsyncThunk(
-    'crmCustomers/data/AddCrmCustomer',
+    'crmCustomers/data/AddCustomer',
     async (data) => {
         const response = await apAddAgent(data)
+        return response.data
+    }
+)
+
+export const DeleteAgent = createAsyncThunk(
+    'crmCustomers/data/DeleteAgent',
+    async (data) => {
+
+        const response = await apPutDeleteAgent(data,'agent')
         return response.data
     }
 )

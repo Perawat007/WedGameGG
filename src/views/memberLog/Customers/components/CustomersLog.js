@@ -1,8 +1,8 @@
 import React, { useEffect, useCallback, useMemo } from 'react'
-import { Avatar, Badge } from 'components/ui'
+import { Badge } from 'components/ui'
 import { DataTable } from 'components/shared'
 import { useDispatch, useSelector } from 'react-redux'
-import { getCustomersLog, setTableData } from '../store/dataSliceLog'
+import { getCustomersLog, setTableData } from '../store/dataSliceAdmin'
 import useThemeClass from 'utils/hooks/useThemeClass'
 import { Link } from 'react-router-dom'
 import cloneDeep from 'lodash/cloneDeep'
@@ -84,10 +84,10 @@ const columns = [
             const row = props.row.original
             return (
                 <div className="flex items-center">
-                <span className="ml-2 rtl:mr-2 capitalize">
-                    {row.balance}
-                </span>
-            </div>
+                    <span className="ml-2 rtl:mr-2 capitalize">
+                        {row.balance}
+                    </span>
+                </div>
             )
         },
     },
@@ -123,30 +123,30 @@ const columns = [
         },
     },
 ]
-const CustomersLog = (id) => {
+const CustomersLog = (idMember) => {
     const dispatch = useDispatch()
-    const idLog = id.row.rowLog;
+    const idLog = idMember.row.rowLog;
     const data = useSelector((state) => state.crmCustomers.data.customerList)
     const loading = useSelector((state) => state.crmCustomers.data.loading)
     const filterData = useSelector(
         (state) => state.crmCustomers.data.filterData
     )
 
-    const { pageIndex, pageSize, sort, query, total } = useSelector(
+    const { pageIndex, pageSize, sort, query, total, id } = useSelector(
         (state) => state.crmCustomers.data.tableData
     )
 
     const fetchData = useCallback(() => {
         dispatch(getCustomersLog({ pageIndex, pageSize, sort, query, filterData, idLog }))
-    }, [pageIndex, pageSize, sort, query, filterData, idLog , dispatch])
+    }, [pageIndex, pageSize, sort, query, filterData, idLog, dispatch])
 
     useEffect(() => {
         fetchData()
     }, [fetchData, pageIndex, pageSize, sort, filterData])
 
     const tableData = useMemo(
-        () => ({ pageIndex, pageSize, sort, query, total }),
-        [pageIndex, pageSize, sort, query, total]
+        () => ({ pageIndex, pageSize, sort, query, total, id }),
+        [pageIndex, pageSize, sort, query, total, id]
     )
 
     const onPaginationChange = (page) => {

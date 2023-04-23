@@ -1,10 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const stateSlice = createSlice({
-    name: 'crmCustomers/state',
+    name: 'logTest/state',
     initialState: {
         drawerOpen: false,
-        tradeDialogOpen: false,
         selectedCustomer: {},
     },
     reducers: {

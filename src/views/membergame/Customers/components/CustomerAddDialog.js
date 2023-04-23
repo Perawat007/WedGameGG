@@ -1,16 +1,12 @@
 import React, { useRef } from 'react'
 import { Button, Drawer } from 'components/ui'
-import CustomerEditContent from './CustomerEditContent'
+import CustomerAddContent from './CustomerAddContent'
 import { useDispatch, useSelector } from 'react-redux'
-import { setDrawerClose, setSelectedCustomer } from '../store/stateSlice'
-import { DeleteAdmin } from '../store/dataSliceAdmin'
+import { setDrawerClose } from '../store/addSlice'
 
-const DrawerFooter = ({ onSaveClick, onCancel, onDelete}) => {
+const DrawerFooter = ({ onSaveClick, onCancel }) => {
     return (
         <div className="text-right w-full">
-            <Button size="sm" className="mr-2" onClick={onDelete}>
-                Delete
-            </Button>
             <Button size="sm" className="mr-2" onClick={onCancel}>
                 Cancel
             </Button>
@@ -21,25 +17,14 @@ const DrawerFooter = ({ onSaveClick, onCancel, onDelete}) => {
     )
 }
 
-const CustomerEditDialog = () => {
+const CustomerAddDialog = () => {
     const dispatch = useDispatch()
     const drawerOpen = useSelector(
-        (state) => state.crmCustomers.state.drawerOpen
-    )
-
-    const customer = useSelector(
-        (state) => state.crmCustomers.state.selectedCustomer
+        (addAgent) => addAgent.crmCustomers.addAgent.drawerOpen
     )
 
     const onDrawerClose = () => {
         dispatch(setDrawerClose())
-        dispatch(setSelectedCustomer({}))
-    }
-
-    const deleteAdmin =() =>{
-        dispatch(DeleteAdmin(customer.id))
-        dispatch(setDrawerClose())
-        dispatch(setSelectedCustomer({}))
     }
 
     const formikRef = useRef()
@@ -57,15 +42,14 @@ const CustomerEditDialog = () => {
             bodyClass="p-0"
             footer={
                 <DrawerFooter
-                    onDelete={deleteAdmin}
                     onCancel={onDrawerClose}
                     onSaveClick={formSubmit}
                 />
             }
         >
-        <CustomerEditContent ref={formikRef} />  
+        <CustomerAddContent ref={formikRef} />  
         </Drawer>
     )
 }
 
-export default CustomerEditDialog
+export default CustomerAddDialog
