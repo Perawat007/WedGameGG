@@ -64,7 +64,7 @@ export const initialFilterData = {
 }
 
 
-const dataSlice = createSlice({
+const dataSliceLog = createSlice({
     name: 'logTest/data',
     initialState: {
         loading: false,
@@ -104,6 +104,6 @@ const dataSlice = createSlice({
 })
 
 export const { setTableData, setCustomerList, setFilterData } =
-    dataSlice.actions
+    dataSliceLog.actions
 
-export default dataSlice.reducer
+export default dataSliceLog.reducer

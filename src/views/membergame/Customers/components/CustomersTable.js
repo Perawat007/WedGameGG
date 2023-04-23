@@ -12,6 +12,7 @@ import CustomerEditDialog from './CustomerEditDialog'
 import CustomerAddDialog from './CustomerAddDialog'
 import cloneDeep from 'lodash/cloneDeep'
 import DataLog from 'views/memberLog/Customers/DataLog'
+import LogData from 'views/LogMember/Market/LogData'
 
 const statusColor = {
     active: 'bg-emerald-500',
@@ -41,10 +42,7 @@ const ActionColumnLog = (row) => {
 
     const onViewOpen = (rowId) => {
         setLogId(rowId.rowLog.id)
-        if (rowIdLog !== undefined)
-        {
-            setViewOpen(true)
-        }
+        setViewOpen(true)
     }
 
     const onDialogClose = () => {
@@ -66,7 +64,7 @@ const ActionColumnLog = (row) => {
             >
             <div className="w-full">
                 <h1>Log</h1>
-                <DataLog rowLog={rowIdLog} />
+                <LogData idLog = {rowIdLog} />
             </div>  
         </Dialog>
     </>
@@ -151,14 +149,27 @@ const columns = [
         accessorKey: 'status',
         cell: (props) => {
             const row = props.row.original
-            return (
-                <div className="flex items-center">
-                    <Badge className={statusColor[row.status]} />
-                    <span className="ml-2 rtl:mr-2 capitalize">
-                        {row.status}
-                    </span>
-                </div>
-            )
+            if (row.status === 'Y'){
+                return (
+                    <div className="flex items-center">
+                        <Badge className={statusColor['active']} />
+                        <span className="ml-2 rtl:mr-2 capitalize">
+                            {'Active'}
+                        </span>
+                    </div>
+                )
+            }
+            else{
+                return (
+                    <div className="flex items-center">
+                        <Badge className={statusColor['blocked']} />
+                        <span className="ml-2 rtl:mr-2 capitalize">
+                            {'Blocked'}
+                        </span>
+                    </div>
+                )
+            
+            }
         },
     },
     {

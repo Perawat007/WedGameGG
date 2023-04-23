@@ -1,9 +1,8 @@
 
 const ApiPutuser = {
-    
+
      //data Delete
      deleteData(param) {
-        console.log(param);
         return new Promise((resolve, reject) => {
           fetch('http://localhost:5000/delete/'+ param.data, {
             method: 'PUT',

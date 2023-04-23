@@ -1,10 +1,10 @@
 import { combineReducers } from '@reduxjs/toolkit'
+import data from './dataSlice'
 import state from './stateSlice'
-import data from './dataSliceLog'
 
 const reducer = combineReducers({
-    state,
     data,
+    state,
 })
 
 export default reducer

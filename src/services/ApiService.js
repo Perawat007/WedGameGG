@@ -148,6 +148,7 @@ const ApiService = {
             .then(response => response.json())
             .then(data => {
               console.log(data);
+              window.location.reload();
             })
             .catch(error => {
               console.error(error);
@@ -183,7 +184,7 @@ const ApiService = {
   putDataMember(param) {
     return new Promise((resolve, reject) => {
       console.log(param);
-      fetch('http://localhost:5000/member/'+ param.data.id, {
+      fetch('https://relaxtimecafe.fun/member/'+ param.data.id, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json'
@@ -199,7 +200,7 @@ const ApiService = {
         .then(response => response.json())
         .then(data => {
           console.log(data);
-          //window.location.reload();
+          window.location.reload();
         })
         .catch(error => {
           console.error(error);
@@ -273,7 +274,7 @@ const ApiService = {
 addMember(param) {
   return new Promise((resolve, reject) => {
 
-    fetch('http://localhost:5000/signupMember', {
+    fetch('https://relaxtimecafe.fun/signupMember', {
           method: 'POST',
           headers: {
            'Content-Type': 'application/json'
@@ -305,7 +306,7 @@ addMember(param) {
  //GetLogMember //Search ด้วย ส่ง name มา
  fetchLogMember(param) {
   return new Promise((resolve, reject) => {
-  fetch('https://relaxtimecafe.fun/user_play/user_lay/' + param.data.idLog, {
+  fetch('https://relaxtimecafe.fun/user_play/user_lay/' + param.data.id, {
             method: 'POST',
             headers: {
              'Content-Type': 'application/json'

@@ -1,6 +1,6 @@
 import React, { forwardRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { setCustomerList, putCustomer } from '../store/dataSliceAdmin'
+import { setCustomerList, putCustomer } from '../store/dataSliceLog'
 import { setDrawerClose } from '../store/stateSlice'
 import cloneDeep from 'lodash/cloneDeep'
 import isEmpty from 'lodash/isEmpty'
@@ -40,11 +40,11 @@ const CustomerEditContent = forwardRef((_, ref) => {
             }
             return elm.personalInfo
         })
-
         if (!isEmpty(editedCustomer)) {
             dispatch(putCustomer(editedCustomer))
         }
         dispatch(setDrawerClose())
+        window.location.reload();
     }
 
     return (
