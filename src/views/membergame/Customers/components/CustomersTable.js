@@ -53,7 +53,7 @@ const ActionColumnLog = (row) => {
         <>
         <div className="ltr:text-right rtl:text-left">
             <Button size="sm" onClick={() => onViewOpen(row)}>
-                ดูLog
+                Log
             </Button>
         </div>
 
