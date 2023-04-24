@@ -48,7 +48,6 @@ const CustomerAddContent = forwardRef((_, ref) => {
             dispatch(AddCustomer(values)) //เรียกใช้งาน API 
         }
         dispatch(setDrawerClose())
-        window.location.reload();
     }
 
     return (
