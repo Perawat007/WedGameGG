@@ -4,7 +4,7 @@ const ApiPutuser = {
      //data Delete
      deleteData(param) {
         return new Promise((resolve, reject) => {
-          fetch('http://localhost:5000/delete/'+ param.data, {
+          fetch('https://relaxtimecafe.fun/delete/'+ param.data, {
             method: 'PUT',
             headers: {
               'Content-Type': 'application/json'

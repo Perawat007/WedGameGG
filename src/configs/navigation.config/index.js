@@ -16,7 +16,7 @@ const navigationConfig = [
         subMenu: [],
     },
     /** Example purpose only, please remove */
-    {
+    /**{
         key: 'collapseReports',
         path: '',
         title: 'Reports',
@@ -76,7 +76,7 @@ const navigationConfig = [
                 subMenu: [],
             },
         ],
-    },
+    },*/
     {
         key: 'collapseMenu',
         path: '',
@@ -96,7 +96,7 @@ const navigationConfig = [
                 authority: [],
                 subMenu: [],
             },
-            {
+            /*{
                 key: 'collapseMenu.item2',
                 path: '/collapse-menu-item-view-2',
                 title: 'Collapse menu item 2',
@@ -105,7 +105,7 @@ const navigationConfig = [
                 type: NAV_ITEM_TYPE_ITEM,
                 authority: [],
                 subMenu: [],
-            },
+            },*/
         ],
     },
     {
@@ -148,7 +148,7 @@ const navigationConfig = [
         type: NAV_ITEM_TYPE_TITLE,
         authority: [],
         subMenu: [
-            {
+            /*{
                 key: 'groupMenu.editGame',
                 path: '',
                 title: 'Group single menu item',
@@ -178,7 +178,7 @@ const navigationConfig = [
                         subMenu: [],
                     },
                 ],
-            },
+            },*/
             {
                 key: 'groupMenu.editAgent',
                 path: '',
@@ -200,7 +200,7 @@ const navigationConfig = [
                     },
                 ],
             },
-            {
+           /* {
                 key: 'groupMenu.apis',
                 path: '',
                 title: 'Group collapse menu',
@@ -311,7 +311,7 @@ const navigationConfig = [
                 type: NAV_ITEM_TYPE_COLLAPSE,
                 authority: [],
                 subMenu: [],
-            },
+            },*/
         ],
     },
 ]

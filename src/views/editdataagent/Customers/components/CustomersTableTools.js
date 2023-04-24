@@ -48,7 +48,6 @@ const CustomersTableTools = () => {
                     ref={inputRef}
                     onInputChange={handleInputChange}
                 />
-                <CustomerTableFilter />
             </div>
             <div className="mb-4">
                 <Button size="sm" onClick={ActionColumn}>
