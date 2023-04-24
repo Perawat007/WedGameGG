@@ -49,7 +49,6 @@ const columns = [
 
     {
         header: 'ID',
-        accessorKey: 'id',
         cell: (props) => {
             const row = props.row.original
             return <NameColumn row={row} />
@@ -63,7 +62,6 @@ const columns = [
 
     {
         header: 'Name',
-        accessorKey: 'role',
         cell: (props) => {
             const row = props.row.original
             return (
@@ -79,7 +77,6 @@ const columns = [
 
     {
         header: 'เบอร์โทรติดต่อ',
-        accessorKey: 'lastOnline',
         cell: (props) => {
             const row = props.row.original
             return (
@@ -94,7 +91,6 @@ const columns = [
 
     {
         header: 'Status',
-        accessorKey: 'status',
         cell: (props) => {
             const row = props.row.original
             if (row.status === 'Y'){
@@ -122,7 +118,6 @@ const columns = [
     },
     {
         header: 'Credit',
-        accessorKey: 'credit',
         cell: (props) => {
             const row = props.row.original
             return (

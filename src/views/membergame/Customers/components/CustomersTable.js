@@ -85,7 +85,6 @@ const columns = [
 
     {
         header: 'ID',
-        accessorKey: 'id',
         cell: (props) => {
             const row = props.row.original
             return <NameColumn row={row} />
@@ -94,7 +93,6 @@ const columns = [
 
     {
         header: 'IdAgent',
-        accessorKey: 'idAgent',
         cell: (props) => {
             const row = props.row.original
             return (
@@ -109,7 +107,6 @@ const columns = [
 
     {
         header: 'Name',
-        accessorKey: 'role',
         cell: (props) => {
             const row = props.row.original
             return (
@@ -130,7 +127,6 @@ const columns = [
 
     {
         header: 'Balance',
-        accessorKey: 'balance',
         cell: (props) => {
             const row = props.row.original
             return (
@@ -145,7 +141,6 @@ const columns = [
 
     {
         header: 'Status',
-        accessorKey: 'status',
         cell: (props) => {
             const row = props.row.original
             if (row.status === 'Y'){
@@ -173,7 +168,6 @@ const columns = [
     },
     {
         header: 'Created_at',
-        accessorKey: 'created_at',
         cell: (props) => {
             const row = props.row.original
             return (

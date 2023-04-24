@@ -127,7 +127,7 @@ const navigationConfig = [
                 authority: [],
                 subMenu: [],
             },
-            {
+            /*{
                 key: 'collapseAdmin.item2',
                 path: '/collapse-menu-item-view-2',
                 title: 'Collapse menu item 2',
@@ -136,7 +136,7 @@ const navigationConfig = [
                 type: NAV_ITEM_TYPE_ITEM,
                 authority: [],
                 subMenu: [],
-            },
+            },*/
         ],
     },
     {
