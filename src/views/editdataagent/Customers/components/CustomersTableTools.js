@@ -2,7 +2,7 @@
 
 import React, { useRef } from 'react'
 import { Button } from 'components/ui'
-import { getCustomers, setTableData, setFilterData } from '../store/dataSliceAdmin'
+import { getCustomers, setTableData } from '../store/dataSliceAdmin'
 import CustomerTableSearch from './CustomerTableSearch'
 import CustomerTableFilter from './CustomerTableFilter'
 import { useDispatch, useSelector } from 'react-redux'
@@ -27,7 +27,6 @@ const CustomersTableTools = () => {
         const newTableData = cloneDeep(tableData)
         newTableData.query = val
         newTableData.pageIndex = 1
-        console.log(newTableData);
         if (typeof val === 'string' && val.length > 1) {
             fetchData(newTableData)
         }

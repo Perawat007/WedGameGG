@@ -11,7 +11,6 @@ import useThemeClass from 'utils/hooks/useThemeClass'
 import CustomerEditDialog from './CustomerEditDialog'
 import CustomerAddDialog from './CustomerAddDialog'
 import cloneDeep from 'lodash/cloneDeep'
-import DataLog from 'views/memberLog/Customers/DataLog'
 import LogData from 'views/LogMember/Market/LogData'
 
 const statusColor = {

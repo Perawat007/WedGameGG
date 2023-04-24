@@ -2,7 +2,7 @@
 
 import React, { useRef } from 'react'
 import { Button } from 'components/ui'
-import { getCustomers, setTableData, setFilterData } from '../store/dataSliceAdmin'
+import { getCustomers, setTableData} from '../store/dataSliceAdmin'
 import CustomerTableSearch from './CustomerTableSearch'
 import CustomerTableFilter from './CustomerTableFilter'
 import { useDispatch, useSelector } from 'react-redux'
