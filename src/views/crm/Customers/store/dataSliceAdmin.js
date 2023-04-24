@@ -1,3 +1,4 @@
+import React, {useState } from 'react'
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import {
     apPutAdmin,
@@ -6,6 +7,8 @@ import {
     apiGetCrmAdmin,
     apPutDeleteAdmin,
 } from 'services/CrmService'
+import { useDispatch} from 'react-redux'
+import ActionColumnLog from 'views/crm/Customers/components/CustomersTable'
 
 export const getCustomerStatistic = createAsyncThunk(
     'crmCustomers/data/getCustomerStatistic',
@@ -31,12 +34,19 @@ export const putCustomer = createAsyncThunk(
         return response.data
     }
 )
-
+     
 export const AddCustomer = createAsyncThunk(
     'crmCustomers/data/AddCrmCustomer',
     async (data) => {
         const response = await AddAdmin(data)
-        return response.data
+        const dispatch = useDispatch()
+        if (response.message === "Data Creates False"){
+            dispatch(ActionColumnLog())
+        }
+        else
+        {
+            window.location.reload();
+        }
     }
 )
 

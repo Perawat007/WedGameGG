@@ -1,5 +1,5 @@
-import React, { useEffect, useCallback, useMemo } from 'react'
-import { Avatar, Badge, Button } from 'components/ui'
+import React, { useEffect, useCallback, useMemo, useState } from 'react'
+import { Avatar, Badge, Button, Dialog } from 'components/ui'
 import { DataTable } from 'components/shared'
 import { useDispatch, useSelector } from 'react-redux'
 import { getCustomers, setTableData } from '../store/dataSliceAdmin'
@@ -33,6 +33,28 @@ const ActionColumn = ({ row }) => {
                 Edit
             </Button>
         </div>
+    )
+}
+
+export async function ActionColumnLog() {
+    console.log('run');
+    const [viewOpen, setViewOpen] = useState(true)
+    const onDialogClose = () => {
+        setViewOpen(false)
+    }
+
+    return (
+        <>
+        <Dialog
+                isOpen={viewOpen}
+                onClose={onDialogClose}
+                onRequestClose={onDialogClose}
+            >
+            <div className="w-full">
+                <h1>Log</h1>
+            </div>  
+        </Dialog>
+    </>
     )
 }
 

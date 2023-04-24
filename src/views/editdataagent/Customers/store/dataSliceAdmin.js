@@ -36,7 +36,13 @@ export const AddCustomer = createAsyncThunk(
     'crmCustomers/data/AddCustomer',
     async (data) => {
         const response = await apAddAgent(data)
-        return response.data
+        if (response.message === "Data Creates False"){
+           
+        }
+        else
+        {
+            window.location.reload();
+        }
     }
 )
 
