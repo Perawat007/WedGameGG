@@ -173,7 +173,6 @@ const columns = [
             const inputDate = row.created_at;
             const date = new Date(inputDate);
             const formattedDate = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}, ${date.toLocaleTimeString()}`;
-            console.log(formattedDate);
             return (
                 <div className="flex items-center">
                     <Badge className={statusColor[row.created_at]} />
