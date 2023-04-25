@@ -27,7 +27,7 @@ const CustomersTableTools = () => {
         const newTableData = cloneDeep(tableData)
         newTableData.query = val
         newTableData.pageIndex = 1
-        if (typeof val === 'string' && val.length > 1) {
+        if (typeof val === 'string' && val.length !== 0) {
             fetchData(newTableData)
         }
 
