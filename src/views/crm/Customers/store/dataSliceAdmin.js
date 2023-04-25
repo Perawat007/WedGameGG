@@ -39,7 +39,6 @@ export const AddCustomer = createAsyncThunk(
     async (data) => {
         const response = await AddAdmin(data)
         if (response.message === "Data Creates False"){  
-            console.log('run')
             alert("UserName นี้มีอยู่แล้ว กรุณาเปลี่ยน Username");
         }
         else{

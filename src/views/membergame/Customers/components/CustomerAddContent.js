@@ -45,9 +45,16 @@ const CustomerAddContent = forwardRef((_, ref) => {
         })
 
         if (isEmpty(editedCustomer)) {
-            dispatch(AddCustomer(values)) //เรียกใช้งาน API 
+            if (isEmpty(editedCustomer)) {
+                if (values.name !== '' && values.username !== '' && values.password !== '' && values.agent_id !== '' && values.member_code !== ''){
+                     dispatch(AddCustomer(values)) //เรียกใช้งาน API 
+                     dispatch(setDrawerClose())
+                }
+                else{
+                    alert("กรุณากรอกข้อมูลให้ครบ");
+                }
+            }
         }
-        dispatch(setDrawerClose())
     }
 
     return (
