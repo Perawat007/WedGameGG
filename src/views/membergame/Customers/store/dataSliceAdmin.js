@@ -36,11 +36,11 @@ export const AddCustomer = createAsyncThunk(
     'crmCustomers/data/AddCustomer',
     async (data) => {
         const response = await apAddMember(data)
-        if (response.message === "Data Creates False"){
-           
+        if (response.message === "Data Creates False"){  
+            console.log('run')
+            alert("UserName นี้มีอยู่แล้ว กรุณาเปลี่ยน Username");
         }
-        else
-        {
+        else{
             window.location.reload();
         }
     }

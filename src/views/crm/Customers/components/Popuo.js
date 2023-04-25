@@ -1,13 +1,9 @@
 import React, {useState } from 'react'
 import {Dialog } from 'components/ui'
 
-export default function ActionColumnLog () {
-
+export default function Popup () {
     console.log('run')
-    const [viewOpen, setViewOpen] = useState(false)
-    const onViewOpen = () => {
-        setViewOpen(true)
-    }
+    const [viewOpen, setViewOpen] = useState(true)
     const onDialogClose = () => {
         setViewOpen(false)
     }

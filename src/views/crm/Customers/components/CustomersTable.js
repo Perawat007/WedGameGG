@@ -36,28 +36,6 @@ const ActionColumn = ({ row }) => {
     )
 }
 
-export async function ActionColumnLog() {
-    console.log('run');
-    const [viewOpen, setViewOpen] = useState(true)
-    const onDialogClose = () => {
-        setViewOpen(false)
-    }
-
-    return (
-        <>
-        <Dialog
-                isOpen={viewOpen}
-                onClose={onDialogClose}
-                onRequestClose={onDialogClose}
-            >
-            <div className="w-full">
-                <h1>Log</h1>
-            </div>  
-        </Dialog>
-    </>
-    )
-}
-
 const NameColumn = ({ row }) => {
     const { textTheme } = useThemeClass()
 

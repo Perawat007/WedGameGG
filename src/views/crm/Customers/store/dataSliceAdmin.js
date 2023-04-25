@@ -1,5 +1,6 @@
 import React, {useState } from 'react'
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
+import { Dialog } from 'components/ui'
 import {
     apPutAdmin,
     apiGetCrmCustomersStatistic,
@@ -7,8 +8,6 @@ import {
     apiGetCrmAdmin,
     apPutDeleteAdmin,
 } from 'services/CrmService'
-import { useDispatch} from 'react-redux'
-import ActionColumnLog from 'views/crm/Customers/components/CustomersTable'
 
 export const getCustomerStatistic = createAsyncThunk(
     'crmCustomers/data/getCustomerStatistic',
@@ -39,16 +38,17 @@ export const AddCustomer = createAsyncThunk(
     'crmCustomers/data/AddCrmCustomer',
     async (data) => {
         const response = await AddAdmin(data)
-        const dispatch = useDispatch()
-        if (response.message === "Data Creates False"){
-            dispatch(ActionColumnLog())
+        if (response.message === "Data Creates False"){  
+            console.log('run')
+            alert("UserName นี้มีอยู่แล้ว กรุณาเปลี่ยน Username");
         }
-        else
-        {
+        else{
             window.location.reload();
         }
     }
 )
+
+
 
 export const DeleteAdmin = createAsyncThunk(
     'crmCustomers/data/DeleteAdmin',
