@@ -6,6 +6,8 @@ import {
     HiLocationMarker,
     HiOutlineUser,
     HiPhone,
+    HiCurrencyDollar,
+    HiLockClosed,
 } from 'react-icons/hi'
 import { Field } from 'formik'
 
@@ -29,25 +31,13 @@ const PersonalInfoForm = (props) => {
                             : {}
                         return (
                             <div className="flex justify-center">
-                                <Upload
-                                    className="cursor-pointer"
-                                    onChange={(files) =>
-                                        onSetFormFile(form, field, files)
-                                    }
-                                    onFileRemove={(files) =>
-                                        onSetFormFile(form, field, files)
-                                    }
-                                    showList={false}
-                                    uploadLimit={1}
-                                >
-                                    <Avatar
+                                <Avatar
                                         className="border-2 border-white dark:border-gray-800 shadow-lg"
                                         size={100}
                                         shape="circle"
                                         icon={<HiOutlineUser />}
                                         {...avatarProps}
                                     />
-                                </Upload>
                             </div>
                         )
                     }}
@@ -92,7 +82,7 @@ const PersonalInfoForm = (props) => {
                     name="password"
                     placeholder="Password"
                     component={Input}
-                    prefix={<HiLocationMarker className="text-xl" />}
+                    prefix={<HiLockClosed className="text-xl" />}
                 />
             </FormItem>
 
@@ -121,7 +111,7 @@ const PersonalInfoForm = (props) => {
                     name="credit"
                     placeholder="credit"
                     component={Input}
-                    prefix={<HiPhone className="text-xl" />}
+                    prefix={<HiCurrencyDollar className="text-xl" />}
                 />
             </FormItem>
         </>

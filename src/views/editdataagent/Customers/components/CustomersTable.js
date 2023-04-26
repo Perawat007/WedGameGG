@@ -12,7 +12,12 @@ import CustomerEditDialog from './CustomerEditDialog'
 import CustomerAddDialog from './CustomerAddDialog'
 
 import cloneDeep from 'lodash/cloneDeep'
-
+import {
+    HiPhone,
+    HiCheck,
+    HiMinusCircle,
+    HiCurrencyDollar,
+} from 'react-icons/hi'
 const statusColor = {
     active: 'bg-emerald-500',
     blocked: 'bg-red-500',
@@ -28,7 +33,7 @@ const ActionColumn = ({ row }) => {
 
     return (
         <div className="ltr:text-right rtl:text-left">
-            <Button size="sm" onClick={() => onEdit()}>
+             <Button size="sm" variant="solid" color="blue-600" onClick={() => onEdit()}>
                 Edit
             </Button>
         </div>
@@ -81,6 +86,7 @@ const columns = [
             const row = props.row.original
             return (
                 <div className="flex items-center">
+                <HiPhone className="text-emerald-500 text-xl" />
                 <span className="ml-2 rtl:mr-2 capitalize">
                     {row.contact_number}
                 </span>
@@ -96,7 +102,7 @@ const columns = [
             if (row.status === 'Y'){
                 return (
                     <div className="flex items-center">
-                        <Badge className={statusColor['active']} />
+                        <HiCheck className="text-emerald-500 text-xl" />
                         <span className="ml-2 rtl:mr-2 capitalize">
                             {'Active'}
                         </span>
@@ -106,7 +112,7 @@ const columns = [
             else{
                 return (
                     <div className="flex items-center">
-                        <Badge className={statusColor['blocked']} />
+                        <HiMinusCircle className={statusColor['blocked']} />
                         <span className="ml-2 rtl:mr-2 capitalize">
                             {'Blocked'}
                         </span>
@@ -122,6 +128,7 @@ const columns = [
             const row = props.row.original
             return (
                 <div className="flex items-center">
+                    <HiCurrencyDollar className="text-emerald-500 text-xl"/>
                     <span className="ml-2 rtl:mr-2 capitalize">
                         {row.credit}
                     </span>

@@ -8,7 +8,7 @@ import { DeleteMemBer } from '../store/dataSliceAdmin'
 const DrawerFooter = ({ onSaveClick, onCancel, onDelete }) => {
     return (
         <div className="text-right w-full">
-             <Button size="sm" className="mr-2" onClick={onDelete}>
+             <Button size="sm" className="mr-2" variant="solid" color="red-600" onClick={onSaveClick}>
                 Delete
             </Button>
             <Button size="sm" className="mr-2" onClick={onCancel}>

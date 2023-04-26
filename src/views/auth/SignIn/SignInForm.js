@@ -76,7 +76,7 @@ const SignInForm = (props) => {
                                     autoComplete="off"
                                     name="username"
                                     placeholder="User Name"
-                                    style={{ color: 'black' }} 
+                                    style={{ color: 'white' }} 
                                     component={Input}
                                 />
                             </FormItem>
@@ -89,7 +89,7 @@ const SignInForm = (props) => {
                                     autoComplete="off"
                                     name="password"
                                     placeholder="Password"
-                                    style={{ color: 'black' }} 
+                                    style={{ color: 'white' }} 
                                     component={PasswordInput}
                                 />
                             </FormItem>

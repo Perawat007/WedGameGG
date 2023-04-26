@@ -13,6 +13,13 @@ import CustomerAddDialog from './CustomerAddDialog'
 import cloneDeep from 'lodash/cloneDeep'
 import LogData from 'views/LogMember/Market/LogData'
 
+import {
+    HiCheck,
+    HiMinusCircle,
+    HiCurrencyDollar,
+    HiCalendar
+} from 'react-icons/hi'
+
 const statusColor = {
     active: 'bg-emerald-500',
     blocked: 'bg-red-500',
@@ -28,7 +35,7 @@ const ActionColumn = (row) => {
 
     return (
         <div className="ltr:text-right rtl:text-left">
-            <Button size="sm" onClick={() => onEdit()}>
+            <Button size="sm" variant="solid" color="blue-600" onClick={() => onEdit()}>
                 Edit
             </Button>
         </div>
@@ -51,7 +58,7 @@ const ActionColumnLog = (row) => {
     return (
         <>
         <div className="ltr:text-right rtl:text-left">
-            <Button size="sm" onClick={() => onViewOpen(row)}>
+            <Button size="sm"  variant="solid" color="yellow-600" onClick={() => onViewOpen(row)}>
                 Log
             </Button>
         </div>
@@ -131,6 +138,7 @@ const columns = [
             const row = props.row.original
             return (
                 <div className="flex items-center">
+                <HiCurrencyDollar className="text-emerald-500 text-xl"/>
                 <span className="ml-2 rtl:mr-2 capitalize">
                     {row.balance}
                 </span>
@@ -146,7 +154,7 @@ const columns = [
             if (row.status === 'Y'){
                 return (
                     <div className="flex items-center">
-                        <Badge className={statusColor['active']} />
+                        <HiCheck className="text-emerald-500 text-xl" />
                         <span className="ml-2 rtl:mr-2 capitalize">
                             {'Active'}
                         </span>
@@ -156,7 +164,7 @@ const columns = [
             else{
                 return (
                     <div className="flex items-center">
-                        <Badge className={statusColor['blocked']} />
+                        <HiMinusCircle className={statusColor['blocked']} />
                         <span className="ml-2 rtl:mr-2 capitalize">
                             {'Blocked'}
                         </span>
@@ -175,7 +183,7 @@ const columns = [
             const formattedDate = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}, ${date.toLocaleTimeString()}`;
             return (
                 <div className="flex items-center">
-                    <Badge className={statusColor[row.created_at]} />
+                    <HiCalendar className="text-emerald-500 text-xl"/>
                     <span className="ml-2 rtl:mr-2 capitalize">
                         {formattedDate}
                     </span>

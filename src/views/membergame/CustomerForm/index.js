@@ -12,9 +12,10 @@ import {Input, FormItem, Avatar, Upload, Select} from 'components/ui'
 import {
     HiUserCircle,
     HiLocationMarker,
-    HiPhone,
+    HiCheck,
     HiCake,
     HiOutlineUser,
+    HiCurrencyDollar,
 } from 'react-icons/hi'
 import { Field } from 'formik'
 import { StatusList } from '../../options.data'
@@ -48,7 +49,7 @@ const PaymentSelectOption = ({ innerProps, label, data, isSelected }) => {
                 <img className="max-w-[35px]" src={data.img} alt="" />
                 <span className="ml-2 rtl:mr-2">{label}</span>
             </div>
-            {isSelected && <HiCake className="text-emerald-500 text-xl" />}
+            {isSelected && <HiCheck className="text-emerald-500 text-xl" />}
         </div>
     )
 }
@@ -110,25 +111,13 @@ const CustomerForm = forwardRef((props, ref) => {
                             : {}
                         return (
                             <div className="flex justify-center">
-                                <Upload
-                                    className="cursor-pointer"
-                                    onChange={(files) =>
-                                        onSetFormFile(form, field, files)
-                                    }
-                                    onFileRemove={(files) =>
-                                        onSetFormFile(form, field, files)
-                                    }
-                                    showList={false}
-                                    uploadLimit={1}
-                                >
-                                    <Avatar
+                                <Avatar
                                         className="border-2 border-white dark:border-gray-800 shadow-lg"
                                         size={100}
                                         shape="circle"
                                         icon={<HiOutlineUser />}
                                         {...avatarProps}
                                     />
-                                </Upload>
                             </div>
                         )
                     }}
@@ -145,6 +134,22 @@ const CustomerForm = forwardRef((props, ref) => {
                     name="id"
                     component={Input}
                     prefix={<HiUserCircle className="text-xl" />}
+                    disabled 
+                />
+            </FormItem>
+            <FormItem
+                label="Username"
+                invalid={errors.name && touched.name}
+                errorMessage={errors.name}
+            >
+                <Field
+                    type="text"
+                    autoComplete="off"
+                    name="username"
+                    placeholder="username"
+                    component={Input}
+                    prefix={<HiUserCircle className="text-xl" />}
+                    disabled 
                 />
             </FormItem>
             <FormItem
@@ -162,20 +167,6 @@ const CustomerForm = forwardRef((props, ref) => {
                 />
             </FormItem>
             <FormItem
-                label="Username"
-                invalid={errors.name && touched.name}
-                errorMessage={errors.name}
-            >
-                <Field
-                    type="text"
-                    autoComplete="off"
-                    name="username"
-                    placeholder="username"
-                    component={Input}
-                    prefix={<HiUserCircle className="text-xl" />}
-                />
-            </FormItem>
-            <FormItem
                 label="Balance"
                 invalid={errors.location && touched.location}
                 errorMessage={errors.location}
@@ -186,7 +177,7 @@ const CustomerForm = forwardRef((props, ref) => {
                     name="balance"
                     placeholder="balance"
                     component={Input}
-                    prefix={<HiLocationMarker className="text-xl" />}
+                    prefix={<HiCurrencyDollar className="text-xl" />}
                 />
             </FormItem>
 
