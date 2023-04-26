@@ -19,6 +19,8 @@ const CustomerFormAddAg = forwardRef((props, ref) => {
                 name : '',
                 username: '',
                 password:'',
+                contact_number:'',
+                credit: 0.00 || '',
             }}
             onSubmit={(values, { setSubmitting }) => {
                 onFormSubmit?.(values)
@@ -31,7 +33,7 @@ const CustomerFormAddAg = forwardRef((props, ref) => {
                         <Tabs defaultValue="personalInfo">
                             <TabList>
                                 <TabNav value="personalInfo">
-                                    Add Admin
+                                    Add Agent
                                 </TabNav>
                             </TabList>
                             <div className="p-6">

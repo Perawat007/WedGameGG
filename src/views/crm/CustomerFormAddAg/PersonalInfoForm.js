@@ -5,6 +5,7 @@ import {
     HiUserCircle,
     HiLocationMarker,
     HiOutlineUser,
+    HiPhone,
 } from 'react-icons/hi'
 import { Field } from 'formik'
 
@@ -94,6 +95,22 @@ const PersonalInfoForm = (props) => {
                     prefix={<HiLocationMarker className="text-xl" />}
                 />
             </FormItem>
+
+            <FormItem
+                label="Phone Number"
+                invalid={errors.phoneNumber && touched.phoneNumber}
+                errorMessage={errors.phoneNumber}
+            >
+                <Field
+                    type="tel"
+                    autoComplete="off"
+                    name="phoneNumber"
+                    placeholder="Phone Number"
+                    component={Input}
+                    prefix={<HiPhone className="text-xl" />}
+                />
+            </FormItem>
+
         </>
     )
 }

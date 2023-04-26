@@ -142,7 +142,9 @@ const ApiService = {
             },
             body: JSON.stringify({
               username: param.data.username,
-              status: param.data.status
+              status: param.data.status,
+              contact_number: param.data.phoneNumber,
+              credit : param.data.credit,
             })
           })
             .then(response => response.json())
@@ -166,7 +168,9 @@ const ApiService = {
           },
           body: JSON.stringify({
             username: param.data.username,
-            status: param.data.status
+            status: param.data.status,
+            contact_number: param.data.phoneNumber,
+
           })
         })
           .then(response => response.json())
@@ -211,7 +215,6 @@ const ApiService = {
     //AddAgent
     addAgent(param) {
       return new Promise((resolve, reject) => {
-        console.log(param);
         fetch('https://relaxtimecafe.fun/signupAgent', {
               method: 'POST',
               headers: {
@@ -220,7 +223,9 @@ const ApiService = {
               body: JSON.stringify({
                   name: param.data.name,
                   username: param.data.username,
-                  password: param.data.password
+                  password: param.data.password,
+                  contact_number: param.data.contact_number,
+                  credit : param.data.credit,
               })
           })
           .then(response => {
@@ -250,7 +255,8 @@ const ApiService = {
             body: JSON.stringify({
                 name: param.data.name,
                 username: param.data.username,
-                password: param.data.password
+                password: param.data.password,
+                contact_number: param.data.phoneNumber,
             })
         })
         .then(response => {

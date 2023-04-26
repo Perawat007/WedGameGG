@@ -47,8 +47,6 @@ export const AddCustomer = createAsyncThunk(
     }
 )
 
-
-
 export const DeleteAdmin = createAsyncThunk(
     'crmCustomers/data/DeleteAdmin',
     async (data) => {
@@ -71,7 +69,6 @@ export const initialTableData = {
 export const initialFilterData = {
     status: '',
 }
-
 
 const dataSlice = createSlice({
     name: 'crmCustomers/data',

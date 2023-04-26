@@ -19,6 +19,7 @@ const CustomerFormAddAg = forwardRef((props, ref) => {
                 name : '',
                 username: '',
                 password:'',
+                phoneNumber:'',
             }}
             onSubmit={(values, { setSubmitting }) => {
                 onFormSubmit?.(values)

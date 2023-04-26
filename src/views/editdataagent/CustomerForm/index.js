@@ -62,6 +62,7 @@ const validationSchema = Yup.object().shape({
         'Phone number is not valid'
     ),
     status: Yup.string(),
+    credit: Yup.string(),
 })
 
 const { TabNav, TabList, TabContent } = Tabs
@@ -77,8 +78,9 @@ const CustomerForm = forwardRef((props, ref) => {
             initialValues={{
                 id : customer.id || '',
                 username: customer.username || '',
-                phoneNumber: '0990825942' || '',
+                phoneNumber: customer.contact_number|| '',
                 status: customer.status || '',
+                credit: customer.credit || '',
             }}
             validationSchema={validationSchema}
             onSubmit={(values, { setSubmitting }) => {
@@ -166,10 +168,25 @@ const CustomerForm = forwardRef((props, ref) => {
                 errorMessage={errors.phoneNumber}
             >
                 <Field
-                    type="text"
+                    type="tel"
                     autoComplete="off"
                     name="phoneNumber"
                     placeholder="Phone Number"
+                    component={Input}
+                    prefix={<HiPhone className="text-xl" />}
+                />
+            </FormItem>
+
+            <FormItem
+                label="Credit"
+                invalid={errors.credit && touched.credit}
+                errorMessage={errors.credit}
+            >
+                <Field
+                    type="Number"
+                    autoComplete="off"
+                    name="credit"
+                    placeholder="credit"
                     component={Input}
                     prefix={<HiPhone className="text-xl" />}
                 />

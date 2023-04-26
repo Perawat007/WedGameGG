@@ -21,13 +21,15 @@ const CustomerAddContent = forwardRef((_, ref) => {
             name,
             username,
             password,
+            phoneNumber,
         } = values
 
-        const basicInfo = { name, username, password }
+        const basicInfo = { name, username, password, phoneNumber}
         const personalInfo = {
             name,
             username,
-            password
+            password,
+            phoneNumber,
         }
         let newData = cloneDeep(data)
         let editedCustomer = {}
@@ -41,7 +43,7 @@ const CustomerAddContent = forwardRef((_, ref) => {
         })
 
         if (isEmpty(editedCustomer)) {
-            if (values.name !== '' && values.username !== '' && values.password !== ''){
+            if (values.name !== '' && values.username !== '' && values.password !== '' && values.phoneNumber !== ''){
                  dispatch(AddCustomer(values)) //เรียกใช้งาน API 
                  dispatch(setDrawerClose())
             }

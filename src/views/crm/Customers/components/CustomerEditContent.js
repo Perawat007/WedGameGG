@@ -15,7 +15,6 @@ const CustomerEditContent = forwardRef((_, ref) => {
     )
     const data = useSelector((state) => state.crmCustomers.data.customerList)
     const { id } = customer
-
     const onFormSubmit = (values) => {
         const {
             id,
@@ -42,9 +41,15 @@ const CustomerEditContent = forwardRef((_, ref) => {
             return elm.personalInfo
         })
         if (!isEmpty(editedCustomer)) {
-            dispatch(putCustomer(editedCustomer))
+            if (values.username !== '' && values.password !== '' && values.phoneNumber !== ''){
+                dispatch(putCustomer(values)) //เรียกใช้งาน API 
+                dispatch(setDrawerClose())
+           }
+           else{
+               alert("กรุณากรอกข้อมูลให้ครบ");
+           }
+            
         }
-        dispatch(setDrawerClose())
     }
 
     return (

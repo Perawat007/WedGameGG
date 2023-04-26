@@ -98,7 +98,7 @@ const columns = [
             return (
                 <div className="flex items-center">
                     <span className="ml-2 rtl:mr-2 capitalize">
-                        {row.id}
+                        {row.agent_id}
                     </span>
                 </div>
             )

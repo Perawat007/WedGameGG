@@ -17,13 +17,6 @@ const ThemeConfigurator = ({ callBackClose }) => {
                     </div>
                     <ModeSwitcher />
                 </div>
-                <div className="flex items-center justify-between">
-                    <div>
-                        <h6>Direction</h6>
-                        <span>Select a direction</span>
-                    </div>
-                    <DirectionSwitcher callBackClose={callBackClose} />
-                </div>
                 <div>
                     <h6 className="mb-3">Nav Mode</h6>
                     <NavModeSwitcher />
@@ -31,10 +24,6 @@ const ThemeConfigurator = ({ callBackClose }) => {
                 <div>
                     <h6 className="mb-3">Theme</h6>
                     <ThemeSwitcher />
-                </div>
-                <div>
-                    <h6 className="mb-3">Layout</h6>
-                    <LayoutSwitcher />
                 </div>
             </div>
             <CopyButton />

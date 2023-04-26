@@ -77,7 +77,7 @@ const CustomerForm = forwardRef((props, ref) => {
             initialValues={{
                 id : customer.id || '',
                 username: customer.username || '',
-                phoneNumber: '0990825942' || '',
+                phoneNumber: customer.contact_number || '',
                 status: customer.status || '',
             }}
             validationSchema={validationSchema}
@@ -166,7 +166,7 @@ const CustomerForm = forwardRef((props, ref) => {
                 errorMessage={errors.phoneNumber}
             >
                 <Field
-                    type="text"
+                    type="tel"
                     autoComplete="off"
                     name="phoneNumber"
                     placeholder="Phone Number"

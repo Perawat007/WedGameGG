@@ -4,7 +4,7 @@ import { AddCustomer } from '../store/dataSliceAdmin'
 import { setDrawerClose } from '../store/addSlice'
 import cloneDeep from 'lodash/cloneDeep'
 import isEmpty from 'lodash/isEmpty'
-import CustomerFormAddAg from 'views/crm/CustomerFormAddAg'
+import CustomerFormAddAg from 'views/editdataagent/CustomerFormAddAg'
 
 const CustomerAddContent = forwardRef((_, ref) => {
     
@@ -21,13 +21,17 @@ const CustomerAddContent = forwardRef((_, ref) => {
             name,
             username,
             password,
+            contact_number,
+            credit
         } = values
 
-        const basicInfo = { name, username, password }
+        const basicInfo = { name, username, password, contact_number, credit}
         const personalInfo = {
             name,
             username,
-            password
+            password,
+            contact_number,
+            credit,
         }
         let newData = cloneDeep(data)
         let editedCustomer = {}
@@ -39,17 +43,15 @@ const CustomerAddContent = forwardRef((_, ref) => {
             }
             return elm.personalInfo
         })
-
+        
         if (isEmpty(editedCustomer)) {
-            if (isEmpty(editedCustomer)) {
-                if (values.name !== '' && values.username !== '' && values.password !== ''){
-                     dispatch(AddCustomer(values)) //เรียกใช้งาน API 
-                     dispatch(setDrawerClose())
-                }
-                else{
-                    alert("กรุณากรอกข้อมูลให้ครบ");
-                } 
-            }
+            if (values.name !== '' && values.username !== '' && values.password !== ''& values.contact_number !== '' & values.credit !== '' ){
+                dispatch(AddCustomer(values)) //เรียกใช้งาน API 
+                dispatch(setDrawerClose())
+           }
+           else{
+               alert("กรุณากรอกข้อมูลให้ครบ");
+           } 
         }
     }
 

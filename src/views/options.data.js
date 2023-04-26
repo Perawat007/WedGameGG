@@ -1,13 +1,13 @@
 
 export const StatusList = [
     {
-        name: 'Y',
-        label: 'Y',
+        name: 'Active ',
+        label: 'Active ',
         value: 'Y',
     },
     {
-        name: 'N',
-        label: 'N',
+        name: 'Blocked ',
+        label: 'Blocked ',
         value: 'N',
     },
 ]

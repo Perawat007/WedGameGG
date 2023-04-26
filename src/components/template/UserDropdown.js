@@ -15,7 +15,7 @@ const dropdownItemList = [
         path: '/account/settings/profile',
         icon: <HiOutlineUser />,
     },
-    {
+   /* {
         label: 'Account Setting',
         path: '/app/account/settings/profile',
         icon: <HiOutlineCog />,
@@ -24,7 +24,7 @@ const dropdownItemList = [
         label: 'Activity Log',
         path: '/app/account/activity-log',
         icon: <FiActivity />,
-    },
+    },*/
 ]
 
 export const UserDropdown = ({ className }) => {
@@ -36,7 +36,7 @@ export const UserDropdown = ({ className }) => {
 
     const UserAvatar = (
         <div className={classNames(className, 'flex items-center gap-2')}>
-            <Avatar size={32} shape="circle" src='/img/thumbs/litecoin.png' />
+            <Avatar size={32} shape="circle" src='/img/thumbs/pngegg.png' />
             <div className="hidden md:block">
                 <div className="text-xs capitalize">
                     {'admin' || 'guest'}
@@ -55,7 +55,7 @@ export const UserDropdown = ({ className }) => {
             >
                 <Dropdown.Item variant="header">
                     <div className="py-2 px-3 flex items-center gap-2">
-                        <Avatar shape="circle" src={'/img/thumbs/litecoin.png'} />
+                        <Avatar shape="circle" src={'/img/thumbs/pngegg.png'} />
                         <div>
                             <div className="font-bold text-gray-900 dark:text-gray-100">
                                 {userName}
