@@ -1,5 +1,5 @@
 //EditData Agent
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import { Input, FormItem, Avatar, Upload } from 'components/ui'
 import {
     HiUserCircle,
@@ -16,6 +16,25 @@ const PersonalInfoForm = (props) => {
         form.setFieldValue(field.name, URL.createObjectURL(file[0]))
     }
 
+    const [data, setData] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [selectedOption, setSelectedOption] = useState('');
+
+    useEffect(() => {
+        async function fetchData() {
+          const response = await fetch('http://localhost:5000/list_idAgent');
+          const dataID = await response.json();
+          setData(dataID.data);
+          setLoading(false);
+        }
+        fetchData();
+    }, []);
+
+    function handleSelect(e) {
+        console.log(e.target.value);
+        setSelectedOption(e.target.value);
+    }
+
     return (
         <>
             <FormItem
@@ -24,8 +43,8 @@ const PersonalInfoForm = (props) => {
             >
                 <Field name="img">
                     {({ field, form }) => {
-                        const avatarProps = '/img/avatars/thumb-6.jpg'
-                            ? { src: '/img/avatars/thumb-6.jpg'}
+                        const avatarProps = '/img/avatars/pngegglol.png'
+                        ? { src: '/img/avatars/pngegglol.png'}
                             : {}
                         return (
                             <div className="flex justify-center">
@@ -43,6 +62,21 @@ const PersonalInfoForm = (props) => {
                 
             </FormItem>
             
+            <div>
+                <select value={selectedOption} onChange={handleSelect}>
+                <option value="">Select an option</option>
+                 {loading ? (
+                 <option value="">Loading...</option>
+                    ) : (
+                    data.map((item) => (
+                    <option key={item.id} value={item.id}>
+                     {item.name}
+                    </option>
+             ))
+         )}
+      </select>
+    </div>
+   
             <FormItem
                 label="agent_id"
                 invalid={errors.name && touched.name}

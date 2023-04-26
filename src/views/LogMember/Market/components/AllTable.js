@@ -6,7 +6,11 @@ import cloneDeep from 'lodash/cloneDeep'
 import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 import useThemeClass from 'utils/hooks/useThemeClass'
-
+import {
+    HiCalendar,
+    HiChevronDoubleUp,
+    HiChevronDoubleDown
+} from 'react-icons/hi'
 const AllTable = ({ data, loading, tableData }) => {
     const dispatch = useDispatch()
 
@@ -101,14 +105,27 @@ const AllTable = ({ data, loading, tableData }) => {
                 accessorKey: 'win',
                 cell: (props) => {
                     const row = props.row.original
-                    return (
-                        <div className="flex items-center">
-                            <Badge className={statusColor[row.win]} />
-                            <span className="ml-2 rtl:mr-2 capitalize">
-                                {row.win}
-                            </span>
-                        </div>
-                    )
+                    if (row.win > 0){
+                        return (
+                            <div className="flex items-center">
+                               <HiChevronDoubleUp className={statusColor['active']} />
+                                <span className="ml-2 rtl:mr-2 capitalize">
+                                    {row.win}
+                                </span>
+                            </div>
+                        )
+                    }
+                    else{
+                        return (
+                            <div className="flex items-center">
+                               <HiChevronDoubleDown className={statusColor['blocked']} />
+                                <span className="ml-2 rtl:mr-2 capitalize">
+                                    {row.win}
+                                </span>
+                            </div>
+                        )
+                    }
+                   
                 },
             },
             {
@@ -121,7 +138,7 @@ const AllTable = ({ data, loading, tableData }) => {
                     const formattedDate = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}, ${date.toLocaleTimeString()}`;
                     return (
                         <div className="flex items-center">
-                            <Badge className={statusColor[row.created_at]} />
+                            <HiCalendar className="text-emerald-500 text-xl"/>
                             <span className="ml-2 rtl:mr-2 capitalize">
                                 {formattedDate}
                             </span>

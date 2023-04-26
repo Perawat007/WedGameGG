@@ -29,8 +29,7 @@ const SalesDashboardBody = () => {
                 <SalesReport data={statisticData} className="col-span-2" />
                 <SalesByCategories data={statisticData} />
             </div>
-            <Holding data={statisticData.dataGame}/>
-
+            {/*<Holding data={statisticData.dataGame}/>*/}
         </Loading>
     )
 }
