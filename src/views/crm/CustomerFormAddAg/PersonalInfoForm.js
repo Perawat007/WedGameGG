@@ -25,8 +25,8 @@ const PersonalInfoForm = (props) => {
             >
                 <Field name="img">
                     {({ field, form }) => {
-                        const avatarProps = '/img/avatars/thumb-6.jpg'
-                            ? { src: '/img/avatars/thumb-6.jpg'}
+                        const avatarProps = '/img/avatars/pngegglol.png'
+                        ? { src: '/img/avatars/pngegglol.png'}
                             : {}
                         return (
                             <div className="flex justify-center">
@@ -96,6 +96,7 @@ const PersonalInfoForm = (props) => {
                     name="phoneNumber"
                     placeholder="Phone Number"
                     component={Input}
+                    pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required
                     prefix={<HiPhone className="text-xl" />}
                 />
             </FormItem>

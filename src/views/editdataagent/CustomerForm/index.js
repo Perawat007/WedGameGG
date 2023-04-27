@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react'
+import React, { forwardRef, useEffect, useState} from 'react'
 import { Tabs, FormContainer } from 'components/ui'
 import { Form, Formik } from 'formik'
 import dayjs from 'dayjs'
@@ -19,6 +19,7 @@ import {
 } from 'react-icons/hi'
 import { Field } from 'formik'
 import { StatusList } from '../../options.data'
+import axios from 'axios';
 
 dayjs.extend(customParseFormat)
 
@@ -73,6 +74,7 @@ const CustomerForm = forwardRef((props, ref) => {
     const onSetFormFile = (form, field, file) => {
         form.setFieldValue(field.name, URL.createObjectURL(file[0]))
     }
+    
     return (
         <Formik
             innerRef={ref}
@@ -106,8 +108,8 @@ const CustomerForm = forwardRef((props, ref) => {
             >
                 <Field name="img">
                     {({ field, form }) => {
-                        const avatarProps = '/img/avatars/thumb-6.jpg'
-                            ? { src: '/img/avatars/thumb-6.jpg'}
+                         const avatarProps = '/img/avatars/pngegglol.png'
+                         ? { src: '/img/avatars/pngegglol.png'}
                             : {}
                         return (
                             <div className="flex justify-center">
@@ -164,6 +166,7 @@ const CustomerForm = forwardRef((props, ref) => {
                     name="phoneNumber"
                     placeholder="Phone Number"
                     component={Input}
+                    pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required
                     prefix={<HiPhone className="text-xl" />}
                 />
             </FormItem>

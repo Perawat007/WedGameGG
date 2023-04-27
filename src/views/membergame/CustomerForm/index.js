@@ -106,8 +106,8 @@ const CustomerForm = forwardRef((props, ref) => {
             >
                 <Field name="img">
                     {({ field, form }) => {
-                        const avatarProps = '/img/avatars/thumb-6.jpg'
-                            ? { src: '/img/avatars/thumb-6.jpg'}
+                        const avatarProps = '/img/avatars/pngegglol.png'
+                        ? { src: '/img/avatars/pngegglol.png'}
                             : {}
                         return (
                             <div className="flex justify-center">

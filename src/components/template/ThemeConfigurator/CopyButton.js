@@ -28,12 +28,13 @@ const CopyButton = () => {
             }
         )
     }
-
-    return (
+    
+    {/* return (
         <Button block variant="solid" onClick={handleCopy}>
             Copy config
         </Button>
-    )
+    )*/}
+   
 }
 
 export default CopyButton
