@@ -19,6 +19,7 @@ import {
     HiLockClosed,
 } from 'react-icons/hi'
 import { StatusList } from '../../options.data'
+import './DropdownList.css';
 
 dayjs.extend(customParseFormat)
 
@@ -79,6 +80,13 @@ const CustomerFormAddAg = forwardRef((props, ref) => {
         setSelectedOption(e.target.value);
     }
 
+    const styles = {
+        backgroundColor: 'lightblack',
+        color: 'white',
+        padding: '10px',
+        borderRadius: '5px',
+    };
+
     return (
         <Formik
             innerRef={ref}
@@ -88,9 +96,10 @@ const CustomerFormAddAg = forwardRef((props, ref) => {
                 name : '',
                 username: '',
                 password:'',
+                IdAgent:'',
             }}
             onSubmit={(values, { setSubmitting }) => {
-                onFormSubmit?.(values)
+                onFormSubmit?.(values, selectedOption)
                 setSubmitting(false)
             }}
         >
@@ -131,6 +140,20 @@ const CustomerFormAddAg = forwardRef((props, ref) => {
                 
             </FormItem>
             
+            
+            <FormItem>
+            <div className="dropdown-container">
+             <label className="dropdown-label" htmlFor="dropdown">agent_id</label>
+             <select className="dropdown-list" id="dropdown" onChange={(e) => handleSelect(e)}>
+             <option value={null}>-- กรุณา Agent ID --</option>
+                {data.map((item, index) => (
+            <option key={index} value={item.id}>{`${item.id}`}</option>
+             ))}
+            </select>
+            </div>
+            </FormItem>
+            
+            {/*
             <FormItem
                 label="agent_id"
                 invalid={errors.name && touched.name}
@@ -146,6 +169,8 @@ const CustomerFormAddAg = forwardRef((props, ref) => {
                 />
             </FormItem>
 
+             */}
+            
             <FormItem
                 label="member_code"
                 invalid={errors.name && touched.name}

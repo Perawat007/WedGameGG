@@ -3,7 +3,6 @@ const ApiPutuser = {
 
      //data Delete
      deleteData(param) {
-        console.log(param.type);
         return new Promise((resolve, reject) => {
           fetch('https://relaxtimecafe.fun/delete/'+ param.data, {
             method: 'PUT',

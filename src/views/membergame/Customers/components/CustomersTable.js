@@ -99,13 +99,13 @@ const columns = [
     },
 
     {
-        header: 'IdAgent',
+        header: 'NameAgent',
         cell: (props) => {
             const row = props.row.original
             return (
                 <div className="flex items-center">
                     <span className="ml-2 rtl:mr-2 capitalize">
-                        {row.agent_id}
+                        {row.username_agent}
                     </span>
                 </div>
             )

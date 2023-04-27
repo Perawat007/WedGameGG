@@ -96,9 +96,9 @@ const PersonalInfoForm = (props) => {
                     autoComplete="off"
                     name="contact_number"
                     placeholder="Phone Number"
-                    pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required
                     component={Input}
                     prefix={<HiPhone className="text-xl" />}
+                    pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required
                 />
             </FormItem>
             <FormItem

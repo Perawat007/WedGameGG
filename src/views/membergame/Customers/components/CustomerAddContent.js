@@ -16,7 +16,7 @@ const CustomerAddContent = forwardRef((_, ref) => {
     const data = useSelector((addMenBer) => addMenBer.crmCustomers.data.customerList)
     const { id } = customer
 
-    const onFormSubmit = (values) => {
+    const onFormSubmit = (values, IdAgent) => {
         const {
             agent_id,
             member_code,
@@ -24,15 +24,15 @@ const CustomerAddContent = forwardRef((_, ref) => {
             username,
             password,
         } = values
-
-        const basicInfo = {agent_id, member_code, name, username, password }
+        const basicInfo = {agent_id:IdAgent, member_code, name, username, password}
         const personalInfo = {
             agent_id,
             member_code,
             name,
             username,
-            password
+            password,
         }
+        console.log(basicInfo);
         let newData = cloneDeep(data)
         let editedCustomer = {}
        newData = newData.map((elm) => {
@@ -44,10 +44,11 @@ const CustomerAddContent = forwardRef((_, ref) => {
             return elm.personalInfo
         })
 
+        //dispatch(AddCustomer(values, IdAgent)) //เรียกใช้งาน API 
         if (isEmpty(editedCustomer)) {
             if (isEmpty(editedCustomer)) {
-                if (values.name !== '' && values.username !== '' && values.password !== '' && values.agent_id !== '' && values.member_code !== ''){
-                     dispatch(AddCustomer(values)) //เรียกใช้งาน API 
+                if (basicInfo.name !== '' && basicInfo.username !== '' && basicInfo.password !== '' && basicInfo.agent_id !== '' && basicInfo.member_code !== ''){
+                    dispatch(AddCustomer(basicInfo)) 
                      dispatch(setDrawerClose())
                 }
                 else{
