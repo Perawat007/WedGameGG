@@ -67,7 +67,7 @@ const CustomerFormAddAg = forwardRef((props, ref) => {
 
     useEffect(() => {
         async function fetchData() {
-          const response = await fetch('http://localhost:5000/list_idAgent');
+          const response = await fetch('https://relaxtimecafe.fun/list_idAgent');
           const dataID = await response.json();
           setData(dataID.data);
           setLoading(false);
@@ -76,16 +76,13 @@ const CustomerFormAddAg = forwardRef((props, ref) => {
     }, []);
 
     function handleSelect(e) {
-        console.log(e.target.value);
-        setSelectedOption(e.target.value);
-    }
-
-    const styles = {
-        backgroundColor: 'lightblack',
-        color: 'white',
-        padding: '10px',
-        borderRadius: '5px',
-    };
+        if (e.target.value === '--- กรุณา Agent ID ---'){
+            setSelectedOption('');
+        }
+        else{
+            setSelectedOption(e.target.value);
+        }
+    }        
 
     return (
         <Formik
@@ -144,10 +141,10 @@ const CustomerFormAddAg = forwardRef((props, ref) => {
             <FormItem>
             <div className="dropdown-container">
              <label className="dropdown-label" htmlFor="dropdown">agent_id</label>
-             <select className="dropdown-list" id="dropdown" onChange={(e) => handleSelect(e)}>
-             <option value={null}>-- กรุณา Agent ID --</option>
+             <select className="dropdown-list" onChange={(e) => handleSelect(e)}>
+             <option className='selected-item' value={null}>--- กรุณา Agent ID ---</option>
                 {data.map((item, index) => (
-            <option key={index} value={item.id}>{`${item.id}`}</option>
+            <option className='dropdown-op' key={index} value={item.id}>{`${item.id}`}</option>
              ))}
             </select>
             </div>

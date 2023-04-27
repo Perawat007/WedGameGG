@@ -32,7 +32,6 @@ const CustomerAddContent = forwardRef((_, ref) => {
             username,
             password,
         }
-        console.log(basicInfo);
         let newData = cloneDeep(data)
         let editedCustomer = {}
        newData = newData.map((elm) => {
@@ -49,7 +48,7 @@ const CustomerAddContent = forwardRef((_, ref) => {
             if (isEmpty(editedCustomer)) {
                 if (basicInfo.name !== '' && basicInfo.username !== '' && basicInfo.password !== '' && basicInfo.agent_id !== '' && basicInfo.member_code !== ''){
                     dispatch(AddCustomer(basicInfo)) 
-                     dispatch(setDrawerClose())
+                    dispatch(setDrawerClose())
                 }
                 else{
                     alert("กรุณากรอกข้อมูลให้ครบ");
