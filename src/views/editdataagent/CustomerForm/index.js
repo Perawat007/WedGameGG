@@ -74,13 +74,14 @@ const CustomerForm = forwardRef((props, ref) => {
     const onSetFormFile = (form, field, file) => {
         form.setFieldValue(field.name, URL.createObjectURL(file[0]))
     }
-    
+
     return (
         <Formik
             innerRef={ref}
             initialValues={{
                 id : customer.id || '',
                 username: customer.username || '',
+                name: customer.name || '',
                 phoneNumber: customer.contact_number|| '',
                 status: customer.status || '',
                 credit: customer.credit || '',
@@ -155,6 +156,22 @@ const CustomerForm = forwardRef((props, ref) => {
                     disabled 
                 />
             </FormItem>
+
+            <FormItem
+                label="Name"
+                invalid={errors.name && touched.name}
+                errorMessage={errors.name}
+            >
+                <Field
+                    type="text"
+                    autoComplete="off"
+                    name="name"
+                    placeholder="name"
+                    component={Input}
+                    prefix={<HiUserCircle className="text-xl" />}
+                />
+            </FormItem>
+
             <FormItem
                 label="Phone Number"
                 invalid={errors.phoneNumber && touched.phoneNumber}

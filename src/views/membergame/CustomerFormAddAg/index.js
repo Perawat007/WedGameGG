@@ -211,8 +211,8 @@ const CustomerFormAddAg = forwardRef((props, ref) => {
             </FormItem>
             <FormItem
                 label="password"
-                invalid={errors.location && touched.location}
-                errorMessage={errors.location}
+                invalid={errors.password && touched.password}
+                errorMessage={errors.password}
             >
                 <Field
                     type="password"

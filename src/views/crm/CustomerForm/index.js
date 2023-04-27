@@ -77,6 +77,7 @@ const CustomerForm = forwardRef((props, ref) => {
             initialValues={{
                 id : customer.id || '',
                 username: customer.username || '',
+                name: customer.name || '',
                 phoneNumber: customer.contact_number || '',
                 status: customer.status || '',
             }}
@@ -148,6 +149,20 @@ const CustomerForm = forwardRef((props, ref) => {
                     component={Input}
                     prefix={<HiUserCircle className="text-xl" />}
                     disabled
+                />
+            </FormItem>
+            <FormItem
+                label="Name"
+                invalid={errors.name && touched.name}
+                errorMessage={errors.name}
+            >
+                <Field
+                    type="text"
+                    autoComplete="off"
+                    name="name"
+                    placeholder="name"
+                    component={Input}
+                    prefix={<HiUserCircle className="text-xl" />}
                 />
             </FormItem>
             <FormItem

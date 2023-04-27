@@ -19,14 +19,16 @@ const CustomerEditContent = forwardRef((_, ref) => {
         const {
             id,
             username,
+            name,
             phoneNumber,
             status,
         } = values
 
-        const basicInfo = { username, phoneNumber, status }
+        const basicInfo = { username,name, phoneNumber, status }
         const personalInfo = {
             id,
             username,
+            name,
             status,
             phoneNumber
         }
@@ -41,7 +43,7 @@ const CustomerEditContent = forwardRef((_, ref) => {
             return elm.personalInfo
         })
         if (!isEmpty(editedCustomer)) {
-            if (values.username !== '' && values.password !== '' && values.phoneNumber !== ''){
+            if (values.name !== '' && values.password !== '' && values.phoneNumber !== ''){
                 dispatch(putCustomer(values)) //เรียกใช้งาน API 
                 dispatch(setDrawerClose())
            }

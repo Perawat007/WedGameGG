@@ -170,7 +170,7 @@ const ApiService = {
             username: param.data.username,
             status: param.data.status,
             contact_number: param.data.phoneNumber,
-
+            name: param.data.name,
           })
         })
           .then(response => response.json())
