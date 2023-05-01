@@ -1,5 +1,5 @@
 import React, { useRef } from 'react'
-import { Button, Drawer } from 'components/ui'
+import { Button, Drawer, Dialog } from 'components/ui'
 import CustomerEditContent from './CustomerEditContent'
 import { useDispatch, useSelector } from 'react-redux'
 import { setDrawerClose, setSelectedCustomer } from '../store/stateSlice'
@@ -49,22 +49,21 @@ const CustomerEditDialog = () => {
     }
 
     return (
-        <Drawer
+        <Dialog
             isOpen={drawerOpen}
             onClose={onDrawerClose}
             onRequestClose={onDrawerClose}
             closable={false}
+            width={500}
             bodyClass="p-0"
-            footer={
-                <DrawerFooter
-                    onDelete={deleteAgent}
-                    onCancel={onDrawerClose}
-                    onSaveClick={formSubmit}
-                />
-            }
         >
         <CustomerEditContent ref={formikRef} />  
-        </Drawer>
+        <DrawerFooter
+            onDelete={deleteAgent}
+            onCancel={onDrawerClose}
+            onSaveClick={formSubmit}
+        />
+        </Dialog>
     )
 }
 

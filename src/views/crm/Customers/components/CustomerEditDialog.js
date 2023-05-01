@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 import { Button, Drawer, Dialog } from 'components/ui'
 import CustomerEditContent from './CustomerEditContent'
 import { useDispatch, useSelector } from 'react-redux'
@@ -24,6 +24,8 @@ const DrawerFooter = ({ onSaveClick, onCancel, onDelete}) => {
 
 const CustomerEditDialog = () => {
     const dispatch = useDispatch()
+    const [dialogIsOpen, setIsOpen] = useState(false)
+
     const drawerOpen = useSelector(
         (state) => state.crmCustomers.state.drawerOpen
     )
@@ -35,6 +37,20 @@ const CustomerEditDialog = () => {
     const onDrawerClose = () => {
         dispatch(setDrawerClose())
         dispatch(setSelectedCustomer({}))
+    }
+
+    const openDialog = () => {
+        setIsOpen(true)
+    }
+
+    const onDialogClose = (e) => {
+        console.log('onDialogClose', e)
+        setIsOpen(false)
+    }
+
+    const onDialogOk = (e) => {
+        console.log('onDialogOk', e)
+        setIsOpen(false)
     }
 
     const deleteAdmin =() =>{
@@ -55,9 +71,15 @@ const CustomerEditDialog = () => {
             onClose={onDrawerClose}
             onRequestClose={onDrawerClose}
             closable={false}
+            width={500}
             bodyClass="p-0"
         >
-        <CustomerEditContent ref={formikRef} />  
+        <div className="flex flex-col h-full justify-between">
+            <div className="max-h-96 overflow-y-auto">
+                <CustomerEditContent ref={formikRef} />  
+            </div>
+        </div>
+        
         <DrawerFooter
             onDelete={deleteAdmin}
             onCancel={onDrawerClose}

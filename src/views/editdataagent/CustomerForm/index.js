@@ -116,7 +116,7 @@ const CustomerForm = forwardRef((props, ref) => {
                             <div className="flex justify-center">
                                 <Avatar
                                         className="border-2 border-white dark:border-gray-800 shadow-lg"
-                                        size={100}
+                                        size={80}
                                         shape="circle"
                                         icon={<HiOutlineUser />}
                                         {...avatarProps}
