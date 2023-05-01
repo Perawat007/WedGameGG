@@ -27,8 +27,7 @@ const ApiPutuser = {
     //GetLogEdit //Search ด้วย ส่ง name มา
  fetchLogEdit(param) {
   return new Promise((resolve, reject) => {
-    console.log(param.data);
-  fetch('http://localhost:5000/logEdit/' + param.data.id.idLog,{
+  fetch('https://relaxtimecafe.fun/logEdit/' + param.data.id.idLog,{
             method: 'POST',
             headers: {
              'Content-Type': 'application/json'

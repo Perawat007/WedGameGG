@@ -72,7 +72,7 @@ const CustomerEditDialog = () => {
             onRequestClose={onDrawerClose}
             closable={false}
             width={500}
-            height={800}
+            height={700}
             bodyClass="p-0"
         >
         <div className="flex flex-col h-full justify-between">
@@ -85,8 +85,6 @@ const CustomerEditDialog = () => {
             onSaveClick={formSubmit}
         />
         </div>
-        
-       
         </Dialog>
     )
 }
