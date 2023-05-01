@@ -72,19 +72,21 @@ const CustomerEditDialog = () => {
             onRequestClose={onDrawerClose}
             closable={false}
             width={500}
+            height={800}
             bodyClass="p-0"
         >
         <div className="flex flex-col h-full justify-between">
-            <div className="max-h-96 overflow-y-auto">
+            <div className="overflow-y-auto">
                 <CustomerEditContent ref={formikRef} />  
             </div>
-        </div>
-        
-        <DrawerFooter
+            <DrawerFooter
             onDelete={deleteAdmin}
             onCancel={onDrawerClose}
             onSaveClick={formSubmit}
         />
+        </div>
+        
+       
         </Dialog>
     )
 }
