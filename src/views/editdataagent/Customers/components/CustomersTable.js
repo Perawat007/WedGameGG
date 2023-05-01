@@ -1,5 +1,5 @@
-import React, { useEffect, useCallback, useMemo } from 'react'
-import { Avatar, Badge, Button } from 'components/ui'
+import React, { useEffect, useCallback, useMemo, useState } from 'react'
+import { Avatar, Badge, Button, Dialog } from 'components/ui'
 import { DataTable } from 'components/shared'
 import { useDispatch, useSelector } from 'react-redux'
 import { getCustomers, setTableData } from '../store/dataSliceAdmin'
@@ -10,13 +10,15 @@ import {
 import useThemeClass from 'utils/hooks/useThemeClass'
 import CustomerEditDialog from './CustomerEditDialog'
 import CustomerAddDialog from './CustomerAddDialog'
-
+import LogEditData from 'views/LogEditUser/Market/LogEditData'
 import cloneDeep from 'lodash/cloneDeep'
 import {
     HiPhone,
     HiCheck,
     HiMinusCircle,
     HiCurrencyDollar,
+    HiPencilAlt,
+    HiOutlineDocumentText,
 } from 'react-icons/hi'
 const statusColor = {
     active: 'bg-emerald-500',
@@ -31,11 +33,37 @@ const ActionColumn = ({ row }) => {
         dispatch(setSelectedCustomer(row))
     }
 
+    const [viewOpen, setViewOpen] = useState(false)
+    const [rowIdLog, setLogId] = useState();
+
+    const onViewOpen = (rowId) => {
+        setLogId(rowId.id)
+        setViewOpen(true)
+    }
+
+    const onDialogClose = () => {
+        setViewOpen(false)
+    }
+
+
     return (
         <div className="ltr:text-right rtl:text-left">
-             <Button size="sm" variant="solid" color="blue-600" onClick={() => onEdit()}>
-                Edit
-            </Button>
+            <div>
+                <Button variant="solid" icon={<HiPencilAlt />} onClick={() => onEdit()} />
+                <Button variant="solid" color="green-600" icon={<HiOutlineDocumentText />} onClick={() => onViewOpen(row)} />
+            </div>
+
+            <Dialog
+                isOpen={viewOpen}
+                onClose={onDialogClose}
+                onRequestClose={onDialogClose}
+            >
+            <div className="w-full">
+                <h1>Log Edit</h1>
+                <LogEditData idLog = {rowIdLog} typeLog = {'agent'} />
+            </div>  
+            </Dialog>
+
         </div>
     )
 }

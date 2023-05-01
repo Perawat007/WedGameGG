@@ -43,6 +43,13 @@ export async function apiGetLogMember(data) {
     })
 }
 
+//get Log_Edit_Member
+export async function apiGetLogEditMember(data) {
+    return ApiPutuser.fetchLogEdit({
+        data
+    })
+}
+
 export async function apiGetCrmCustomersStatistic(params) {
    return ApiService.fetchDataAg({
         params

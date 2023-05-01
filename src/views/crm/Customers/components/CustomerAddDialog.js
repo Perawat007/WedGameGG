@@ -1,5 +1,5 @@
 import React, { useRef } from 'react'
-import { Button, Drawer } from 'components/ui'
+import { Button, Drawer, Dialog } from 'components/ui'
 import CustomerAddContent from './CustomerAddContent'
 import { useDispatch, useSelector } from 'react-redux'
 import { setDrawerClose } from '../store/addSlice'
@@ -34,21 +34,19 @@ const CustomerAddDialog = () => {
     }
 
     return (
-        <Drawer
-            isOpen={drawerOpen}
-            onClose={onDrawerClose}
-            onRequestClose={onDrawerClose}
-            closable={false}
-            bodyClass="p-0"
-            footer={
-                <DrawerFooter
-                    onCancel={onDrawerClose}
-                    onSaveClick={formSubmit}
-                />
-            }
-        >
-        <CustomerAddContent ref={formikRef} />  
-        </Drawer>
+        <Dialog
+        isOpen={drawerOpen}
+        onClose={onDrawerClose}
+        onRequestClose={onDrawerClose}
+        closable={false}
+        bodyClass="p-0"
+    >
+    <CustomerAddContent ref={formikRef} />  
+    <DrawerFooter
+        onCancel={onDrawerClose}
+        onSaveClick={formSubmit}
+    />
+    </Dialog>
     )
 }
 

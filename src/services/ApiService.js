@@ -198,7 +198,7 @@ const ApiService = {
           name: param.data.name,
           username: param.data.username,
           status: param.data.status,
-          balance: param.data.balance
+          credit: param.data.balance
         })
       })
         .then(response => response.json())
@@ -336,8 +336,6 @@ addMember(param) {
           });
         })
     },
-
-
   getValusData() {
     return new Promise((resolve, reject) => {
             fetch('https://relaxtimecafe.fun/getallData')

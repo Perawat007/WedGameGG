@@ -4,7 +4,9 @@ import CustomerEditContent from './CustomerEditContent'
 import { useDispatch, useSelector } from 'react-redux'
 import { setDrawerClose, setSelectedCustomer } from '../store/stateSlice'
 import { DeleteMemBer } from '../store/dataSliceAdmin'
-
+import {
+    HiPhone,
+} from 'react-icons/hi'
 const DrawerFooter = ({ onSaveClick, onCancel, onDelete }) => {
     return (
         <div className="text-right w-full">

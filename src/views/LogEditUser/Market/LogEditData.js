@@ -18,7 +18,7 @@ injectReducer('cryptoMarket', reducer)
 
 const { TabNav, TabList, TabContent } = Tabs
 
-const LogData = (id) => {
+const LogEditData = (id) => {
 
     const dispatch = useDispatch()
 
@@ -40,7 +40,7 @@ const LogData = (id) => {
     }, [dispatch, selectedTab, tableData])
 
     const fetchData = () => {
-        dispatch(getMarketData({ tab: selectedTab, ...tableData, id : id.idLog}))
+        dispatch(getMarketData({ tab: selectedTab, ...tableData, id : id}))
     }
 
     const handleTabChange = (val) => {
@@ -68,4 +68,4 @@ const LogData = (id) => {
     )
 }
 
-export default LogData
+export default LogEditData

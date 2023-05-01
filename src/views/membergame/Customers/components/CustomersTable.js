@@ -12,12 +12,14 @@ import CustomerEditDialog from './CustomerEditDialog'
 import CustomerAddDialog from './CustomerAddDialog'
 import cloneDeep from 'lodash/cloneDeep'
 import LogData from 'views/LogMember/Market/LogData'
-
+import LogEditData from 'views/LogEditUser/Market/LogEditData'
 import {
     HiCheck,
     HiMinusCircle,
     HiCurrencyDollar,
-    HiCalendar
+    HiCalendar,
+    HiPencilAlt,
+    HiOutlineDocumentText
 } from 'react-icons/hi'
 
 const statusColor = {
@@ -30,14 +32,39 @@ const ActionColumn = (row) => {
     const dispatch = useDispatch()
     const onEdit = () => {
         dispatch(setDrawerOpen())
-        dispatch(setSelectedCustomer(row.rowLog))
+        dispatch(setSelectedCustomer(row))
+    }
+
+    const [viewOpen, setViewOpen] = useState(false)
+    const [rowIdLog, setLogId] = useState();
+
+    const onViewOpen = (rowId) => {
+        setLogId(rowId.rowLog.id)
+        setViewOpen(true)
+    }
+
+    const onDialogClose = () => {
+        setViewOpen(false)
     }
 
     return (
         <div className="ltr:text-right rtl:text-left">
-            <Button size="sm" variant="solid" color="blue-600" onClick={() => onEdit()}>
-                Edit
-            </Button>
+            <div>
+                <Button variant="solid" icon={<HiPencilAlt />} onClick={() => onEdit()} />
+                <Button variant="solid" color="green-600" icon={<HiOutlineDocumentText />} onClick={() => onViewOpen(row)} />
+            </div>
+
+            <Dialog
+                isOpen={viewOpen}
+                onClose={onDialogClose}
+                onRequestClose={onDialogClose}
+            >
+            <div className="w-full">
+                <h1>Log Edit</h1>
+                <LogEditData idLog = {rowIdLog} typeLog = {'member'} />
+            </div>  
+            </Dialog>
+
         </div>
     )
 }
@@ -133,14 +160,14 @@ const columns = [
     },
 
     {
-        header: 'Balance',
+        header: 'Credit',
         cell: (props) => {
             const row = props.row.original
             return (
                 <div className="flex items-center">
                 <HiCurrencyDollar className="text-emerald-500 text-xl"/>
                 <span className="ml-2 rtl:mr-2 capitalize">
-                    {row.balance}
+                    {row.credit}
                 </span>
             </div>
             )

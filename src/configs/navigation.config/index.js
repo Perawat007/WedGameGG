@@ -16,7 +16,7 @@ const navigationConfig = [
         subMenu: [],
     },
     /** Example purpose only, please remove */
-    /**{
+    {
         key: 'collapseReports',
         path: '',
         title: 'Reports',
@@ -76,7 +76,7 @@ const navigationConfig = [
                 subMenu: [],
             },
         ],
-    },*/
+    },
     {
         key: 'collapseMenu',
         path: '',

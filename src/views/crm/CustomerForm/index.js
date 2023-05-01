@@ -78,7 +78,7 @@ const CustomerForm = forwardRef((props, ref) => {
                 id : customer.id || '',
                 username: customer.username || '',
                 name: customer.name || '',
-                phoneNumber: customer.contact_number || '',
+                phoneNumber: customer?.personalInfo?.contact_number || '',
                 status: customer.status || '',
             }}
             validationSchema={validationSchema}
