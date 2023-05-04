@@ -50,20 +50,25 @@ const CustomerEditDialog = () => {
 
     return (
         <Dialog
-            isOpen={drawerOpen}
-            onClose={onDrawerClose}
-            onRequestClose={onDrawerClose}
-            closable={false}
-            width={500}
-            bodyClass="p-0"
-        >
-        <CustomerEditContent ref={formikRef} />  
+        isOpen={drawerOpen}
+        onClose={onDrawerClose}
+        onRequestClose={onDrawerClose}
+        closable={false}
+        width={500}
+        height={700}
+        bodyClass="p-0"
+    >
+    <div className="flex flex-col h-full justify-between">
+        <div className="overflow-y-auto">
+            <CustomerEditContent ref={formikRef} />  
+        </div>
         <DrawerFooter
-            onDelete={deleteAgent}
-            onCancel={onDrawerClose}
-            onSaveClick={formSubmit}
-        />
-        </Dialog>
+        onDelete={deleteAgent}
+        onCancel={onDrawerClose}
+        onSaveClick={formSubmit}
+    />
+    </div>
+    </Dialog>
     )
 }
 

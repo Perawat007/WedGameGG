@@ -35,18 +35,24 @@ const CustomerAddDialog = () => {
 
     return (
         <Dialog
-        isOpen={drawerOpen}
-        onClose={onDrawerClose}
-        onRequestClose={onDrawerClose}
-        closable={false}
-        bodyClass="p-0"
-    >
-    <CustomerAddContent ref={formikRef} />  
-    <DrawerFooter
-        onCancel={onDrawerClose}
-        onSaveClick={formSubmit}
-    />
-    </Dialog>
+            isOpen={drawerOpen}
+            onClose={onDrawerClose}
+            onRequestClose={onDrawerClose}
+            closable={false}
+            width={500}
+            height={700}
+            bodyClass="p-0"
+        >
+        <div className="flex flex-col h-full justify-between">
+            <div className="overflow-y-auto">
+                <CustomerAddContent ref={formikRef} />  
+            </div>
+            <DrawerFooter
+            onCancel={onDrawerClose}
+            onSaveClick={formSubmit}
+        />
+        </div>
+        </Dialog>
     )
 }
 

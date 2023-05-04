@@ -11,7 +11,6 @@ import { components } from 'react-select'
 import {Input, FormItem, Avatar, Upload, Select} from 'components/ui'
 import {
     HiUserCircle,
-    HiLocationMarker,
     HiPhone,
     HiCheck,
     HiOutlineUser,
@@ -78,7 +77,7 @@ const CustomerForm = forwardRef((props, ref) => {
                 id : customer.id || '',
                 username: customer.username || '',
                 name: customer.name || '',
-                phoneNumber: customer?.personalInfo?.contact_number || '',
+                phoneNumber: customer.contact_number || '',
                 status: customer.status || '',
             }}
             validationSchema={validationSchema}

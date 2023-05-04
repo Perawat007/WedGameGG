@@ -82,6 +82,7 @@ const ApiService = {
             },
             body: JSON.stringify({
               name: param.data.query,
+              idedit: 1,
               pageIndex: param.data.pageIndex,
               pageSize: param.data.pageSize
             })
@@ -112,6 +113,7 @@ const ApiService = {
           },
           body: JSON.stringify({
             name: param.data.query,
+            idedit: 1,
             pageIndex: param.data.pageIndex,
             pageSize: param.data.pageSize
           })
@@ -168,6 +170,7 @@ const ApiService = {
           },
           body: JSON.stringify({
             username: param.data.username,
+            idedit: 1,
             status: param.data.status,
             contact_number: param.data.phoneNumber,
             name: param.data.name,
@@ -198,7 +201,7 @@ const ApiService = {
           name: param.data.name,
           username: param.data.username,
           status: param.data.status,
-          credit: param.data.balance
+          credit: param.data.credit
         })
       })
         .then(response => response.json())

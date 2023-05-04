@@ -13,9 +13,7 @@ const ActionColumn = ({ row }) => {
 
     return (
         <div className="ltr:text-right rtl:text-left">
-            <Button size="sm" onClick={onTrade}>
-                Trade
-            </Button>
+           
         </div>
     )
 }

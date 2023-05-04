@@ -56,19 +56,16 @@ const PaymentSelectOption = ({ innerProps, label, data, isSelected }) => {
 
 const validationSchema = Yup.object().shape({
     id: Yup.string(),
+    name : Yup.string().required('User Name Required'),
     username: Yup.string().required('User Name Required'),
-    phoneNumber: Yup.string().matches(
-        /^((\+[1-9]{1,4}[ -]?)|(\([0-9]{2,3}\)[ -]?)|([0-9]{2,4})[ -]?)*?[0-9]{3,4}[ -]?[0-9]{3,4}$/,
-        'Phone number is not valid'
-    ),
     status: Yup.string(),
+    credit: Yup.string(),
 })
 
 const { TabNav, TabList, TabContent } = Tabs
 
 const CustomerForm = forwardRef((props, ref) => {
     const { customer, onFormSubmit } = props
-
     const onSetFormFile = (form, field, file) => {
         form.setFieldValue(field.name, URL.createObjectURL(file[0]))
     }
@@ -77,11 +74,10 @@ const CustomerForm = forwardRef((props, ref) => {
             innerRef={ref}
             initialValues={{
                 id : customer.id || '',
-                member_code: customer.member_code || '',
-                name: customer.name || '',
                 username: customer.username || '',
+                name: customer.name || '',
                 status: customer.status || '',
-                balance: customer.balance || '',
+                credit: customer.credit || '',
             }}
             validationSchema={validationSchema}
             onSubmit={(values, { setSubmitting }) => {
@@ -134,7 +130,7 @@ const CustomerForm = forwardRef((props, ref) => {
                     name="id"
                     component={Input}
                     prefix={<HiUserCircle className="text-xl" />}
-                    disabled 
+                    disabled
                 />
             </FormItem>
             <FormItem
@@ -167,15 +163,15 @@ const CustomerForm = forwardRef((props, ref) => {
                 />
             </FormItem>
             <FormItem
-                label="Balance"
+                label="Credit"
                 invalid={errors.location && touched.location}
                 errorMessage={errors.location}
             >
                 <Field
                     type="Number"
                     autoComplete="off"
-                    name="balance"
-                    placeholder="balance"
+                    name="credit"
+                    placeholder="credit"
                     component={Input}
                     prefix={<HiCurrencyDollar className="text-xl" />}
                 />

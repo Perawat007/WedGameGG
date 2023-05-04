@@ -7,7 +7,6 @@ export const getMarketData = createAsyncThunk(
     'cryptoMarket/data/getMarketData',
     async (data) => {
         const response = await apiGetLogEditMember(data)
-        console.log(response);
         return response
     }
 )

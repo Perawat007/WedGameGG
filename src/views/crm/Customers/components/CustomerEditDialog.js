@@ -24,7 +24,6 @@ const DrawerFooter = ({ onSaveClick, onCancel, onDelete}) => {
 
 const CustomerEditDialog = () => {
     const dispatch = useDispatch()
-    const [dialogIsOpen, setIsOpen] = useState(false)
 
     const drawerOpen = useSelector(
         (state) => state.crmCustomers.state.drawerOpen
@@ -37,20 +36,6 @@ const CustomerEditDialog = () => {
     const onDrawerClose = () => {
         dispatch(setDrawerClose())
         dispatch(setSelectedCustomer({}))
-    }
-
-    const openDialog = () => {
-        setIsOpen(true)
-    }
-
-    const onDialogClose = (e) => {
-        console.log('onDialogClose', e)
-        setIsOpen(false)
-    }
-
-    const onDialogOk = (e) => {
-        console.log('onDialogOk', e)
-        setIsOpen(false)
     }
 
     const deleteAdmin =() =>{
