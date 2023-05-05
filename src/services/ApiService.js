@@ -137,6 +137,7 @@ const ApiService = {
     //putAgent
     putDataAgent(param) {
         return new Promise((resolve, reject) => {
+          console.log(param.data);
           fetch('https://relaxtimecafe.fun/agent/'+ param.data.id, {
             method: 'PUT',
             headers: {
@@ -144,9 +145,11 @@ const ApiService = {
             },
             body: JSON.stringify({
               username: param.data.username,
+              name: param.data.name,
               status: param.data.status,
               contact_number: param.data.phoneNumber,
               credit : param.data.credit,
+              idedit : 1
             })
           })
             .then(response => response.json())
@@ -199,9 +202,11 @@ const ApiService = {
         body: JSON.stringify({
           member_code: param.data.member_code,
           name: param.data.name,
+          idedit: 1,
           username: param.data.username,
           status: param.data.status,
-          credit: param.data.credit
+          credit: param.data.credit,
+          edittype: 'admin',
         })
       })
         .then(response => response.json())
