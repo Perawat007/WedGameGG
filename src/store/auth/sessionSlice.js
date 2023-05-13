@@ -9,11 +9,12 @@ export const sessionSlice = createSlice({
     reducers: {
         onSignInSuccess: (state, action) => {
             state.signedIn = true
-            console.log(action);
             state.token = action.payload
         },
         onSignOutSuccess: (state) => {
             state.signedIn = false
+            localStorage.removeItem("token")
+            localStorage.removeItem("admin")
             state.token = ''
         },
         setToken: (state, action) => {

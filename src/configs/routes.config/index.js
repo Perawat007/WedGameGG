@@ -12,6 +12,41 @@ export const protectedRoutes = [
     },
 
     {
+        key: 'collapseReports.item1',
+        path: '/dailyOverview',
+        component: React.lazy(() => import('views/reports/daily_overview/daily_overviews')),
+        authority: ['admin', 'user'],
+    },
+    {
+        key: 'collapseReports.item2',
+        path: '/monthlyCommission',
+        component: React.lazy(() => import('views/reports/monthly_commission/indexmonthly')),
+        authority: ['admin', 'user'],
+    },
+
+    {
+        key: 'collapseReports.item3',
+        path: '/dayCommission',
+        component: React.lazy(() => import('views/reports/day_commission/indexday')),
+        authority: ['admin', 'user'],
+    },
+
+    {
+        key: 'collapseReports.item4',
+        path: '/receivedPercentage',
+        component: React.lazy(() => import('views/reports/receivedpercentage/indexpercen')),
+        authority: ['admin', 'user'],
+    },
+
+
+    {
+        key: 'collapseReports.item5',
+        path: '/userRank',
+        component: React.lazy(() => import('views/reports/userRank/indexRankUsers')),
+        authority: ['admin', 'user'],
+    },
+
+    {
         key: 'appsAccount.settings',
         path: '/account/settings/profile',
         component: React.lazy(() => import('views/account/Settings')),
@@ -27,12 +62,7 @@ export const protectedRoutes = [
         component: React.lazy(() => import('views/membergame/Customers/memderLog')),
         authority: [],
     },
-    {
-        key: 'collapseMenu.item2',
-        path: '/collapse-menu-item-view-2',
-        component: React.lazy(() => import('views/demo/CollapseMenuItemView2')),
-        authority: [],
-    },
+   
     {
         key: 'collapseMenu.item3',
         path: '/collapse-menu-item-view-3',
@@ -69,4 +99,30 @@ export const protectedRoutes = [
         ),
         authority: [],
     },
+
+    {
+        key: 'groupMenu.userManual.item1',
+        path: '/manual/add-credit-user',
+        component: React.lazy(() =>
+            import('views/usermanual/indexaddcredit')
+        ),
+        authority: [],
+    },
+    {
+        key: 'groupMenu.userManual.item2',
+        path: '/manual/add-member-user',
+        component: React.lazy(() =>
+            import('views/usermanual/indexaddmember')
+        ),
+        authority: [],
+    },
+    {
+        key: 'groupMenu.userManual.item2',
+        path: '/manual/graph',
+        component: React.lazy(() =>
+            import('views/usermanual/indexseeGraph')
+        ),
+        authority: [],
+    },
 ]
+

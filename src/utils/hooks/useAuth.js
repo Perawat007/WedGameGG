@@ -1,5 +1,4 @@
 //ทำ Login ดูหน้านี้
-
 import { useSelector, useDispatch } from 'react-redux'
 import { setUser, initialState } from 'store/auth/userSlice'
 import { apiSignIn, apiSignOut, apiSignUp } from 'services/AuthService'
@@ -22,9 +21,8 @@ function useAuth() {
         try {
             const resp = await apiSignIn(values)
             if (resp.data) {
-                const { token } = resp.token
-                console.log(resp.token)
-                dispatch(onSignInSuccess(resp.token))
+                const token  = resp.token
+                dispatch(onSignInSuccess(token))
                 if (resp.data) {
                     dispatch(
                         setUser(
@@ -107,6 +105,7 @@ function useAuth() {
         signIn,
         signUp,
         signOut,
+        handleSignOut,
     }
 }
 

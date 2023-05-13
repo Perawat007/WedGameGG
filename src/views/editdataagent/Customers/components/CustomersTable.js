@@ -10,6 +10,7 @@ import {
 import useThemeClass from 'utils/hooks/useThemeClass'
 import CustomerEditDialog from './CustomerEditDialog'
 import CustomerAddDialog from './CustomerAddDialog'
+import LogAgMember from 'views/LogAgMember/Market/LogAgMember'
 import LogEditData from 'views/LogEditUser/Market/LogEditData'
 import cloneDeep from 'lodash/cloneDeep'
 import {
@@ -20,6 +21,7 @@ import {
     HiPencilAlt,
     HiOutlineDocumentText,
 } from 'react-icons/hi'
+import { TiFolderOpen } from "react-icons/ti";
 const statusColor = {
     active: 'bg-emerald-500',
     blocked: 'bg-red-500',
@@ -45,12 +47,24 @@ const ActionColumn = ({ row }) => {
         setViewOpen(false)
     }
 
+    const [viewLogOpen, setViewLogOpen] = useState(false)
+    const [rowLogIdLog, setSeeLogId] = useState();
+    
+    const onViewOpenLog = (rowId) => {
+        setSeeLogId(rowId.id)
+        setViewLogOpen(true)
+    }
+
+    const onDialogLogClose = () => {
+        setViewLogOpen(false)
+    }
 
     return (
         <div className="ltr:text-right rtl:text-left">
             <div>
                 <Button variant="solid" icon={<HiPencilAlt />} onClick={() => onEdit()} />
                 <Button variant="solid" color="green-600" icon={<HiOutlineDocumentText />} onClick={() => onViewOpen(row)} />
+                <Button variant="solid" color="blue-600" icon={<TiFolderOpen />} onClick={() => onViewOpenLog(row)} />
             </div>
 
             <Dialog
@@ -61,6 +75,22 @@ const ActionColumn = ({ row }) => {
             <div className="w-full">
                 <h1>Log Edit</h1>
                 <LogEditData idLog = {rowIdLog} typeLog = {'agent'} />
+            </div>  
+            </Dialog>
+
+            <Dialog
+                isOpen={viewLogOpen}
+                onClose={onDialogLogClose}
+                onRequestClose={onDialogLogClose}
+                bodyClass="p-0"
+            >
+            <div className="w-full">
+                <div className="flex flex-col h-full justify-between">
+                    <div className="overflow-y-auto">
+                        <h1>Member</h1>
+                        <LogAgMember idLog = {rowLogIdLog}/>
+                    </div>
+                </div>
             </div>  
             </Dialog>
 

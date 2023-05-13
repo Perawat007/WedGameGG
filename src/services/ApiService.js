@@ -1,12 +1,14 @@
 import BaseService from './BaseService'
-
+import useAuth from 'utils/hooks/useAuth';
+const token = localStorage.getItem("token");
+const baseURL = 'https://relaxtimecafe.fun/'
 const ApiService = {
-      //Login Admin
-      fetchData(param) {
-        return new Promise((resolve, reject) => {
-          fetch('https://relaxtimecafe.fun/login/admin', {
-                method: 'POST',
-                headers: {
+  //Login Admin
+  loginAdmin(param) {
+    return new Promise((resolve, reject) => {
+      fetch(baseURL+'login/admin', {
+        method: 'POST',
+        headers: {
                  'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
@@ -22,33 +24,36 @@ const ApiService = {
                 }
               })
               .then(data => {
+                const accessToken = data.token;
+                localStorage.setItem('token',accessToken);
                 resolve(data);
               })
               .catch(error => {
                 console.error('Error:', error);
               });
     });
-    },
-    signOut(param) {
-      return new Promise((resolve, reject) => {
-          BaseService(param)
-              .then((response) => {
-                  console.log(response);
-                  resolve(response)
-              })
-              .catch((errors) => {
-                  reject(errors)
-              }) 
+  },
+  signOut(param) {
+    return new Promise((resolve, reject) => {
+      BaseService(param)
+      .then((response) => {
+        resolve(response)
+        })
+      .catch((errors) => {
+        reject(errors)
+        }) 
       });
   },
 
   //GetDataAdmin //Search ด้วย ส่ง name มา
-  fetchDataAd(param) {
+  fetchDataAd (param) {
     return new Promise((resolve, reject) => {
-      fetch('https://relaxtimecafe.fun/list_admins', {
+      console.log(token);
+      fetch(baseURL + 'list_admins', {
         method: 'POST',
         headers: {
-         'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify({
             name: param.data.query,
@@ -63,22 +68,26 @@ const ApiService = {
           throw new Error('Error: ' + response.statusText);
         }
       })
-      .then(data => {
-        resolve(data);
-      })
+    .then(data => {
+      resolve(data);
+    })
       .catch(error => {
+        localStorage.removeItem('admin')
+        //localStorage.removeItem('token')
+        window.location.reload();
         console.error('Error:', error);
       });
     })
   },
 
   //GetDataAgent //Search ด้วย ส่ง name มา
-    fetchDataAg(param) {
+      fetchDataAg(param) {
         return new Promise((resolve, reject) => {
-          fetch('https://relaxtimecafe.fun/list_agents', {
+          fetch(baseURL + 'list_agents', {
             method: 'POST',
             headers: {
-             'Content-Type': 'application/json'
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`
             },
             body: JSON.stringify({
               name: param.data.query,
@@ -98,18 +107,22 @@ const ApiService = {
             resolve(data);
           })
           .catch(error => {
+            localStorage.removeItem('admin')
+            //localStorage.removeItem('token')
+            window.location.reload();
             console.error('Error:', error);
           });
         })
-    },
+      },
 
      //GetDataMember //Search ด้วย ส่ง name มา
      fetchDataMember(param) {
       return new Promise((resolve, reject) => {
-        fetch('https://relaxtimecafe.fun/list_users', {
+        fetch(baseURL + 'list_users', {
           method: 'POST',
           headers: {
-           'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
           },
           body: JSON.stringify({
             name: param.data.query,
@@ -129,6 +142,9 @@ const ApiService = {
           resolve(data);
         })
         .catch(error => {
+          localStorage.removeItem('admin')
+          //localStorage.removeItem('token')
+          window.location.reload();
           console.error('Error:', error);
         });
       })
@@ -138,7 +154,7 @@ const ApiService = {
     putDataAgent(param) {
         return new Promise((resolve, reject) => {
           console.log(param.data);
-          fetch('https://relaxtimecafe.fun/agent/'+ param.data.id, {
+          fetch(baseURL + 'agent/'+ param.data.id, {
             method: 'PUT',
             headers: {
               'Content-Type': 'application/json'
@@ -166,7 +182,7 @@ const ApiService = {
     //putAdmin
     putDataAdmin(param) {
       return new Promise((resolve, reject) => {
-        fetch('https://relaxtimecafe.fun/admin/'+ param.data.id, {
+        fetch(baseURL + 'admin/'+ param.data.id, {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json'
@@ -194,7 +210,7 @@ const ApiService = {
   putDataMember(param) {
     return new Promise((resolve, reject) => {
       console.log(param);
-      fetch('https://relaxtimecafe.fun/member/'+ param.data.id, {
+      fetch(baseURL + 'member/'+ param.data.id, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json'
@@ -223,7 +239,7 @@ const ApiService = {
     //AddAgent
     addAgent(param) {
       return new Promise((resolve, reject) => {
-        fetch('https://relaxtimecafe.fun/signupAgent', {
+        fetch(baseURL + 'signupAgent', {
               method: 'POST',
               headers: {
                'Content-Type': 'application/json'
@@ -255,7 +271,7 @@ const ApiService = {
   //AddAdmin
   addAdmin(param) {
     return new Promise((resolve, reject) => {
-      fetch('https://relaxtimecafe.fun/signup', {
+      fetch(baseURL+'signup', {
             method: 'POST',
             headers: {
              'Content-Type': 'application/json'
@@ -286,8 +302,7 @@ const ApiService = {
 //AddMember
 addMember(param) {
   return new Promise((resolve, reject) => {
-
-    fetch('https://relaxtimecafe.fun/signupMember', {
+    fetch(baseURL+'signupMember', {
           method: 'POST',
           headers: {
            'Content-Type': 'application/json'
@@ -319,7 +334,7 @@ addMember(param) {
  //GetLogMember //Search ด้วย ส่ง name มา
  fetchLogMember(param) {
   return new Promise((resolve, reject) => {
-  fetch('https://relaxtimecafe.fun/user_play/user_lay/' + param.data.id, {
+  fetch(baseURL+'user_play/user_lay/' + param.data.id, {
             method: 'POST',
             headers: {
              'Content-Type': 'application/json'
@@ -344,9 +359,63 @@ addMember(param) {
           });
         })
     },
+
+    //GetLogMember //Search ด้วย ส่ง name มา
+  fetchDataAgMember(param) {
+    console.log(param.params.id.idLog);
+    return new Promise((resolve, reject) => {
+    fetch(baseURL+ 'post/logAgentMember/' + param.params.id.idLog, {
+            method: 'POST',
+            headers: {
+             'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              name: param.params.query,
+              pageIndex: param.params.pageIndex,
+              pageSize: param.params.pageSize
+            })
+        })
+        .then(response => {
+            if (response) {
+              return response.json();
+            } else {
+              throw new Error('Error: ' + response.statusText);
+            }
+          })
+          .then(data => {
+            resolve(data);
+          })
+          .catch(error => {
+            console.error('Error:', error);
+          });
+        })
+    },
+
   getValusData() {
     return new Promise((resolve, reject) => {
-            fetch('https://relaxtimecafe.fun/getallData')
+            fetch(baseURL+ 'getallData')
+            .then(response => response.json())
+            .then(data => {
+                resolve(data);
+            })
+            .catch(error => console.error(error))
+    })
+  },
+
+  getCommission() {
+    return new Promise((resolve, reject) => {
+            fetch(baseURL+ 'post/commissionGame')
+            .then(response => response.json())
+            .then(data => {
+                resolve(data);
+            })
+            .catch(error => console.error(error))
+    })
+  },
+
+  getCommissionMonthly() {
+    return new Promise((resolve, reject) => {
+            fetch(baseURL+ 'post/commissionMonthly')
             .then(response => response.json())
             .then(data => {
                 resolve(data);

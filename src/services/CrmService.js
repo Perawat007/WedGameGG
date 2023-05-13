@@ -127,11 +127,20 @@ export async function getCustomer() {
     return ApiService.getValusData()
 }
 
-export async function apiGetCrmCustomerDetails(params) {
-    return ApiService.fetchData({
-        url: '/crm/customer-details',
-        method: 'get',
-        params,
+//Get CommissionGame
+export async function getCommissionGame() {
+    return ApiService.getCommission()
+}
+
+//Get CommissionMonthly
+export async function getCommissionMonthly() {
+    return ApiService.getCommissionMonthly()
+}
+
+// Get Log  Member Agent
+export async function apiGetLogAgMember(params) {
+    return ApiService.fetchDataAgMember({
+        params
     })
 }
 

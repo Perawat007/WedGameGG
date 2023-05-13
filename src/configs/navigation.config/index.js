@@ -23,12 +23,12 @@ const navigationConfig = [
         translateKey: 'nav.collapseReports.reports',
         icon: 'groupCollapseMenu',
         type: NAV_ITEM_TYPE_COLLAPSE,
-        authority: [],
+        authority: ['admin', 'user'],
         subMenu: [
             {
                 key: 'collapseReports.item1',
-                path: '/group-collapse-menu-item-view-1',
-                title: 'Menu item 1',
+                path: '/dailyOverview',
+                title: 'Reports 1',
                 translateKey: 'nav.collapseReports.item1',
                 icon: '',
                 type: NAV_ITEM_TYPE_ITEM,
@@ -37,8 +37,8 @@ const navigationConfig = [
             },
             {
                 key: 'collapseReports.item2',
-                path: '/group-collapse-menu-item-view-2',
-                title: 'Menu item 2',
+                path: '/monthlyCommission',
+                title: 'Reports 2',
                 translateKey: 'nav.collapseReports.item2',
                 icon: '',
                 type: NAV_ITEM_TYPE_ITEM,
@@ -47,8 +47,8 @@ const navigationConfig = [
             },
             {
                 key: 'collapseReports.item3',
-                path: '/group-collapse-menu-item-view-2',
-                title: 'Menu item 3',
+                path: '/dayCommission',
+                title: 'Reports 3',
                 translateKey: 'nav.collapseReports.item3',
                 icon: '',
                 type: NAV_ITEM_TYPE_ITEM,
@@ -57,8 +57,8 @@ const navigationConfig = [
             },
             {
                 key: 'collapseReports.item4',
-                path: '/group-collapse-menu-item-view-2',
-                title: 'Menu item 4',
+                path: '/receivedPercentage',
+                title: 'Reports 4',
                 translateKey: 'nav.collapseReports.item4',
                 icon: '',
                 type: NAV_ITEM_TYPE_ITEM,
@@ -67,8 +67,8 @@ const navigationConfig = [
             },
             {
                 key: 'collapseReports.item5',
-                path: '/group-collapse-menu-item-view-2',
-                title: 'Menu item 5',
+                path: '/userRank',
+                title: 'Reports 5',
                 translateKey: 'nav.collapseReports.item5',
                 icon: '',
                 type: NAV_ITEM_TYPE_ITEM,
@@ -200,7 +200,7 @@ const navigationConfig = [
                     },
                 ],
             },
-           /* {
+            {
                 key: 'groupMenu.apis',
                 path: '',
                 title: 'Group collapse menu',
@@ -232,7 +232,7 @@ const navigationConfig = [
                 subMenu: [
                     {
                         key: 'groupMenu.userManual.item1',
-                        path: '/group-collapse-menu-item-view-1',
+                        path: '/manual/add-credit-user',
                         title: 'Menu item 1',
                         translateKey: 'nav.groupMenu.userManual.item1',
                         icon: '',
@@ -242,7 +242,7 @@ const navigationConfig = [
                     },
                     {
                         key: 'groupMenu.userManual.item2',
-                        path: '/group-collapse-menu-item-view-1',
+                        path: '/manual/add-member-user',
                         title: 'Menu item 1',
                         translateKey: 'nav.groupMenu.userManual.item2',
                         icon: '',
@@ -262,7 +262,7 @@ const navigationConfig = [
                     },
                     {
                         key: 'groupMenu.userManual.item4',
-                        path: '/group-collapse-menu-item-view-1',
+                        path: '/manual/graph',
                         title: 'Menu item 1',
                         translateKey: 'nav.groupMenu.userManual.item4',
                         icon: '',
@@ -311,7 +311,7 @@ const navigationConfig = [
                 type: NAV_ITEM_TYPE_COLLAPSE,
                 authority: [],
                 subMenu: [],
-            },*/
+            },
         ],
     },
 ]

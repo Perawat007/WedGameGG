@@ -47,7 +47,6 @@ const Statistic = ({ data = {} }) => {
     const startDate = useSelector(
         (state) => state.salesDashboard.state.startDate
     )
-
     return (
         <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 mb-6">
             <StatisticCard

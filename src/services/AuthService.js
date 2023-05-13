@@ -1,7 +1,7 @@
 import ApiService from './ApiService'
 
 export async function apiSignIn(data) {
-    return ApiService.fetchData({
+    return ApiService.loginAdmin({
         url: '/login/admin',
         method: 'post',
         data,
@@ -9,7 +9,7 @@ export async function apiSignIn(data) {
 }
 
 export async function apiSignUp(data) {
-    return ApiService.fetchData({
+    return ApiService.loginAdmin({
         url: '/login/admin',
         method: 'post',
         data,
@@ -33,7 +33,7 @@ export async function apiForgotPassword(data) {
 }
 
 export async function apiResetPassword(data) {
-    return ApiService.fetchData({
+    return ApiService.loginAdmin({
         url: '/reset-password',
         method: 'post',
         data,

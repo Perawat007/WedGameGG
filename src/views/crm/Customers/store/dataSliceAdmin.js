@@ -8,6 +8,7 @@ import {
     apiGetCrmAdmin,
     apPutDeleteAdmin,
 } from 'services/CrmService'
+import useAuth from 'utils/hooks/useAuth'
 
 export const getCustomerStatistic = createAsyncThunk(
     'crmCustomers/data/getCustomerStatistic',
@@ -21,8 +22,7 @@ export const getCustomers = createAsyncThunk(
     'crmCustomers/data/getCustomers',
     async (params) => {
         const response = await apiGetCrmAdmin(params)
-        return response
-        
+        return response;
     }
 )
 
