@@ -90,6 +90,7 @@ function useAuth() {
     }
 
     const handleSignOut = () => {
+        localStorage.removeItem("admin")
         dispatch(onSignOutSuccess())
         dispatch(setUser(initialState))
         navigate(appConfig.unAuthenticatedEntryPath)

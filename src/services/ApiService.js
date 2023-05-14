@@ -1,7 +1,7 @@
 import BaseService from './BaseService'
 import useAuth from 'utils/hooks/useAuth';
 const token = localStorage.getItem("token");
-const baseURL = 'https://relaxtimecafe.fun/'
+const baseURL = 'http://localhost:5000/'
 const ApiService = {
   //Login Admin
   loginAdmin(param) {
@@ -52,8 +52,8 @@ const ApiService = {
       fetch(baseURL + 'list_admins', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
         },
         body: JSON.stringify({
             name: param.data.query,
@@ -71,11 +71,11 @@ const ApiService = {
     .then(data => {
       resolve(data);
     })
-      .catch(error => {
-        localStorage.removeItem('admin')
-        //localStorage.removeItem('token')
-        window.location.reload();
-        console.error('Error:', error);
+    .catch(error => {
+      //localStorage.removeItem('admin')
+      //localStorage.removeItem('token')
+      //window.location.reload();
+      console.error('Error:', error);
       });
     })
   },
@@ -362,7 +362,6 @@ addMember(param) {
 
     //GetLogMember //Search ด้วย ส่ง name มา
   fetchDataAgMember(param) {
-    console.log(param.params.id.idLog);
     return new Promise((resolve, reject) => {
     fetch(baseURL+ 'post/logAgentMember/' + param.params.id.idLog, {
             method: 'POST',
