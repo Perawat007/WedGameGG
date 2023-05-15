@@ -117,10 +117,28 @@ export const protectedRoutes = [
         authority: [],
     },
     {
-        key: 'groupMenu.userManual.item2',
+        key: 'groupMenu.userManual.item4',
         path: '/manual/graph',
         component: React.lazy(() =>
             import('views/usermanual/indexseeGraph')
+        ),
+        authority: [],
+    },
+
+    {
+        key: 'groupMenu.condition',
+        path: '/conditionGame',
+        component: React.lazy(() =>
+            import('views/indexcondition')
+        ),
+        authority: [],
+    },
+
+    {
+        key: 'groupMenu.updatereport',
+        path: '/System-Changelogs',
+        component: React.lazy(() =>
+            import('views/system_changelogs')
         ),
         authority: [],
     },

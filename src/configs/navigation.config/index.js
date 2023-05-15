@@ -284,7 +284,7 @@ const navigationConfig = [
             },
             {
                 key: 'groupMenu.condition',
-                path: '',
+                path: '/conditionGame',
                 title: 'เงื่อนไขและข้อตกลง',
                 translateKey: 'nav.groupMenu.condition.condition',
                 icon: 'groupCollapseMenu',
@@ -294,7 +294,7 @@ const navigationConfig = [
             },
             {
                 key: 'groupMenu.updatereport',
-                path: '',
+                path: 'System-Changelogs',
                 title: 'รายงานการอัพเดทระบบ',
                 translateKey: 'nav.groupMenu.updatereport.updatereport',
                 icon: 'groupCollapseMenu',

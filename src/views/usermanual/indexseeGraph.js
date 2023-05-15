@@ -1,7 +1,7 @@
 import React from 'react'
 import { Card, Button } from 'components/ui'
 import { HiCheckCircle } from 'react-icons/hi'
-const HeaderFooter = () => {
+const HeaderGraph = () => {
 
     return (
         <div>
@@ -50,4 +50,4 @@ const HeaderFooter = () => {
     )
 }
 
-export default HeaderFooter
+export default HeaderGraph

@@ -19,6 +19,7 @@ const HeaderFooter = () => {
                     ที่มุมขวา จะมีปุ่ม Add Member ให้กดปุ่ม Add member ดังภาพ
                 </p>
                 <figure>
+                <br/>
                 <img
                     src={process.env.PUBLIC_URL + '/img/others/03.png'}
                     alt="My_Image"
