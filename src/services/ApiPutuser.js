@@ -1,10 +1,11 @@
 
+const baseURL = 'https://relaxtimecafe.fun/'
 const ApiPutuser = {
 
      //data Delete
      deleteData(param) {
         return new Promise((resolve, reject) => {
-          fetch('https://relaxtimecafe.fun/delete/'+ param.data, {
+          fetch( baseURL+'delete/'+ param.data, {
             method: 'PUT',
             headers: {
               'Content-Type': 'application/json'
@@ -27,7 +28,7 @@ const ApiPutuser = {
     //GetLogEdit //Search ด้วย ส่ง name มา
  fetchLogEdit(param) {
   return new Promise((resolve, reject) => {
-  fetch('https://relaxtimecafe.fun/logEdit/' + param.data.id.idLog,{
+  fetch( baseURL + 'logEdit/' + param.data.id.idLog,{
             method: 'POST',
             headers: {
              'Content-Type': 'application/json'

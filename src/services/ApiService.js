@@ -1,7 +1,7 @@
 import BaseService from './BaseService'
 import useAuth from 'utils/hooks/useAuth';
 const token = localStorage.getItem("token");
-const baseURL = 'http://localhost:5000/'
+const baseURL = 'https://relaxtimecafe.fun/'
 const ApiService = {
   //Login Admin
   loginAdmin(param) {
@@ -72,9 +72,7 @@ const ApiService = {
       resolve(data);
     })
     .catch(error => {
-      //localStorage.removeItem('admin')
-      //localStorage.removeItem('token')
-      //window.location.reload();
+      window.location.reload();
       console.error('Error:', error);
       });
     })
@@ -107,8 +105,6 @@ const ApiService = {
             resolve(data);
           })
           .catch(error => {
-            localStorage.removeItem('admin')
-            //localStorage.removeItem('token')
             window.location.reload();
             console.error('Error:', error);
           });
@@ -142,8 +138,6 @@ const ApiService = {
           resolve(data);
         })
         .catch(error => {
-          localStorage.removeItem('admin')
-          //localStorage.removeItem('token')
           window.location.reload();
           console.error('Error:', error);
         });

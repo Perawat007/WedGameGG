@@ -12,7 +12,6 @@ const SalesDashboardBody = () => {
 
     const statisticData = useSelector((state) => state.salesDashboard.data.dashboardData)
     const loading = useSelector((state) => state.salesDashboard.data.loading)
-    console.log(statisticData);
     useEffect(() => {
         fetchData()
         // eslint-disable-next-line react-hooks/exhaustive-deps
