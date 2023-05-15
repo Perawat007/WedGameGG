@@ -128,13 +128,13 @@ export async function getCustomer() {
 }
 
 //Get CommissionGame
-export async function getCommissionGame() {
-    return ApiService.getCommission()
+export async function getCommissionGame(data) {
+    return ApiService.getCommission(data)
 }
 
 //Get CommissionMonthly
-export async function getCommissionMonthly() {
-    return ApiService.getCommissionMonthly()
+export async function getCommissionMonthly(data) {
+    return ApiService.getCommissionMonthly(data)
 }
 
 // Get Log  Member Agent

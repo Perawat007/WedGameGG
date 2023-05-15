@@ -3,8 +3,8 @@ import { getCustomer, getCommissionGame } from 'services/CrmService'
 
 export const getCryptoDashboardData = createAsyncThunk(
     'cryptoDashboard/data/getCryptoDashboardData',
-    async () => {
-        const response = await getCommissionGame()
+    async (data) => {
+        const response = await getCommissionGame(data)
         return response
     }
 )

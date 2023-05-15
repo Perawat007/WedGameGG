@@ -6,7 +6,7 @@ import Leads from './components/Leads'
 import LeadsgameGGold from './components/LeadsgameGGold'
 import LeadsLuckyBunny from './components/LeadsLuckyBunny'
 import { useDispatch, useSelector } from 'react-redux'
-
+import TransactionHistory from './components/TransactionHistory'
 injectReducer('crmDashboard', reducer)
 
 const RankUsers = () => {
@@ -20,9 +20,7 @@ const RankUsers = () => {
                 <h4>Users Rank</h4>
             </div>
              <Loading loading={loading}>
-                <Leads />
-                <LeadsgameGGold />
-                <LeadsLuckyBunny />
+                <TransactionHistory />
             </Loading>
         </div>
     )

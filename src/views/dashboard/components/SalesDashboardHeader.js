@@ -28,14 +28,6 @@ const SalesDashboardHeader = () => {
                 <h3>Dashboard Overview</h3>
                 <p>ดูภาพรวมของระบบ</p>
             </div>
-            <div className="flex flex-col lg:flex-row lg:items-center gap-3">
-                <DatePickerRange
-                    value={[startDate, endDate]}
-                    onChange={handleDateChange}
-                    inputFormat={dateFormat}
-                    size="sm"
-                />
-            </div>
         </div>
     )
 }

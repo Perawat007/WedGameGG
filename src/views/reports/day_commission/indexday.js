@@ -1,8 +1,9 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState  } from 'react'
 import { Loading } from 'components/shared'
 import PortfolioStats from './components/PortfolioStats'
 import MarketValue from './components/MarketValue'
 import reducer from './store'
+import { DatePicker } from 'components/ui'
 import { injectReducer } from 'store/index'
 import { getCryptoDashboardData } from './store/dataSlice'
 import { useDispatch, useSelector } from 'react-redux'
@@ -11,24 +12,53 @@ injectReducer('cryptoDashboard', reducer)
 
 const DayCommission = () => {
     const dispatch = useDispatch()
+    const [dateValue, setDateValue] = useState(new Date())
 
-    const {datacommission
-        , data
+    const {datacommission, data
     } = useSelector((state) => state.cryptoDashboard.data.dashboardData)
     
     const loading = useSelector((state) => state.cryptoDashboard.data.loadingAll)
 
     useEffect(() => {
-        fetchData()
+        const date = new Date();
+        const formattedDate = date.toLocaleDateString("en-US");
+        const [day, month, year] = formattedDate.split('/');
+        const formattedDay = day.padStart(2, '0');
+        const formattedMonth = month.padStart(2, '0');
+        const formattedDateB = `${year}-${formattedDay}-${formattedMonth}`;
+        fetchData(formattedDateB)
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
-    const fetchData = () => {
-        dispatch(getCryptoDashboardData())
+    const fetchData = (formattedDateB) => {
+        dispatch(getCryptoDashboardData(formattedDateB));
     }
 
+    const onCertainPeriodChange = (date) => {
+        const dateString = new Date(date);
+        const formattedDate = dateString.toLocaleDateString("en-US");
+        const [day, month, year] = formattedDate.split('/');
+        const formattedDay = day.padStart(2, '0');
+        const formattedMonth = month.padStart(2, '0');
+        const formattedDateB = `${year}-${formattedDay}-${formattedMonth}`;
+        setDateValue(formattedDateB);
+        fetchData(formattedDateB);
+    }
+
+    const disableCertainDate = (date) => {
+        const banDate = [0]
+        return banDate.includes(date.getDate())
+    }
     return (
         <div className="flex flex-col gap-4 h-full">
+            <div className="flex flex-col lg:flex-row lg:items-center gap-3">
+                <DatePicker
+                   value={dateValue}
+                   placeholder="กรุณาเลือกวัน"
+                   onChange={onCertainPeriodChange}
+                   disableDate={disableCertainDate}
+                />
+            </div>
             <Loading loading={loading}>
                 <div className="flex flex-col gap-4 h-full">
                     <PortfolioStats

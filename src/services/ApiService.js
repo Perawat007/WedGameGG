@@ -1,7 +1,6 @@
 import BaseService from './BaseService'
-import useAuth from 'utils/hooks/useAuth';
-import { useSelector } from 'react-redux'
-const baseURL = 'https://relaxtimecafe.fun/'
+
+const baseURL = 'http://localhost:5000/'
 const ApiService = {
   //Login Admin
   loginAdmin(param) {
@@ -66,7 +65,6 @@ const ApiService = {
       .then(response => {
           if (response) {
             if (response.status === 401){
-              console.log(response.status);
               localStorage.removeItem('admin');
               localStorage.removeItem('token');
             }
@@ -430,25 +428,52 @@ addMember(param) {
     })
   },
 
-  getCommission() {
+  getCommission(param) {
     return new Promise((resolve, reject) => {
-            fetch(baseURL+ 'post/commissionGame')
-            .then(response => response.json())
-            .then(data => {
-                resolve(data);
-            })
-            .catch(error => console.error(error))
+      console.log(param);
+      fetch(baseURL+ 'post/commissionGame',{
+        method: 'POST',
+        headers: {
+        'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+        name: param,
+        })
+        })
+        .then(response => {
+          if (response) {
+            return response.json();
+            } else {
+              throw new Error('Error: ' + response.statusText);
+            }
+          }).then(data => {
+          resolve(data);
+        })
+        .catch(error => console.error(error))
     })
   },
 
-  getCommissionMonthly() {
+  getCommissionMonthly(param) {
     return new Promise((resolve, reject) => {
-            fetch(baseURL+ 'post/commissionMonthly')
-            .then(response => response.json())
-            .then(data => {
-                resolve(data);
-            })
-            .catch(error => console.error(error))
+      fetch(baseURL+ 'post/commissionMonthly',{
+        method: 'POST',
+        headers: {
+        'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+        name: param,
+        })
+        })
+        .then(response => {
+          if (response) {
+            return response.json();
+            } else {
+              throw new Error('Error: ' + response.statusText);
+            }
+          }).then(data => {
+          resolve(data);
+        })
+        .catch(error => console.error(error))
     })
   },
 }

@@ -9,6 +9,14 @@ export const getCrmDashboardData = createAsyncThunk(
     }
 )
 
+export const getTransctionHistoryData = createAsyncThunk(
+    'cryptoWallets/data/getTransctionHistoryData',
+    async (params) => {
+        const response = await apiGetCrmMember(params)
+        return response
+    }
+)
+
 export const initialTableData = {
     total: 0,
     pageIndex: 1,
@@ -30,10 +38,16 @@ const dataSlice = createSlice({
         loading: false,
         customerList: [],
         dashboardData: {},
+        transactionHistoryLoading: true,
+        transactionHistoryData: [],
         tableData: initialTableData,
         filterData: initialFilterData,
+        selectedTab: 'Go_Gold',
     },
     reducers: {
+        setSelectedTab: (state, action) => {
+            state.selectedTab = action.payload
+        },
         setTableData: (state, action) => {
             state.tableData = action.payload
         },
@@ -43,6 +57,9 @@ const dataSlice = createSlice({
         setFilterData: (state, action) => {
             state.filterData = action.payload
         },
+        setTransactionHistoryData: (state, action) => {
+            state.transactionHistoryData = action.payload
+        },
     },
     extraReducers: {
         [getCrmDashboardData.fulfilled]: (state, action) => {
@@ -51,13 +68,18 @@ const dataSlice = createSlice({
             state.tableData.total = action.payload.total
             state.loading = false
         },
+        [getTransctionHistoryData.fulfilled]: (state, action) => {
+            state.transactionHistoryLoading = false
+            state.tableData.total = action.payload.total
+            state.transactionHistoryData = action.payload.data
+        },
         [getCrmDashboardData.pending]: (state) => {
             state.loading = true
         },
     },
 })
 
-export const { setTableData, setCustomerList, setFilterData } =
+export const {setTransactionHistoryData, setSelectedTab ,setTableData, setCustomerList, setFilterData } =
     dataSlice.actions
 
 export default dataSlice.reducer
