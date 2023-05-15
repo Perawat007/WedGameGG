@@ -1,6 +1,7 @@
 import BaseService from './BaseService'
 import useAuth from 'utils/hooks/useAuth';
-const baseURL = 'http://localhost:5000/'
+import { useSelector } from 'react-redux'
+const baseURL = 'https://relaxtimecafe.fun/'
 const ApiService = {
   //Login Admin
   loginAdmin(param) {
@@ -87,6 +88,17 @@ const ApiService = {
     })
   },
 
+   //GetDataAdmin //Search ด้วย ส่ง name มา
+  fetchDataAdProfile (param) {
+    return new Promise((resolve, reject) => {
+    fetch(baseURL + 'list_admin/' + param.data)
+    .then(response => response.json())
+    .then(data => {
+        resolve(data);
+    })
+    .catch(error => console.error(error))
+  })},
+
   //GetDataAgent //Search ด้วย ส่ง name มา
       fetchDataAg(param) {
         return new Promise((resolve, reject) => {
@@ -148,7 +160,6 @@ const ApiService = {
       .then(response => {
         if (response) {
           if (response.status === 401){
-            console.log(response.status);
             localStorage.removeItem('admin');
             localStorage.removeItem('token');
           }
@@ -172,7 +183,6 @@ const ApiService = {
     //putAgent
     putDataAgent(param) {
         return new Promise((resolve, reject) => {
-          console.log(param.data);
           fetch(baseURL + 'agent/'+ param.data.id, {
             method: 'PUT',
             headers: {
@@ -184,7 +194,7 @@ const ApiService = {
               status: param.data.status,
               contact_number: param.data.phoneNumber,
               credit : param.data.credit,
-              idedit : 1
+              idedit : param.data.idUsers,
             })
           })
             .then(response => response.json())
@@ -208,7 +218,7 @@ const ApiService = {
           },
           body: JSON.stringify({
             username: param.data.username,
-            idedit: 1,
+            idedit : param.data.idUsers,
             status: param.data.status,
             contact_number: param.data.phoneNumber,
             name: param.data.name,
@@ -228,7 +238,7 @@ const ApiService = {
   //putMember
   putDataMember(param) {
     return new Promise((resolve, reject) => {
-      console.log(param);
+
       fetch(baseURL + 'member/'+ param.data.id, {
         method: 'PUT',
         headers: {
@@ -237,7 +247,7 @@ const ApiService = {
         body: JSON.stringify({
           member_code: param.data.member_code,
           name: param.data.name,
-          idedit: 1,
+          idedit : param.data.idUsers,
           username: param.data.username,
           status: param.data.status,
           credit: param.data.credit,

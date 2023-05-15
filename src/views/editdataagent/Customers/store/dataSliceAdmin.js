@@ -6,6 +6,7 @@ import {
     apiGetAgent,
     apPutDeleteAgent
 } from 'services/CrmService'
+import {useSelector } from 'react-redux'
 
 export const getCustomerStatistic = createAsyncThunk(
     'crmCustomers/data/getCustomerStatistic',

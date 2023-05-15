@@ -4,6 +4,7 @@ import { AdaptableCard, Container } from 'components/shared'
 import { useNavigate, useLocation } from 'react-router-dom'
 import isEmpty from 'lodash/isEmpty'
 import { apiGetAccountSettingData } from 'services/AccountServices'
+import { useSelector } from 'react-redux'
 
 const Profile = lazy(() => import('./components/Profile'))
 
@@ -16,6 +17,9 @@ const settingsMenu = {
 const Settings = () => {
     const [currentTab, setCurrentTab] = useState('profile')
     const [data, setData] = useState('')
+    const {id} = useSelector(
+        (state) => state.auth.user
+      )
 
     const navigate = useNavigate()
 
@@ -31,7 +35,7 @@ const Settings = () => {
     }
 
     const fetchData = async () => {
-        const response = await apiGetAccountSettingData()
+        const response = await apiGetAccountSettingData(id)
         setData(response.data[0])
     }
 

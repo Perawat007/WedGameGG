@@ -1,9 +1,8 @@
 import ApiService from './ApiService'
 
-export async function apiGetAccountSettingData() { //ProFileAdmin
-    return ApiService.fetchDataAd({
-        url: 'list_admin/1',
-        method: 'get',
+export async function apiGetAccountSettingData(data) { //ProFileAdmin
+    return ApiService.fetchDataAdProfile({
+        data
     })
 }
 

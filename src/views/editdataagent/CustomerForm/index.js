@@ -6,7 +6,7 @@ import customParseFormat from 'dayjs/plugin/customParseFormat'
 import * as Yup from 'yup'
 import PersonalInfoForm from './PersonalInfoForm'
 import { values } from 'lodash'
-
+import { useSelector } from 'react-redux'
 import { components } from 'react-select'
 import {Input, FormItem, Avatar, Upload, Select} from 'components/ui'
 import {
@@ -19,7 +19,6 @@ import {
 } from 'react-icons/hi'
 import { Field } from 'formik'
 import { StatusList } from '../../options.data'
-import axios from 'axios';
 
 dayjs.extend(customParseFormat)
 
@@ -74,7 +73,11 @@ const CustomerForm = forwardRef((props, ref) => {
     const onSetFormFile = (form, field, file) => {
         form.setFieldValue(field.name, URL.createObjectURL(file[0]))
     }
-
+    const idAdmin = useSelector(
+        (state) => state.auth.user
+    )
+    const idUser = idAdmin.id
+    
     return (
         <Formik
             innerRef={ref}
@@ -85,6 +88,7 @@ const CustomerForm = forwardRef((props, ref) => {
                 phoneNumber: customer.contact_number|| '',
                 status: customer.status || '',
                 credit: customer.credit || '',
+                idUsers: idUser || '',
             }}
             validationSchema={validationSchema}
             onSubmit={(values, { setSubmitting }) => {

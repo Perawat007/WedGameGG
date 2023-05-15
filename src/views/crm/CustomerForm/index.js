@@ -17,6 +17,7 @@ import {
 } from 'react-icons/hi'
 import { Field } from 'formik'
 import { StatusList } from '../../options.data'
+import { useSelector } from 'react-redux'
 
 dayjs.extend(customParseFormat)
 
@@ -70,6 +71,12 @@ const CustomerForm = forwardRef((props, ref) => {
     const onSetFormFile = (form, field, file) => {
         form.setFieldValue(field.name, URL.createObjectURL(file[0]))
     }
+
+    const idAdmin = useSelector(
+        (state) => state.auth.user
+    )
+    const idUser = idAdmin.id
+
     return (
         <Formik
             innerRef={ref}
@@ -79,6 +86,7 @@ const CustomerForm = forwardRef((props, ref) => {
                 name: customer.name || '',
                 phoneNumber: customer.contact_number || '',
                 status: customer.status || '',
+                idUsers: idUser || '',
             }}
             validationSchema={validationSchema}
             onSubmit={(values, { setSubmitting }) => {

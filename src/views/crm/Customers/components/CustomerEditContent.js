@@ -13,7 +13,7 @@ const CustomerEditContent = forwardRef((_, ref) => {
     const customer = useSelector(
         (state) => state.crmCustomers.state.selectedCustomer
     )
-    console.log(customer);
+
     const data = useSelector((state) => state.crmCustomers.data.customerList)
     const { id } = customer
     const onFormSubmit = (values) => {
@@ -23,15 +23,17 @@ const CustomerEditContent = forwardRef((_, ref) => {
             name,
             phoneNumber,
             status,
+            idUser,
         } = values
 
-        const basicInfo = { username,name, phoneNumber, status }
+        const basicInfo = { username,name, phoneNumber, status,idUser }
         const personalInfo = {
             id,
             username,
             name,
             status,
-            phoneNumber
+            phoneNumber,
+            idUser
         }
         let newData = cloneDeep(data)
         let editedCustomer = {}

@@ -13,8 +13,10 @@ const CustomerEditContent = forwardRef((_, ref) => {
     const customer = useSelector(
         (state) => state.crmCustomers.state.selectedCustomer
     )
+
     const data = useSelector((state) => state.crmCustomers.data.customerList)
-    const { id } = customer
+
+    //const { id } = customer
     const onFormSubmit = (values) => {
         const {
             id,
@@ -23,9 +25,9 @@ const CustomerEditContent = forwardRef((_, ref) => {
             phoneNumber,
             status,
             credit,
+            idUser,
         } = values
-
-        const basicInfo = { username,name, phoneNumber, status, credit}
+        const basicInfo = { username,name, phoneNumber, status, credit,idUser}
         const personalInfo = {
             id,
             username,
@@ -33,6 +35,7 @@ const CustomerEditContent = forwardRef((_, ref) => {
             status,
             phoneNumber,
             credit,
+            idUser,
         }
         let newData = cloneDeep(data)
         let editedCustomer = {}
@@ -44,7 +47,7 @@ const CustomerEditContent = forwardRef((_, ref) => {
             }
             return elm.personalInfo
         })
-        console.log(values);
+
         if (!isEmpty(editedCustomer)) {
             if (values.name !== '' && values.username !== '' && values.password !== ''& values.contact_number !== '' & values.credit !== '' ){
                 dispatch(putCustomer(values)) //เรียกใช้งาน API 
