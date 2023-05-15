@@ -1,10 +1,11 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import {getCustomer} from 'services/CrmService'
+import {getCustomerValis} from 'services/CrmService'
 
 export const getCryptoDashboardData = createAsyncThunk(
     'cryptoDashboard/data/getCryptoDashboardData',
     async (data) => {
-        const response = await getCustomer(data)
+        const response = await getCustomerValis(data)
+        console.log(response);
         return response
     }
 )

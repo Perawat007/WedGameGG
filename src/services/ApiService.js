@@ -1,6 +1,6 @@
 import BaseService from './BaseService'
 
-const baseURL = 'https://relaxtimecafe.fun/'
+const baseURL = 'http://localhost:5000/'
 const ApiService = {
   //Login Admin
   loginAdmin(param) {
@@ -428,9 +428,32 @@ addMember(param) {
     })
   },
 
+  getValusDataPost(param) {
+    return new Promise((resolve, reject) => {
+      fetch(baseURL+ 'post/postGetallData',{
+        method: 'POST',
+        headers: {
+        'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+        name: param,
+        })
+        })
+        .then(response => {
+          if (response) {
+            return response.json();
+            } else {
+              throw new Error('Error: ' + response.statusText);
+            }
+          }).then(data => {
+          resolve(data);
+        })
+        .catch(error => console.error(error))
+    })
+  },
+
   getCommission(param) {
     return new Promise((resolve, reject) => {
-      console.log(param);
       fetch(baseURL+ 'post/commissionGame',{
         method: 'POST',
         headers: {

@@ -127,6 +127,10 @@ export async function getCustomer() {
     return ApiService.getValusData()
 }
 
+export async function getCustomerValis(data) {
+    return ApiService.getValusDataPost(data)
+}
+
 //Get CommissionGame
 export async function getCommissionGame(data) {
     return ApiService.getCommission(data)

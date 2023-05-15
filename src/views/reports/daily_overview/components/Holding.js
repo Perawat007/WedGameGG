@@ -102,7 +102,7 @@ const Holding = ({ data = [], dataview }) => {
                     <HoldingCard key={holding.id} data={holding} />
                 ))}
 
-                <StatisticCard
+            <StatisticCard
                 data={dataview.dataMember}
                 avatarClass="!bg-emerald-500"
                 label="Member จำนวน / คน"
