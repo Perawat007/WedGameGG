@@ -200,7 +200,7 @@ const navigationConfig = [
                     },
                 ],
             },
-            {
+           /* {
                 key: 'groupMenu.apis',
                 path: '',
                 title: 'Group collapse menu',
@@ -220,7 +220,7 @@ const navigationConfig = [
                         subMenu: [],
                     },
                 ],
-            },
+            },*/
             {
                 key: 'groupMenu.userManual',
                 path: '',
@@ -250,7 +250,7 @@ const navigationConfig = [
                         authority: [],
                         subMenu: [],
                     },
-                    {
+                    /*{
                         key: 'groupMenu.userManual.item3',
                         path: '/group-collapse-menu-item-view-1',
                         title: 'Menu item 1',
@@ -259,7 +259,7 @@ const navigationConfig = [
                         type: NAV_ITEM_TYPE_ITEM,
                         authority: [],
                         subMenu: [],
-                    },
+                    },*/
                     {
                         key: 'groupMenu.userManual.item4',
                         path: '/manual/graph',
@@ -270,7 +270,7 @@ const navigationConfig = [
                         authority: [],
                         subMenu: [],
                     },
-                    {
+                   /* {
                         key: 'groupMenu.userManual.item5',
                         path: '/group-collapse-menu-item-view-1',
                         title: 'Menu item 1',
@@ -279,7 +279,7 @@ const navigationConfig = [
                         type: NAV_ITEM_TYPE_ITEM,
                         authority: [],
                         subMenu: [],
-                    },
+                    },*/
                 ],
             },
             {
@@ -302,7 +302,7 @@ const navigationConfig = [
                 authority: [],
                 subMenu: [],
             },
-            {
+           /* {
                 key: 'groupMenu.manual',
                 path: '',
                 title: 'คู่มือการใช้งาน Demo',
@@ -311,7 +311,7 @@ const navigationConfig = [
                 type: NAV_ITEM_TYPE_COLLAPSE,
                 authority: [],
                 subMenu: [],
-            },
+            },*/
         ],
     },
 ]
