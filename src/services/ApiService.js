@@ -1,7 +1,6 @@
 import BaseService from './BaseService'
 import useAuth from 'utils/hooks/useAuth';
-const token = localStorage.getItem("token");
-const baseURL = 'https://relaxtimecafe.fun/'
+const baseURL = 'http://localhost:5000/'
 const ApiService = {
   //Login Admin
   loginAdmin(param) {
@@ -48,39 +47,50 @@ const ApiService = {
   //GetDataAdmin //Search ด้วย ส่ง name มา
   fetchDataAd (param) {
     return new Promise((resolve, reject) => {
-      console.log(token);
-      fetch(baseURL + 'list_admins', {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${token}`,
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            name: param.data.query,
-            pageIndex: param.data.pageIndex,
-            pageSize: param.data.pageSize
-        })
-    })
-    .then(response => {
-        if (response) {
-          return response.json();
-        } else {
-          throw new Error('Error: ' + response.statusText);
-        }
+      const tokenA = localStorage.getItem("token");
+      if (tokenA !== null)
+      {
+        fetch(baseURL + 'list_admins', {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${tokenA}`,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+              name: param.data.query,
+              pageIndex: param.data.pageIndex,
+              pageSize: param.data.pageSize
+          })
       })
-    .then(data => {
-      resolve(data);
-    })
-    .catch(error => {
-      window.location.reload();
-      console.error('Error:', error);
-      });
+      .then(response => {
+          if (response) {
+            if (response.status === 401){
+              console.log(response.status);
+              localStorage.removeItem('admin');
+              localStorage.removeItem('token');
+            }
+            else{
+              return response.json();
+            }
+          } else {
+            throw new Error('Error: ' + response.statusText);
+          }
+        })
+      .then(data => {
+        resolve(data);
+      })
+      .catch(error => {
+        //window.location.reload();
+        console.error('Error:', error);
+        });
+      }
     })
   },
 
   //GetDataAgent //Search ด้วย ส่ง name มา
       fetchDataAg(param) {
         return new Promise((resolve, reject) => {
+          const token = localStorage.getItem("token");
           fetch(baseURL + 'list_agents', {
             method: 'POST',
             headers: {
@@ -95,8 +105,15 @@ const ApiService = {
             })
         })
         .then(response => {
-            if (response) {
+          if (response) {
+            if (response.status === 401){
+              console.log(response.status);
+              localStorage.removeItem('admin');
+              localStorage.removeItem('token');
+            }
+            else{
               return response.json();
+            }
             } else {
               throw new Error('Error: ' + response.statusText);
             }
@@ -114,6 +131,7 @@ const ApiService = {
      //GetDataMember //Search ด้วย ส่ง name มา
      fetchDataMember(param) {
       return new Promise((resolve, reject) => {
+        const token = localStorage.getItem("token");
         fetch(baseURL + 'list_users', {
           method: 'POST',
           headers: {
@@ -128,8 +146,15 @@ const ApiService = {
           })
       })
       .then(response => {
-          if (response) {
+        if (response) {
+          if (response.status === 401){
+            console.log(response.status);
+            localStorage.removeItem('admin');
+            localStorage.removeItem('token');
+          }
+          else{
             return response.json();
+          }
           } else {
             throw new Error('Error: ' + response.statusText);
           }
