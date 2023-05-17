@@ -50,7 +50,7 @@ const CustomerFormAddAg = forwardRef((props, ref) => {
             .matches(/^[A-Za-z0-9-]*$/, 'Only Letters & Numbers Allowed')
             .required('User Name Required'),
         username: Yup.string()
-            .min(1, 'Too Short!')
+            .min(8, 'Too Short!')
             .max(20, 'Too Long!')
             .matches(/^[A-Za-z0-9-]*$/, 'Only Letters & Numbers Allowed')
             .required('User Name Required'),
