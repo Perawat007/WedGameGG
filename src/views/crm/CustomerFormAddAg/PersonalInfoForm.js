@@ -60,8 +60,8 @@ const PersonalInfoForm = (props) => {
             </FormItem>
             <FormItem
                 label="Username"
-                invalid={errors.name && touched.name}
-                errorMessage={errors.name}
+                invalid={errors.username && touched.username}
+                errorMessage={errors.username}
             >
                 <Field
                     name="username"
@@ -72,8 +72,8 @@ const PersonalInfoForm = (props) => {
             </FormItem>
             <FormItem
                 label="password"
-                invalid={errors.location && touched.location}
-                errorMessage={errors.location}
+                invalid={errors.password && touched.password}
+                errorMessage={errors.password}
             >
                 <Field
                     type="password"
@@ -100,7 +100,6 @@ const PersonalInfoForm = (props) => {
                     prefix={<HiPhone className="text-xl" />}
                 />
             </FormItem>
-
         </>
     )
 }

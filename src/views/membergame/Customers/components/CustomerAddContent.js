@@ -42,7 +42,6 @@ const CustomerAddContent = forwardRef((_, ref) => {
             }
             return elm.personalInfo
         })
-
         //dispatch(AddCustomer(values, IdAgent)) //เรียกใช้งาน API 
         if (isEmpty(editedCustomer)) {
             if (isEmpty(editedCustomer)) {

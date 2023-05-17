@@ -55,13 +55,14 @@ const PaymentSelectOption = ({ innerProps, label, data, isSelected }) => {
 }
 
 const validationSchema = Yup.object().shape({
-    id: Yup.string(),
-    username: Yup.string().required('User Name Required'),
-    phoneNumber: Yup.string().matches(
-        /^((\+[1-9]{1,4}[ -]?)|(\([0-9]{2,3}\)[ -]?)|([0-9]{2,4})[ -]?)*?[0-9]{3,4}[ -]?[0-9]{3,4}$/,
-        'Phone number is not valid'
-    ),
-    status: Yup.string(),
+    name: Yup.string()
+        .min(1, 'Too Short!')
+        .max(30, 'Too Long!')
+        .matches(/^[A-Za-z0-9-]*$/, 'Only Letters & Numbers Allowed')
+        .required('Name Required'),
+    phoneNumber: Yup.string()
+        .required('phone number Required')
+        .matches(/^\d{10}$/, 'Invalid phone number'),
 })
 
 const { TabNav, TabList, TabContent } = Tabs
@@ -71,7 +72,6 @@ const CustomerForm = forwardRef((props, ref) => {
     const onSetFormFile = (form, field, file) => {
         form.setFieldValue(field.name, URL.createObjectURL(file[0]))
     }
-
     const idAdmin = useSelector(
         (state) => state.auth.user
     )
@@ -132,8 +132,8 @@ const CustomerForm = forwardRef((props, ref) => {
 
             <FormItem
                 label="Id"
-                invalid={errors.name && touched.name}
-                errorMessage={errors.name}
+                invalid={errors.id && touched.id}
+                errorMessage={errors.id}
             >
                 <Field
                     name="id"
@@ -145,8 +145,8 @@ const CustomerForm = forwardRef((props, ref) => {
 
             <FormItem
                 label="Username"
-                invalid={errors.name && touched.name}
-                errorMessage={errors.name}
+                invalid={errors.username && touched.username}
+                errorMessage={errors.username}
             >
                 <Field
                     type="text"

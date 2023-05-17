@@ -10,6 +10,7 @@ import {
     HiLockClosed,
 } from 'react-icons/hi'
 import { Field } from 'formik'
+import * as Yup from 'yup'
 
 const PersonalInfoForm = (props) => {
     const { touched, errors } = props
@@ -73,8 +74,8 @@ const PersonalInfoForm = (props) => {
             </FormItem>
             <FormItem
                 label="password"
-                invalid={errors.location && touched.location}
-                errorMessage={errors.location}
+                invalid={errors.password && touched.password}
+                errorMessage={errors.password}
             >
                 <Field
                     type="password"
@@ -88,8 +89,8 @@ const PersonalInfoForm = (props) => {
 
             <FormItem
                 label="Phone Number"
-                invalid={errors.phoneNumber && touched.phoneNumber}
-                errorMessage={errors.phoneNumber}
+                invalid={errors.contact_number && touched.contact_number}
+                errorMessage={errors.contact_number}
             >
                 <Field
                     type="tel"

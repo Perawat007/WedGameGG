@@ -3,10 +3,7 @@ import React from 'react'
 import { DatePicker, Input, FormItem, Avatar, Upload } from 'components/ui'
 import {
     HiUserCircle,
-    HiMail,
     HiLocationMarker,
-    HiPhone,
-    HiCake,
     HiOutlineUser,
 } from 'react-icons/hi'
 import { Field } from 'formik'
@@ -54,9 +51,7 @@ const PersonalInfoForm = (props) => {
                         )
                     }}
                 </Field>
-                
             </FormItem>
-
             <FormItem
                 label="Id"
                 invalid={errors.name && touched.name}

@@ -23,47 +23,15 @@ import './DropdownList.css';
 
 dayjs.extend(customParseFormat)
 
-const { Control } = components
-
-const PaymentControl = ({ children, ...props }) => {
-    const selected = props.getValue()[0]
-    return (
-        <Control {...props}>
-            {selected && (
-                <img className="max-w-[35px] ml-2" src={selected.img} alt="" />
-            )}
-            {children}
-        </Control>
-    )
-}
-
-const PaymentSelectOption = ({ innerProps, label, data, isSelected }) => {
-    return (
-        <div
-            className={`cursor-pointer flex items-center justify-between p-2 ${
-                isSelected
-                    ? 'bg-gray-100 dark:bg-gray-500'
-                    : 'hover:bg-gray-50 dark:hover:bg-gray-600'
-            }`}
-            {...innerProps}
-        >
-            <div className="flex items-center">
-                <img className="max-w-[35px]" src={data.img} alt="" />
-                <span className="ml-2 rtl:mr-2">{label}</span>
-            </div>
-            {isSelected && <HiCheck className="text-emerald-500 text-xl" />}
-        </div>
-    )
-}
-
 const { TabNav, TabList, TabContent } = Tabs
 
 const CustomerFormAddAg = forwardRef((props, ref) => {
-    const { onFormSubmit } = props
+    const { onFormSubmit} = props
 
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(true);
     const [selectedOption, setSelectedOption] = useState('');
+    const [error, setError] = useState('');
 
     useEffect(() => {
         async function fetchData() {
@@ -75,6 +43,25 @@ const CustomerFormAddAg = forwardRef((props, ref) => {
         fetchData();
     }, []);
 
+    const validationSchema = Yup.object().shape({
+        name: Yup.string()
+            .min(1, 'Too Short!')
+            .max(30, 'Too Long!')
+            .matches(/^[A-Za-z0-9-]*$/, 'Only Letters & Numbers Allowed')
+            .required('User Name Required'),
+        username: Yup.string()
+            .min(1, 'Too Short!')
+            .max(20, 'Too Long!')
+            .matches(/^[A-Za-z0-9-]*$/, 'Only Letters & Numbers Allowed')
+            .required('User Name Required'),
+        password: Yup.string()
+            .required('Password Required')
+            .min(8, 'Too Short!')
+            .max(20, 'Too Long!')
+            .matches(/^[A-Za-z0-9_-]*$/, 'Only Letters & Numbers Allowed'),
+        rememberMe: Yup.bool(),
+    })
+
     function handleSelect(e) {
         if (e.target.value === '--- กรุณา Agent ID ---'){
             setSelectedOption('');
@@ -82,7 +69,7 @@ const CustomerFormAddAg = forwardRef((props, ref) => {
         else{
             setSelectedOption(e.target.value);
         }
-    }        
+    } 
 
     return (
         <Formik
@@ -95,9 +82,14 @@ const CustomerFormAddAg = forwardRef((props, ref) => {
                 password:'',
                 IdAgent:'',
             }}
+            validationSchema={validationSchema}
             onSubmit={(values, { setSubmitting }) => {
                 onFormSubmit?.(values, selectedOption)
                 setSubmitting(false)
+                setTimeout(() => {
+                    alert(JSON.stringify(values, null, 2))
+                    setSubmitting(false)
+                }, 400)
             }}
         >
             {({ touched, errors, resetForm }) => (
@@ -170,8 +162,8 @@ const CustomerFormAddAg = forwardRef((props, ref) => {
             
             <FormItem
                 label="member_code"
-                invalid={errors.name && touched.name}
-                errorMessage={errors.name}
+                invalid={errors.member_code && touched.member_code}
+                errorMessage={errors.member_code}
             >
                 <Field
                     type="text"
@@ -199,16 +191,19 @@ const CustomerFormAddAg = forwardRef((props, ref) => {
             </FormItem>
             <FormItem
                 label="Username"
-                invalid={errors.name && touched.name}
-                errorMessage={errors.name}
+                invalid={errors.username && touched.username}
+                errorMessage={errors.username}
             >
                 <Field
+                    type="text"
+                    autoComplete="off"
                     name="username"
                     placeholder="username"
                     component={Input}
                     prefix={<HiUserCircle className="text-xl" />}
                 />
             </FormItem>
+            {error && <p>{error}</p>}
             <FormItem
                 label="password"
                 invalid={errors.password && touched.password}

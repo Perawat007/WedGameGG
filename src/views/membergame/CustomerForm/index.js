@@ -54,14 +54,6 @@ const PaymentSelectOption = ({ innerProps, label, data, isSelected }) => {
     )
 }
 
-const validationSchema = Yup.object().shape({
-    id: Yup.string(),
-    name : Yup.string().required('User Name Required'),
-    username: Yup.string().required('User Name Required'),
-    status: Yup.string(),
-    credit: Yup.string(),
-})
-
 const { TabNav, TabList, TabContent } = Tabs
 
 const CustomerForm = forwardRef((props, ref) => {
@@ -69,6 +61,25 @@ const CustomerForm = forwardRef((props, ref) => {
     const onSetFormFile = (form, field, file) => {
         form.setFieldValue(field.name, URL.createObjectURL(file[0]))
     }
+
+    const validationSchema = Yup.object().shape({
+        name: Yup.string()
+            .min(1, 'Too Short!')
+            .max(30, 'Too Long!')
+            .matches(/^[A-Za-z0-9-]*$/, 'Only Letters & Numbers Allowed')
+            .required('User Name Required'),
+        username: Yup.string()
+            .min(8, 'Too Short!')
+            .max(20, 'Too Long!')
+            .matches(/^[A-Za-z0-9-]*$/, 'Only Letters & Numbers Allowed')
+            .required('User Name Required'),
+        password: Yup.string()
+            .required('Password Required')
+            .min(8, 'Too Short!')
+            .max(20, 'Too Long!')
+            .matches(/^[A-Za-z0-9_-]*$/, 'Only Letters & Numbers Allowed'),
+        rememberMe: Yup.bool(),
+    })
 
     const idAdmin = useSelector(
         (state) => state.auth.user
