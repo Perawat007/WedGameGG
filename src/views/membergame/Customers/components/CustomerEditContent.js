@@ -48,12 +48,12 @@ const CustomerEditContent = forwardRef((_, ref) => {
         })
         if (!isEmpty(editedCustomer)) {
             if (values.name !== '' && values.username !== '' && values.password !== ''& values.contact_number !== '' & values.credit !== '' ){
-                //dispatch(putCustomer(values))
+                dispatch(putCustomer(values))
+                dispatch(setDrawerClose())
             }else{
                 alert("กรุณากรอกข้อมูลให้ครบ");
             } 
         }
-        dispatch(setDrawerClose())
     }
 
     return (
