@@ -22,6 +22,21 @@ export async function apiGetAgent(data) {
     })
 }
 
+//get SubAgent
+export async function apiGetSubAgent(data) {
+    return ApiService.fetchDataSubAg({
+        data
+    })
+}
+
+//get SubAgent
+export async function apiGetMemberSubAgent(data) {
+    return ApiService.fetchDataSubMemberAg({
+        data
+    })
+}
+
+
 //get Admin
 export async function apiGetCrmAdmin(data) {
     return ApiService.fetchDataAd({
@@ -51,7 +66,7 @@ export async function apiGetLogEditMember(data) {
 }
 
 export async function apiGetCrmCustomersStatistic(params) {
-   return ApiService.fetchDataAg({
+    return ApiService.fetchDataAg({
         params
     })
 }

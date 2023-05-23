@@ -2,8 +2,7 @@ import React, { useEffect, useCallback, useMemo, useState } from 'react'
 import { Avatar, Badge, Button, Dialog } from 'components/ui'
 import { DataTable } from 'components/shared'
 import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
-import { getCustomers, setTableData } from '../store/dataSliceAdmin'
+import { getCustomers, setTableData } from '../store/dataSliceSubAgent'
 import {
     setSelectedCustomer,
     setDrawerOpen,
@@ -11,35 +10,35 @@ import {
 import useThemeClass from 'utils/hooks/useThemeClass'
 import CustomerEditDialog from './CustomerEditDialog'
 import CustomerAddDialog from './CustomerAddDialog'
-import LogAgMember from 'views/LogAgMember/Market/LogAgMember'
-import LogEditData from 'views/LogEditUser/Market/LogEditData'
 import cloneDeep from 'lodash/cloneDeep'
+import { useNavigate } from 'react-router-dom'
+import LogData from 'views/LogMember/Market/LogData'
+import LogEditData from 'views/LogEditUser/Market/LogEditData'
 import {
-    HiPhone,
     HiCheck,
     HiMinusCircle,
     HiCurrencyDollar,
+    HiCalendar,
     HiPencilAlt,
     HiOutlineDocumentText,
-    HiOutlineUserGroup,
+    HiOutlineUserGroup
 } from 'react-icons/hi'
-import { TiFolderOpen } from "react-icons/ti";
+import { RiFileHistoryFill } from "react-icons/ri";
 const statusColor = {
     active: 'bg-emerald-500',
     blocked: 'bg-red-500',
 }
 
 const ActionColumn = ({ row }) => {
-    const { textTheme } = useThemeClass()
-    const dispatch = useDispatch();
+    const dispatch = useDispatch()
     const navigate = useNavigate();
     const onEdit = () => {
         dispatch(setDrawerOpen())
         dispatch(setSelectedCustomer(row))
     }
 
-    const onSubAgent = () => {
-        navigate(`/editSutAgent/${row.id}`)
+    const onmemberSubAgent = () => {
+        navigate(`/editSutAgent/memberSub/${row.id_agent}/${row.id}`)
     }
 
     const [viewOpen, setViewOpen] = useState(false)
@@ -56,7 +55,7 @@ const ActionColumn = ({ row }) => {
 
     const [viewLogOpen, setViewLogOpen] = useState(false)
     const [rowLogIdLog, setSeeLogId] = useState();
-    
+
     const onViewOpenLog = (rowId) => {
         setSeeLogId(rowId.id)
         setViewLogOpen(true)
@@ -71,7 +70,7 @@ const ActionColumn = ({ row }) => {
             <div>
                 <Button variant="solid" icon={<HiPencilAlt />} onClick={() => onEdit()} />
                 <Button variant="solid" color="green-600" icon={<HiOutlineDocumentText />} onClick={() => onViewOpen(row)} />
-                <Button variant="solid" color="blue-600" icon={<HiOutlineUserGroup />} onClick={() => onSubAgent(row)} />
+                <Button variant="solid" color="yellow-600" icon={<HiOutlineUserGroup />} onClick={() => onmemberSubAgent()}/>
             </div>
 
             <Dialog
@@ -81,7 +80,7 @@ const ActionColumn = ({ row }) => {
             >
             <div className="w-full">
                 <h1>Log Edit</h1>
-                <LogEditData idLog = {rowIdLog} typeLog = {'agent'} />
+                <LogEditData idLog = {rowIdLog} typeLog = {'member'} />
             </div>  
             </Dialog>
 
@@ -94,8 +93,8 @@ const ActionColumn = ({ row }) => {
             <div className="w-full">
                 <div className="flex flex-col h-full justify-between">
                     <div className="overflow-y-auto">
-                        <h1>Member</h1>
-                        <LogAgMember idLog = {rowLogIdLog}/>
+                        <h1>Log</h1>
+                        <LogData idLog = {rowLogIdLog} />
                     </div>
                 </div>
             </div>  
@@ -124,10 +123,19 @@ const columns = [
             return <NameColumn row={row} />
         },
     },
-     
+
     {
-        header: 'UserName',
-        accessorKey: 'username',
+        header: 'NameAgent',
+        cell: (props) => {
+            const row = props.row.original
+            return (
+                <div className="flex items-center">
+                    <span className="ml-2 rtl:mr-2 capitalize">
+                        {row.username_agent}
+                    </span>
+                </div>
+            )
+        },
     },
 
     {
@@ -144,16 +152,21 @@ const columns = [
             )
         },
     },
+    
+    {
+        header: 'UserName',
+        accessorKey: 'username',
+    },
 
     {
-        header: 'เบอร์โทรติดต่อ',
+        header: 'Credit',
         cell: (props) => {
             const row = props.row.original
             return (
                 <div className="flex items-center">
-                <HiPhone className="text-emerald-500 text-xl" />
+                <HiCurrencyDollar className="text-emerald-500 text-xl"/>
                 <span className="ml-2 rtl:mr-2 capitalize">
-                    {row.contact_number}
+                    {row.credit}
                 </span>
             </div>
             )
@@ -188,44 +201,58 @@ const columns = [
         },
     },
     {
-        header: 'Credit',
+        header: 'Created_at',
         cell: (props) => {
             const row = props.row.original
+            const inputDate = row.created_at;
+            const date = new Date(inputDate);
+            const formattedDate = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}, ${date.toLocaleTimeString()}`;
             return (
                 <div className="flex items-center">
-                    <HiCurrencyDollar className="text-emerald-500 text-xl"/>
+                    <HiCalendar className="text-emerald-500 text-xl"/>
                     <span className="ml-2 rtl:mr-2 capitalize">
-                        {row.credit}
+                        {formattedDate}
                     </span>
                 </div>
             )
         },
     },
+
     {
         header: '',
         id: 'action',
         cell: (props) => <ActionColumn row={props.row.original} />,
     },
+
+   /* {
+        header: '',
+        id: 'actionLog',
+        cell: (props) => {
+            const row = props.row.original
+            return <ActionColumnLog rowLog={row}/>
+        },
+    },*/
 ]
+
 const Customers = () => {
     const dispatch = useDispatch()
-    const data = useSelector((state) => state.crmCustomers.data.customerList)
-    const loading = useSelector((state) => state.crmCustomers.data.loading)
+    const data = useSelector((state) => state.crmSubAgent.data.customerList)
+    const loading = useSelector((state) => state.crmSubAgent.data.loading)
     const filterData = useSelector(
-        (state) => state.crmCustomers.data.filterData
+        (state) => state.crmSubAgent.data.filterData
     )
 
     const { pageIndex, pageSize, sort, query, total } = useSelector(
-        (state) => state.crmCustomers.data.tableData
+        (state) => state.crmSubAgent.data.tableData
     )
 
-    const fetchData = useCallback(() => {
+    /*const fetchData = useCallback(() => {
         dispatch(getCustomers({ pageIndex, pageSize, sort, query, filterData }))
     }, [pageIndex, pageSize, sort, query, filterData, dispatch])
 
     useEffect(() => {
         fetchData()
-    }, [fetchData, pageIndex, pageSize, sort, filterData])
+    }, [fetchData, pageIndex, pageSize, sort, filterData])*/
 
     const tableData = useMemo(
         () => ({ pageIndex, pageSize, sort, query, total }),

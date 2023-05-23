@@ -5,51 +5,50 @@ const ApiService = {
   //Login Admin
   loginAdmin(param) {
     return new Promise((resolve, reject) => {
-      fetch(baseURL+'login/admin', {
+      fetch(baseURL + 'login/admin', {
         method: 'POST',
         headers: {
-                 'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    username: param.data.username,
-                    password: param.data.password
-                })
-            })
-            .then(response => {
-                if (response) {
-                  return response.json();
-                } else {
-                  throw new Error('Error: ' + response.statusText);
-                }
-              })
-              .then(data => {
-                const accessToken = data.token;
-                localStorage.setItem('token',accessToken);
-                resolve(data);
-              })
-              .catch(error => {
-                console.error('Error:', error);
-              });
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          username: param.data.username,
+          password: param.data.password
+        })
+      })
+        .then(response => {
+          if (response) {
+            return response.json();
+          } else {
+            throw new Error('Error: ' + response.statusText);
+          }
+        })
+        .then(data => {
+          const accessToken = data.token;
+          localStorage.setItem('token', accessToken);
+          resolve(data);
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
     });
   },
   signOut(param) {
     return new Promise((resolve, reject) => {
       BaseService(param)
-      .then((response) => {
-        resolve(response)
+        .then((response) => {
+          resolve(response)
         })
-      .catch((errors) => {
-        reject(errors)
-        }) 
-      });
+        .catch((errors) => {
+          reject(errors)
+        })
+    });
   },
 
   //GetDataAdmin //Search ด้วย ส่ง name มา
-  fetchDataAd (param) {
+  fetchDataAd(param) {
     return new Promise((resolve, reject) => {
       const tokenA = localStorage.getItem("token");
-      if (tokenA !== null)
-      {
+      if (tokenA !== null) {
         fetch(baseURL + 'list_admins', {
           method: 'POST',
           headers: {
@@ -57,73 +56,20 @@ const ApiService = {
             'Content-Type': 'application/json'
           },
           body: JSON.stringify({
-              name: param.data.query,
-              pageIndex: param.data.pageIndex,
-              pageSize: param.data.pageSize
+            name: param.data.query,
+            pageIndex: param.data.pageIndex,
+            pageSize: param.data.pageSize
           })
-      })
-      .then(response => {
-          if (response) {
-            if (response.status === 401){
-              localStorage.removeItem('admin');
-              localStorage.removeItem('token');
-            }
-            else{
-              return response.json();
-            }
-          } else {
-            throw new Error('Error: ' + response.statusText);
-          }
         })
-      .then(data => {
-        resolve(data);
-      })
-      .catch(error => {
-        //window.location.reload();
-        console.error('Error:', error);
-        });
-      }
-    })
-  },
-
-   //GetDataAdmin //Search ด้วย ส่ง name มา
-  fetchDataAdProfile (param) {
-    return new Promise((resolve, reject) => {
-    fetch(baseURL + 'list_admin/' + param.data)
-    .then(response => response.json())
-    .then(data => {
-        resolve(data);
-    })
-    .catch(error => console.error(error))
-  })},
-
-  //GetDataAgent //Search ด้วย ส่ง name มา
-      fetchDataAg(param) {
-        return new Promise((resolve, reject) => {
-          const token = localStorage.getItem("token");
-          fetch(baseURL + 'list_agents', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'Authorization': `Bearer ${token}`
-            },
-            body: JSON.stringify({
-              name: param.data.query,
-              idedit: 1,
-              pageIndex: param.data.pageIndex,
-              pageSize: param.data.pageSize
-            })
-        })
-        .then(response => {
-          if (response) {
-            if (response.status === 401){
-              console.log(response.status);
-              localStorage.removeItem('admin');
-              localStorage.removeItem('token');
-            }
-            else{
-              return response.json();
-            }
+          .then(response => {
+            if (response) {
+              if (response.status === 401) {
+                localStorage.removeItem('admin');
+                localStorage.removeItem('token');
+              }
+              else {
+                return response.json();
+              }
             } else {
               throw new Error('Error: ' + response.statusText);
             }
@@ -132,38 +78,52 @@ const ApiService = {
             resolve(data);
           })
           .catch(error => {
-            window.location.reload();
+            //window.location.reload();
             console.error('Error:', error);
           });
-        })
-      },
+      }
+    })
+  },
 
-     //GetDataMember //Search ด้วย ส่ง name มา
-     fetchDataMember(param) {
-      return new Promise((resolve, reject) => {
-        const token = localStorage.getItem("token");
-        fetch(baseURL + 'list_users', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`
-          },
-          body: JSON.stringify({
-            name: param.data.query,
-            idedit: 1,
-            pageIndex: param.data.pageIndex,
-            pageSize: param.data.pageSize
-          })
+  //GetDataAdmin //Search ด้วย ส่ง name มา
+  fetchDataAdProfile(param) {
+    return new Promise((resolve, reject) => {
+      fetch(baseURL + 'list_admin/' + param.data)
+        .then(response => response.json())
+        .then(data => {
+          resolve(data);
+        })
+        .catch(error => console.error(error))
+    })
+  },
+
+  //GetDataAgent //Search ด้วย ส่ง name มา
+  fetchDataAg(param) {
+    return new Promise((resolve, reject) => {
+      const token = localStorage.getItem("token");
+      fetch(baseURL + 'list_agents', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({
+          name: param.data.query,
+          idedit: 1,
+          pageIndex: param.data.pageIndex,
+          pageSize: param.data.pageSize
+        })
       })
-      .then(response => {
-        if (response) {
-          if (response.status === 401){
-            localStorage.removeItem('admin');
-            localStorage.removeItem('token');
-          }
-          else{
-            return response.json();
-          }
+        .then(response => {
+          if (response) {
+            if (response.status === 401) {
+              console.log(response.status);
+              localStorage.removeItem('admin');
+              localStorage.removeItem('token');
+            }
+            else {
+              return response.json();
+            }
           } else {
             throw new Error('Error: ' + response.statusText);
           }
@@ -175,69 +135,179 @@ const ApiService = {
           window.location.reload();
           console.error('Error:', error);
         });
-      })
+    })
   },
 
-    //putAgent
-    putDataAgent(param) {
-        return new Promise((resolve, reject) => {
-          fetch(baseURL + 'agent/'+ param.data.id, {
-            method: 'PUT',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-              username: param.data.username,
-              name: param.data.name,
-              status: param.data.status,
-              contact_number: param.data.phoneNumber,
-              credit : param.data.credit,
-              idedit : param.data.idUsers,
-            })
-          })
-            .then(response => response.json())
-            .then(data => {
-              console.log(data);
-              window.location.reload();
-            })
-            .catch(error => {
-              console.error(error);
-            });
+  //GetDataMember //Search ด้วย ส่ง name มา
+  fetchDataMember(param) {
+    return new Promise((resolve, reject) => {
+      const token = localStorage.getItem("token");
+      fetch(baseURL + 'list_users', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({
+          name: param.data.query,
+          idedit: 1,
+          pageIndex: param.data.pageIndex,
+          pageSize: param.data.pageSize
         })
-    },
-
-    //putAdmin
-    putDataAdmin(param) {
-      return new Promise((resolve, reject) => {
-        fetch(baseURL + 'admin/'+ param.data.id, {
-          method: 'PUT',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            username: param.data.username,
-            idedit : param.data.idUsers,
-            status: param.data.status,
-            contact_number: param.data.phoneNumber,
-            name: param.data.name,
-          })
-        })
-          .then(response => response.json())
-          .then(data => {
-            console.log(data);
-            window.location.reload();
-          })
-          .catch(error => {
-            console.error(error);
-          });
       })
+        .then(response => {
+          if (response) {
+            if (response.status === 401) {
+              localStorage.removeItem('admin');
+              localStorage.removeItem('token');
+            }
+            else {
+              return response.json();
+            }
+          } else {
+            throw new Error('Error: ' + response.statusText);
+          }
+        })
+        .then(data => {
+          resolve(data);
+        })
+        .catch(error => {
+          window.location.reload();
+          console.error('Error:', error);
+        });
+    })
+  },
+
+  //GetDataSubAgent //Search ด้วย ส่ง name มา
+  fetchDataSubAg(param) {
+    return new Promise((resolve, reject) => {
+      //const token = localStorage.getItem("token");
+      fetch(baseURL + 'post/listSubAgent/'+ param.data.idUser, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: param.data.query,
+          pageIndex: param.data.pageIndex,
+          pageSize: param.data.pageSize
+        })
+      })
+        .then(response => {
+          if (response) {
+            if (response.status === 401) {
+              /*console.log(response.status);
+              localStorage.removeItem('admin');
+              localStorage.removeItem('token');*/
+            }
+            else {
+              return response.json();
+            }
+          } else {
+            throw new Error('Error: ' + response.statusText);
+          }
+        })
+        .then(data => {
+          resolve(data);
+        })
+        .catch(error => {
+          //window.location.reload();
+          console.error('Error:', error);
+        });
+    })
+  },
+
+  //GetLogMember //Search ด้วย ส่ง name มา
+  fetchDataSubMemberAg(param) {
+    return new Promise((resolve, reject) => {
+      console.log(param);
+      fetch(baseURL + 'post/MemberSubAgent/' + param.data.idUser, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          name: param.data.query,
+          pageIndex: param.data.pageIndex,
+          pageSize: param.data.pageSize
+        })
+      })
+        .then(response => {
+          if (response) {
+            return response.json();
+          } else {
+            throw new Error('Error: ' + response.statusText);
+          }
+        })
+        .then(data => {
+          resolve(data);
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
+    })
+  },
+
+  //putAgent
+  putDataAgent(param) {
+    return new Promise((resolve, reject) => {
+      fetch(baseURL + 'agent/' + param.data.id, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          username: param.data.username,
+          name: param.data.name,
+          status: param.data.status,
+          contact_number: param.data.phoneNumber,
+          credit: param.data.credit,
+          idedit: param.data.idUsers,
+        })
+      })
+        .then(response => response.json())
+        .then(data => {
+          console.log(data);
+          window.location.reload();
+        })
+        .catch(error => {
+          console.error(error);
+        });
+    })
+  },
+
+  //putAdmin
+  putDataAdmin(param) {
+    return new Promise((resolve, reject) => {
+      fetch(baseURL + 'admin/' + param.data.id, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          username: param.data.username,
+          idedit: param.data.idUsers,
+          status: param.data.status,
+          contact_number: param.data.phoneNumber,
+          name: param.data.name,
+        })
+      })
+        .then(response => response.json())
+        .then(data => {
+          console.log(data);
+          window.location.reload();
+        })
+        .catch(error => {
+          console.error(error);
+        });
+    })
   },
 
   //putMember
   putDataMember(param) {
     return new Promise((resolve, reject) => {
 
-      fetch(baseURL + 'member/'+ param.data.id, {
+      fetch(baseURL + 'member/' + param.data.id, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json'
@@ -245,7 +315,7 @@ const ApiService = {
         body: JSON.stringify({
           member_code: param.data.member_code,
           name: param.data.name,
-          idedit : param.data.idUsers,
+          idedit: param.data.idUsers,
           username: param.data.username,
           status: param.data.status,
           credit: param.data.credit,
@@ -261,88 +331,25 @@ const ApiService = {
           console.error(error);
         });
     })
-},
-
-    //AddAgent
-    addAgent(param) {
-      return new Promise((resolve, reject) => {
-        fetch(baseURL + 'signupAgent', {
-              method: 'POST',
-              headers: {
-               'Content-Type': 'application/json'
-              },
-              body: JSON.stringify({
-                  name: param.data.name,
-                  username: param.data.username,
-                  password: param.data.password,
-                  contact_number: param.data.contact_number,
-                  credit : param.data.credit,
-              })
-          })
-          .then(response => {
-              if (response) {
-                return response.json();
-              } else {
-                throw new Error('Error: ' + response.statusText);
-              }
-            })
-            .then(data => {
-              resolve(data);
-            })
-            .catch(error => {
-              console.error('Error:', error);
-            });
-  });
   },
 
-  //AddAdmin
-  addAdmin(param) {
+  //AddAgent
+  addAgent(param) {
     return new Promise((resolve, reject) => {
-      fetch(baseURL+'signup', {
-            method: 'POST',
-            headers: {
-             'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                name: param.data.name,
-                username: param.data.username,
-                password: param.data.password,
-                contact_number: param.data.phoneNumber,
-            })
+      fetch(baseURL + 'signupAgent', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          name: param.data.name,
+          username: param.data.username,
+          password: param.data.password,
+          contact_number: param.data.contact_number,
+          credit: param.data.credit,
         })
-        .then(response => {
-            if (response) {
-              return response.json();
-            } else {
-              throw new Error('Error: ' + response.statusText);
-            }
-          })
-          .then(data => {
-            resolve(data);
-          })
-          .catch(error => {
-            console.error('Error:', error);
-          });
-});
-},
-
-//AddMember
-addMember(param) {
-  return new Promise((resolve, reject) => {
-    fetch(baseURL+'signupMember', {
-          method: 'POST',
-          headers: {
-           'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-              agent_id : param.data.agent_id,
-              member_code: param.data.member_code,
-              name: param.data.name,
-              username: param.data.username,
-              password: param.data.password,
-          })
       })
-      .then(response => {
+        .then(response => {
           if (response) {
             return response.json();
           } else {
@@ -355,97 +362,160 @@ addMember(param) {
         .catch(error => {
           console.error('Error:', error);
         });
-});
-},
+    });
+  },
 
- //GetLogMember //Search ด้วย ส่ง name มา
- fetchLogMember(param) {
-  return new Promise((resolve, reject) => {
-  fetch(baseURL+'user_play/user_lay/' + param.data.id, {
-            method: 'POST',
-            headers: {
-             'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-              pageIndex: param.data.pageIndex,
-              pageSize: param.data.pageSize
-            })
+  //AddAdmin
+  addAdmin(param) {
+    return new Promise((resolve, reject) => {
+      fetch(baseURL + 'signup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          name: param.data.name,
+          username: param.data.username,
+          password: param.data.password,
+          contact_number: param.data.phoneNumber,
         })
+      })
         .then(response => {
-            if (response) {
-              return response.json();
-            } else {
-              throw new Error('Error: ' + response.statusText);
-            }
-          })
-          .then(data => {
-            resolve(data);
-          })
-          .catch(error => {
-            console.error('Error:', error);
-          });
+          if (response) {
+            return response.json();
+          } else {
+            throw new Error('Error: ' + response.statusText);
+          }
         })
-    },
+        .then(data => {
+          resolve(data);
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
+    });
+  },
 
-    //GetLogMember //Search ด้วย ส่ง name มา
+  //AddMember
+  addMember(param) {
+    return new Promise((resolve, reject) => {
+      fetch(baseURL + 'signupMember', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          agent_id: param.data.agent_id,
+          member_code: param.data.member_code,
+          name: param.data.name,
+          username: param.data.username,
+          password: param.data.password,
+        })
+      })
+        .then(response => {
+          if (response) {
+            return response.json();
+          } else {
+            throw new Error('Error: ' + response.statusText);
+          }
+        })
+        .then(data => {
+          resolve(data);
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
+    });
+  },
+
+  //GetLogMember //Search ด้วย ส่ง name มา
+  fetchLogMember(param) {
+    return new Promise((resolve, reject) => {
+      fetch(baseURL + 'user_play/user_lay/' + param.data.id, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          pageIndex: param.data.pageIndex,
+          pageSize: param.data.pageSize
+        })
+      })
+        .then(response => {
+          if (response) {
+            return response.json();
+          } else {
+            throw new Error('Error: ' + response.statusText);
+          }
+        })
+        .then(data => {
+          resolve(data);
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
+    })
+  },
+
+  //GetLogMember //Search ด้วย ส่ง name มา
   fetchDataAgMember(param) {
     return new Promise((resolve, reject) => {
-    fetch(baseURL+ 'post/logAgentMember/' + param.params.id.idLog, {
-            method: 'POST',
-            headers: {
-             'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-              name: param.params.query,
-              pageIndex: param.params.pageIndex,
-              pageSize: param.params.pageSize
-            })
+      fetch(baseURL + 'post/logAgentMember/' + param.params.id.idLog, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          name: param.params.query,
+          pageIndex: param.params.pageIndex,
+          pageSize: param.params.pageSize
         })
+      })
         .then(response => {
-            if (response) {
-              return response.json();
-            } else {
-              throw new Error('Error: ' + response.statusText);
-            }
-          })
-          .then(data => {
-            resolve(data);
-          })
-          .catch(error => {
-            console.error('Error:', error);
-          });
+          if (response) {
+            return response.json();
+          } else {
+            throw new Error('Error: ' + response.statusText);
+          }
         })
-    },
+        .then(data => {
+          resolve(data);
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
+    })
+  },
 
   getValusData() {
     return new Promise((resolve, reject) => {
-            fetch(baseURL+ 'getallData')
-            .then(response => response.json())
-            .then(data => {
-                resolve(data);
-            })
-            .catch(error => console.error(error))
+      fetch(baseURL + 'getallData')
+        .then(response => response.json())
+        .then(data => {
+          resolve(data);
+        })
+        .catch(error => console.error(error))
     })
   },
 
   getValusDataPost(param) {
     return new Promise((resolve, reject) => {
-      fetch(baseURL+ 'post/postGetallData',{
+      fetch(baseURL + 'post/postGetallData', {
         method: 'POST',
         headers: {
-        'Content-Type': 'application/json'
+          'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-        name: param,
+          name: param,
         })
-        })
+      })
         .then(response => {
           if (response) {
             return response.json();
-            } else {
-              throw new Error('Error: ' + response.statusText);
-            }
-          }).then(data => {
+          } else {
+            throw new Error('Error: ' + response.statusText);
+          }
+        }).then(data => {
           resolve(data);
         })
         .catch(error => console.error(error))
@@ -454,22 +524,22 @@ addMember(param) {
 
   getCommission(param) {
     return new Promise((resolve, reject) => {
-      fetch(baseURL+ 'post/commissionGame',{
+      fetch(baseURL + 'post/commissionGame', {
         method: 'POST',
         headers: {
-        'Content-Type': 'application/json'
+          'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-        name: param,
+          name: param,
         })
-        })
+      })
         .then(response => {
           if (response) {
             return response.json();
-            } else {
-              throw new Error('Error: ' + response.statusText);
-            }
-          }).then(data => {
+          } else {
+            throw new Error('Error: ' + response.statusText);
+          }
+        }).then(data => {
           resolve(data);
         })
         .catch(error => console.error(error))
@@ -478,22 +548,22 @@ addMember(param) {
 
   getCommissionMonthly(param) {
     return new Promise((resolve, reject) => {
-      fetch(baseURL+ 'post/commissionMonthly',{
+      fetch(baseURL + 'post/commissionMonthly', {
         method: 'POST',
         headers: {
-        'Content-Type': 'application/json'
+          'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-        name: param,
+          name: param,
         })
-        })
+      })
         .then(response => {
           if (response) {
             return response.json();
-            } else {
-              throw new Error('Error: ' + response.statusText);
-            }
-          }).then(data => {
+          } else {
+            throw new Error('Error: ' + response.statusText);
+          }
+        }).then(data => {
           resolve(data);
         })
         .catch(error => console.error(error))

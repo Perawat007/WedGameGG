@@ -142,5 +142,19 @@ export const protectedRoutes = [
         ),
         authority: [],
     },
+
+    {
+        key: 'groupMenu.editAgent.item3',
+        path: '/editSutAgent/:subagentId',
+        component: React.lazy(() => import('views/editdataagent/subAgent/Customers/subAgent')),
+        authority: [],
+    },
+
+    {
+        key: 'groupMenu.editAgent.item3',
+        path: '/editSutAgent/memberSub/:agentId/:subagentId',
+        component: React.lazy(() => import('views/editdataagent/memberSub/Customers/memberSubAg')),
+        authority: [],
+    },
 ]
 

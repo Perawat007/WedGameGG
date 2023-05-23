@@ -1,5 +1,6 @@
 {
     "nav": {
+        "apps": "-----------------------------------",
         "dashboard": "Dashboard",
         "singleMenuItem": "",
         "collapseReports": {
@@ -21,15 +22,14 @@
             "item2": "แก้ไขสิทธิ์"
         },
         "groupMenu": {
-
+            "editAgent": {
+                "editAgent": "Agent",
+                "item1": "แก้ไขข้อมูล Agent"
+            },
             "editGame": {
                 "editGame": "Game",
                 "item1": "ตั้งค่า Winrate",
                 "item2": "ตั้งค่า Games"
-            },
-            "editAgent": {
-                "editAgent": "Agent",
-                "item1": "แก้ไขข้อมูล Agent"
             },
             "apis": {
                 "apis": "APIs",
