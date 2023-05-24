@@ -39,7 +39,7 @@ export const AddSutAgent = createAsyncThunk(
             alert("UserName นี้มีอยู่แล้ว กรุณาเปลี่ยน Username");
         }
         else{
-            //window.location.reload();
+            window.location.reload();
         }
     }
 )
