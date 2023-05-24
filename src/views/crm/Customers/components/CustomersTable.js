@@ -17,7 +17,7 @@ import {
     HiCheck,
     HiMinusCircle,
     HiPhone,
-    HiPencilAlt,
+    HiPencil,
     HiOutlineDocumentText,
 } from 'react-icons/hi'
 const statusColor = {
@@ -49,8 +49,8 @@ const ActionColumn = ({ row }) => {
     return (
         <div className="ltr:text-right rtl:text-left">
             <div>
-                <Button variant="solid" icon={<HiPencilAlt />} onClick={() => onEdit()} />
-                <Button variant="solid" color="green-600" icon={<HiOutlineDocumentText />} onClick={() => onViewOpen(row)} />
+            <Button variant="solid" color="blue-600" icon={<HiPencil />} onClick={() => onEdit()} />
+                <Button variant="solid" color="yellow-600" icon={<HiOutlineDocumentText />} onClick={() => onViewOpen(row)} />
             </div>
 
             <Dialog

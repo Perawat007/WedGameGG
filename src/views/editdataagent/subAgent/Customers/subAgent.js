@@ -43,7 +43,7 @@ const SubAgent = () => {
     }
 
      const h3Style = {
-        color: isClickedA ? 'red' : 'yellow',
+        color: isClickedA ? 'red' : '#FF9933',
         cursor: 'pointer',
         display: 'inline-block',
         marginRight: '10px',
