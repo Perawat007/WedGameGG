@@ -24,7 +24,8 @@
         "groupMenu": {
             "editAgent": {
                 "editAgent": "Agent",
-                "item1": "แก้ไขข้อมูล Agent"
+                "item1": "แก้ไขข้อมูล Agent",
+                "item2": "เพิ่ม Agent"
             },
             "editGame": {
                 "editGame": "Game",

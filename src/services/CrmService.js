@@ -92,6 +92,13 @@ export async function apPutMember(data) {
     })
 }
 
+//PutSubAgent
+export async function editSubAgent(data) {
+    return ApiPutuser.putSubAgent({
+        data,
+    })
+}
+
 //PutDeleteAgent
 export async function apPutDeleteAgent(data, type) {
     return ApiPutuser.deleteData({
@@ -126,6 +133,13 @@ export async function AddAdmin(data) {
 //AddAgent
 export async function apAddAgent(data) {
     return ApiService.addAgent({
+        data,
+    })
+}
+
+//AddSubAgent
+export async function apAddSubAgent(data) {
+    return ApiService.addSubAgent({
         data,
     })
 }

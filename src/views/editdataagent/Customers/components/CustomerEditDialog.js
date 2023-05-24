@@ -2,9 +2,10 @@ import React, { useRef } from 'react'
 import { Button, Drawer, Dialog } from 'components/ui'
 import CustomerEditContent from './CustomerEditContent'
 import { useDispatch, useSelector } from 'react-redux'
-import { setDrawerClose, setSelectedCustomer } from '../store/stateSlice'
+import { setDrawerClose} from '../store/stateSlice'
+import { setSelectedCustomer } from '../store/dataSliceAdmin'
 import { DeleteAgent } from '../store/dataSliceAdmin'
-
+import { useNavigate } from 'react-router-dom'
 const DrawerFooter = ({ onSaveClick, onCancel, onDelete }) => {
     return (
         <div className="text-right w-full">
@@ -23,17 +24,15 @@ const DrawerFooter = ({ onSaveClick, onCancel, onDelete }) => {
 
 const CustomerEditDialog = () => {
     const dispatch = useDispatch()
-    const drawerOpen = useSelector(
-        (state) => state.crmCustomers.state.drawerOpen
-    )
+    const navigate = useNavigate();
 
     const customer = useSelector(
-        (state) => state.crmCustomers.state.selectedCustomer
+        (state) => state.crmEditAgentCustomers.state.selectedCustomer
     )
-
+    console.log(customer);
     const onDrawerClose = () => {
-        dispatch(setDrawerClose())
         dispatch(setSelectedCustomer({}))
+        navigate(`/editDataAgent`)
     }
 
     const deleteAgent =() =>{
@@ -49,15 +48,6 @@ const CustomerEditDialog = () => {
     }
 
     return (
-        <Dialog
-        isOpen={drawerOpen}
-        onClose={onDrawerClose}
-        onRequestClose={onDrawerClose}
-        closable={false}
-        width={500}
-        height={700}
-        bodyClass="p-0"
-    >
     <div className="flex flex-col h-full justify-between">
         <div className="overflow-y-auto">
             <CustomerEditContent ref={formikRef} />  
@@ -68,7 +58,6 @@ const CustomerEditDialog = () => {
         onSaveClick={formSubmit}
     />
     </div>
-    </Dialog>
     )
 }
 

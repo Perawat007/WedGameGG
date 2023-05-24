@@ -1,10 +1,10 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import {
-    apAddMember,
+    apAddSubAgent,
     apiGetCrmCustomersStatistic,
-    apPutMember,
+    editSubAgent,
     apiGetSubAgent,
-    apPutDeleteMember
+    apPutDeleteMember,
 } from 'services/CrmService'
 
 export const getCustomerStatistic = createAsyncThunk(
@@ -23,23 +23,23 @@ export const getCustomers = createAsyncThunk(
     }
 )
 
-export const putCustomer = createAsyncThunk(
+export const updateSubAgent = createAsyncThunk(
     'crmSubAgent/data/putCustomer',
     async (data) => {
-        const response = await apPutMember(data)
+        const response = await editSubAgent(data)
         return response.data
     }
 )
 
-export const AddCustomer = createAsyncThunk(
+export const AddSutAgent = createAsyncThunk(
     'crmSubAgent/data/AddCustomer',
     async (data) => {
-        const response = await apAddMember(data)
+        const response = await apAddSubAgent(data)
         if (response.message === "Data Creates False"){  
             alert("UserName นี้มีอยู่แล้ว กรุณาเปลี่ยน Username");
         }
         else{
-            window.location.reload();
+            //window.location.reload();
         }
     }
 )

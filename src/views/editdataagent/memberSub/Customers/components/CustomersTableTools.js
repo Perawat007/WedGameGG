@@ -2,23 +2,19 @@
 
 import React, { useRef } from 'react'
 import { Button } from 'components/ui'
-import { getCustomers, setTableData} from '../store/dataSliceSubAgent'
+import { getCustomers, setTableData } from '../store/dataSliceSubAgent'
 import CustomerTableSearch from './CustomerTableSearch'
 import CustomerTableFilter from './CustomerTableFilter'
 import { useDispatch, useSelector } from 'react-redux'
 import cloneDeep from 'lodash/cloneDeep'
 import { useLocation, useNavigate } from 'react-router-dom'
-import {setDrawerOpen} from '../store/addSlice'
-
+import { setDrawerOpen } from '../store/addSlice'
 
 const CustomersTableTools = () => {
 
     const dispatch = useDispatch()
     const location = useLocation()
-
-    const ActionColumn = () => { //สั่งทำงาน Edit
-        dispatch(setDrawerOpen())
-    }
+    const navigate = useNavigate()
 
     const inputRef = useRef()
 
@@ -27,6 +23,15 @@ const CustomersTableTools = () => {
     const path = location.pathname.substring(
         location.pathname.lastIndexOf('/') + 1
     )
+
+    const pathA = window.location.pathname;
+    const pathSegments = pathA.split('/');
+    
+    const ActionColumn = () => { //สั่งทำงาน Add
+        navigate(`/AddMemberSub/${pathSegments[3]}/${pathSegments[4]}`) //:agentId/:subagentId
+        //dispatch(setDrawerOpen())
+    }
+
     const rquestParam = { id: path }
 
     const handleInputChange = (val) => {

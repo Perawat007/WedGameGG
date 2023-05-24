@@ -1,67 +1,103 @@
-import React, { forwardRef } from 'react'
+import React, { forwardRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { AddCustomer } from '../store/dataSliceSubAgent'
+import { AddSutAgent } from '../store/dataSliceSubAgent'
 import { setDrawerClose } from '../store/addSlice'
 import cloneDeep from 'lodash/cloneDeep'
 import isEmpty from 'lodash/isEmpty'
-import CustomerFormAddAg from 'views/membergame/CustomerFormAddAg/index'
+import CustomerFormAddAg from '../../CustomerFormAddAg'
+import { useNavigate } from 'react-router-dom'
+import { Button, Dialog } from 'components/ui'
 
 const CustomerAddContent = forwardRef((_, ref) => {
     
     const dispatch = useDispatch()
+    const customer = [];
+     const navigate = useNavigate();
 
-    const customer = useSelector(
-        (addMenBer) => addMenBer.crmCustomers.state.selectedCustomer
-    )
-    const data = useSelector((addMenBer) => addMenBer.crmCustomers.data.customerList)
-    const { id } = customer
-
-    const onFormSubmit = (values, IdAgent) => {
+    const [dialogIsOpen, setIsOpen] = useState(false)
+    const [okay, setOkay] = useState(false)
+    const [dataEdit, setDataEdit] = useState('')
+    const onFormSubmit = (values) => {
         const {
-            agent_id,
-            member_code,
+            id,
+            contact_number,
             name,
             username,
             password,
+            credit,
+            level,
+            rank,
         } = values
-        const basicInfo = {agent_id:IdAgent, member_code, name, username, password}
+
+        const basicInfo = {contact_number, name, username, password, credit,level, rank}
         const personalInfo = {
-            agent_id,
-            member_code,
-            name,
+            id,
+            contact_number,
             username,
+            name,
             password,
+            credit,
+            level,
+            rank,
         }
-        let newData = cloneDeep(data)
-        let editedCustomer = {}
-       newData = newData.map((elm) => {
-            if (elm.id === id) {
-                elm = { ...elm, ...basicInfo }
-                elm.personalInfo = { ...elm.personalInfo, ...personalInfo }
-                editedCustomer = elm.personalInfo
-            }
-            return elm.personalInfo
-        })
+       
         //dispatch(AddCustomer(values, IdAgent)) //เรียกใช้งาน API 
-        if (isEmpty(editedCustomer)) {
-            if (isEmpty(editedCustomer)) {
-                if (basicInfo.name !== '' && basicInfo.username !== '' && basicInfo.password !== '' && basicInfo.agent_id !== '' && basicInfo.member_code !== ''){
-                    dispatch(AddCustomer(basicInfo)) 
-                    dispatch(setDrawerClose())
-                }
-                else{
-                    alert("กรุณากรอกข้อมูลให้ครบ");
-                }
+        if (values) {
+            if (values.rank !== "" && values.level !== ""){
+                setIsOpen(true)
+                setDataEdit(values);
+            }
+            else{
+                alert("กรุณากรอกข้อมูลให้ครบ");
             }
         }
     }
+    const editDataSUb = () => {
+        dispatch(AddSutAgent(dataEdit)) 
+        navigate(`/editSutAgent/${dataEdit.id}`)
+    }
+
+    const onDialogClose = (e) => {
+        setOkay(false)
+        setIsOpen(false)
+    }
+
+    const onDialogOk = (e) => {
+        setIsOpen(false)
+        editDataSUb();
+    }
 
     return (
-        <CustomerFormAddAg
-            ref={ref}
-            onFormSubmit={onFormSubmit}
-            customer={customer}
-        />
+        <div>
+            <Dialog
+                isOpen={dialogIsOpen}
+                onClose={onDialogClose}
+                onRequestClose={onDialogClose}
+            >
+                <h5 className="mb-4">การแจ้งเตือน</h5>
+                <p>
+                    คุณต้องการแก้ไขข้อมูลตามนี้หรือไม่
+                </p>
+                <div className="text-right mt-6">
+                    <Button
+                        className="ltr:mr-2 rtl:ml-2"
+                        variant="plain"
+                        onClick={onDialogClose}
+                    >
+                        ยกเลิก
+                    </Button>
+                    <Button variant="solid" onClick={onDialogOk}>
+                        แก้ไข
+                    </Button>
+                </div>
+            </Dialog>
+
+            <CustomerFormAddAg
+                ref={ref}
+                onFormSubmit={onFormSubmit}
+                customer={customer}
+            />
+        </div>
     )
 })
 

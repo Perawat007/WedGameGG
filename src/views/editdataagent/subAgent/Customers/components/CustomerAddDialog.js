@@ -3,6 +3,7 @@ import { Button, Drawer, Dialog} from 'components/ui'
 import CustomerAddContent from './CustomerAddContent'
 import { useDispatch, useSelector } from 'react-redux'
 import { setDrawerClose } from '../store/addSlice'
+import { useNavigate } from 'react-router-dom'
 
 const DrawerFooter = ({ onSaveClick, onCancel }) => {
     return (
@@ -19,12 +20,12 @@ const DrawerFooter = ({ onSaveClick, onCancel }) => {
 
 const CustomerAddDialog = () => {
     const dispatch = useDispatch()
-    const drawerOpen = useSelector(
-        (addAgent) => addAgent.crmSubAgent.addAgent.drawerOpen
-    )
+    const navigate = useNavigate();
 
     const onDrawerClose = () => {
-        dispatch(setDrawerClose())
+        const pathA = window.location.pathname;
+        const pathSegments = pathA.split('/');
+        navigate(`/editSutAgent/${pathSegments[2]}}`)
     }
 
     const formikRef = useRef()
@@ -34,15 +35,6 @@ const CustomerAddDialog = () => {
     }
 
     return (
-        <Dialog
-        isOpen={drawerOpen}
-        onClose={onDrawerClose}
-        onRequestClose={onDrawerClose}
-        closable={false}
-        width={500}
-        height={700}
-        bodyClass="p-0"
-    >
     <div className="flex flex-col h-full justify-between">
         <div className="overflow-y-auto">
             <CustomerAddContent ref={formikRef} />  
@@ -52,7 +44,6 @@ const CustomerAddDialog = () => {
         onSaveClick={formSubmit}
     />
     </div>
-    </Dialog>
     )
 }
 

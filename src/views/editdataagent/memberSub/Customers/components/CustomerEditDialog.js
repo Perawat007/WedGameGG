@@ -4,6 +4,7 @@ import CustomerEditContent from './CustomerEditContent'
 import { useDispatch, useSelector } from 'react-redux'
 import { setDrawerClose, setSelectedCustomer } from '../store/stateSlice'
 import { DeleteMemBer } from '../store/dataSliceSubAgent'
+import { useNavigate } from 'react-router-dom'
 import {
     HiPhone,
 } from 'react-icons/hi'
@@ -25,6 +26,8 @@ const DrawerFooter = ({ onSaveClick, onCancel, onDelete }) => {
 
 const CustomerEditDialog = () => {
     const dispatch = useDispatch()
+    const navigate = useNavigate();
+
     const drawerOpen = useSelector(
         (state) => state.crmMemSubAgent.state.drawerOpen
     )
@@ -34,7 +37,9 @@ const CustomerEditDialog = () => {
     )
     
     const onDrawerClose = () => {
-        dispatch(setDrawerClose())
+        const pathA = window.location.pathname;
+        const pathSegments = pathA.split('/');
+        navigate(`/editSutAgent/memberSub/${pathSegments[2]}/${pathSegments[3]}`)
         dispatch(setSelectedCustomer({}))
     }
 
@@ -51,15 +56,6 @@ const CustomerEditDialog = () => {
     }
 
     return (
-        <Dialog
-        isOpen={drawerOpen}
-        onClose={onDrawerClose}
-        onRequestClose={onDrawerClose}
-        closable={false}
-        width={500}
-        height={700}
-        bodyClass="p-0"
-    >
     <div className="flex flex-col h-full justify-between">
         <div className="overflow-y-auto">
             <CustomerEditContent ref={formikRef} />  
@@ -70,7 +66,6 @@ const CustomerEditDialog = () => {
         onSaveClick={formSubmit}
     />
     </div>
-    </Dialog>
     )
 }
 

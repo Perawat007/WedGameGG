@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const stateSlice = createSlice({
-    name: 'crmCustomers/state',
+    name: 'crmEditAgentCustomers/state',
     initialState: {
         drawerOpen: false,
         selectedCustomer: {},

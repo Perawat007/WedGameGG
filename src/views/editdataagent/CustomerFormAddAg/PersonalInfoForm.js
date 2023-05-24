@@ -1,19 +1,62 @@
 //EditData Agent
 import React from 'react'
-import { Input, FormItem, Avatar, Upload } from 'components/ui'
+import { Input, FormItem, Avatar, Select } from 'components/ui'
 import {
     HiUserCircle,
-    HiLocationMarker,
     HiOutlineUser,
     HiPhone,
     HiCurrencyDollar,
     HiLockClosed,
+    HiOutlineUserGroup,
+    HiCheck,
 } from 'react-icons/hi'
 import { Field } from 'formik'
 import * as Yup from 'yup'
+import { components } from 'react-select'
 
 const PersonalInfoForm = (props) => {
-    const { touched, errors } = props
+    const {values, touched, errors } = props
+    const { Control } = components;
+
+    const level = [
+        { value: 'Stater', label: 'Stater', icon: HiOutlineUser },
+        { value: 'VIP', label: 'VIP' },
+        { value: 'VVIP', label: 'VVIP' },
+    ]
+    
+    const rank = [
+        { value: 'Agent', label: 'Agent' },
+        { value: 'Reseller', label: 'Reseller' },
+    ]
+
+    const CustomSelectOption = ({ innerProps, label, data, isSelected }) => {
+        return (
+            <div
+                className={`flex items-center justify-between p-2 ${isSelected
+                    ? 'bg-gray-100 dark:bg-gray-500'
+                    : 'hover:bg-gray-50 dark:hover:bg-gray-600'
+                    }`}
+                {...innerProps}
+            >
+                <div className="flex items-center">
+                    <span className="ml-2 rtl:mr-2">{label}</span>
+                </div>
+                {isSelected && <HiCheck className="text-emerald-500 text-xl" />}
+            </div>
+        )
+    }
+
+    const CustomControl = ({ children, ...props }) => {
+        const selected = props.getValue()[0]
+        return (
+            <Control {...props}>
+                {selected && (
+                    <HiOutlineUserGroup className="text-xl" />
+                )}
+                {children}
+            </Control>
+        )
+    }
 
     const onSetFormFile = (form, field, file) => {
         form.setFieldValue(field.name, URL.createObjectURL(file[0]))
@@ -28,22 +71,22 @@ const PersonalInfoForm = (props) => {
                 <Field name="img">
                     {({ field, form }) => {
                         const avatarProps = '/img/avatars/pngegglol.png'
-                        ? { src: '/img/avatars/pngegglol.png'}
+                            ? { src: '/img/avatars/pngegglol.png' }
                             : {}
                         return (
                             <div className="flex justify-center">
                                 <Avatar
-                                        className="border-2 border-white dark:border-gray-800 shadow-lg"
-                                        size={70}
-                                        shape="circle"
-                                        icon={<HiOutlineUser />}
-                                        {...avatarProps}
-                                    />
+                                    className="border-2 border-white dark:border-gray-800 shadow-lg"
+                                    size={70}
+                                    shape="circle"
+                                    icon={<HiOutlineUser />}
+                                    {...avatarProps}
+                                />
                             </div>
                         )
                     }}
                 </Field>
-                
+
             </FormItem>
 
             <FormItem
@@ -62,8 +105,8 @@ const PersonalInfoForm = (props) => {
             </FormItem>
             <FormItem
                 label="Username"
-                invalid={errors.name && touched.name}
-                errorMessage={errors.name}
+                invalid={errors.username && touched.username}
+                errorMessage={errors.username}
             >
                 <Field
                     name="username"
@@ -103,6 +146,37 @@ const PersonalInfoForm = (props) => {
                 />
             </FormItem>
             <FormItem
+                label="ระดับ"
+                invalid={errors.rank && touched.rank}
+                errorMessage={errors.rank}
+            >
+                <Field name="rank">
+                    {({ field, form }) => (
+                        <Select
+                            field={field}
+                            form={form}
+                            placeholder="Please Select"
+                            options={rank}
+                            components={{
+                                Option: CustomSelectOption,
+                                Control: CustomControl,
+                            }}
+                            value={rank.filter(
+                                (option) =>
+                                    option.value ===
+                                    values?.rank
+                            )}
+                            onChange={(option) =>
+                                form.setFieldValue(
+                                    field.name,
+                                    option.value
+                                )
+                            }
+                        />
+                    )}
+                </Field>
+            </FormItem>
+            <FormItem
                 label="Credit"
                 invalid={errors.credit && touched.credit}
                 errorMessage={errors.credit}
@@ -115,6 +189,38 @@ const PersonalInfoForm = (props) => {
                     component={Input}
                     prefix={<HiCurrencyDollar className="text-xl" />}
                 />
+            </FormItem>
+
+            <FormItem
+                label="ระดับ"
+                invalid={errors.rank && touched.rank}
+                errorMessage={errors.rank}
+            >
+                <Field name="level">
+                    {({ field, form }) => (
+                        <Select
+                            field={field}
+                            form={form}
+                            placeholder="Please Select"
+                            options={level}
+                            components={{
+                                Option: CustomSelectOption,
+                                Control: CustomControl,
+                            }}
+                            value={level.filter(
+                                (option) =>
+                                    option.value ===
+                                    values?.level
+                            )}
+                            onChange={(option) =>
+                                form.setFieldValue(
+                                    field.name,
+                                    option.value
+                                )
+                            }
+                        />
+                    )}
+                </Field>
             </FormItem>
         </>
     )

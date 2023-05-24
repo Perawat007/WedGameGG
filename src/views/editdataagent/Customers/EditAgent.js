@@ -5,7 +5,7 @@ import CustomersTableTools from './components/CustomersTableTools'
 import { injectReducer } from 'store/index'
 import reducer from './store'
 
-injectReducer('crmCustomers', reducer)
+injectReducer('crmEditAgentCustomers', reducer)
 /** Example purpose only */
 const CollapseMenuItemView2 = () => {
     return (

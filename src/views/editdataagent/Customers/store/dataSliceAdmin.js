@@ -9,7 +9,7 @@ import {
 import {useSelector } from 'react-redux'
 
 export const getCustomerStatistic = createAsyncThunk(
-    'crmCustomers/data/getCustomerStatistic',
+    'crmEditAgentCustomers/data/getCustomerStatistic',
     async () => {
         const response = await apiGetCrmCustomersStatistic()
         return response.data
@@ -17,7 +17,7 @@ export const getCustomerStatistic = createAsyncThunk(
 )
 
 export const getCustomers = createAsyncThunk(
-    'crmCustomers/data/getCustomers',
+    'crmEditAgentCustomers/data/getCustomers',
     async (params) => {
         const response = await apiGetAgent(params)
         return response
@@ -26,7 +26,7 @@ export const getCustomers = createAsyncThunk(
 )
 
 export const putCustomer = createAsyncThunk(
-    'crmCustomers/data/putCustomer',
+    'crmEditAgentCustomers/data/putCustomer',
     async (data) => {
         const response = await apPutAgent(data)
         return response.data
@@ -34,7 +34,7 @@ export const putCustomer = createAsyncThunk(
 )
 
 export const AddCustomer = createAsyncThunk(
-    'crmCustomers/data/AddCustomer',
+    'crmEditAgentCustomers/data/AddCustomer',
     async (data) => {
         const response = await apAddAgent(data)
         if (response.message === "Data Creates False"){  
@@ -47,7 +47,7 @@ export const AddCustomer = createAsyncThunk(
 )
 
 export const DeleteAgent = createAsyncThunk(
-    'crmCustomers/data/DeleteAgent',
+    'crmEditAgentCustomers/data/DeleteAgent',
     async (data) => {
 
         const response = await apPutDeleteAgent(data,'agent')
@@ -72,7 +72,7 @@ export const initialFilterData = {
 
 
 const dataSlice = createSlice({
-    name: 'crmCustomers/data',
+    name: 'crmEditAgentCustomers/data',
     initialState: {
         loading: false,
         customerList: [],
@@ -89,6 +89,9 @@ const dataSlice = createSlice({
         },
         setFilterData: (state, action) => {
             state.filterData = action.payload
+        },
+        setSelectedCustomer: (state, action) => {
+            state.selectedCustomer = action.payload
         },
     },
     extraReducers: {
@@ -110,7 +113,7 @@ const dataSlice = createSlice({
     },
 })
 
-export const { setTableData, setCustomerList, setFilterData } =
+export const { setTableData, setCustomerList, setFilterData, setSelectedCustomer} =
     dataSlice.actions
 
 export default dataSlice.reducer

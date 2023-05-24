@@ -13,12 +13,13 @@ import CustomerAddDialog from './CustomerAddDialog'
 import cloneDeep from 'lodash/cloneDeep'
 import LogData from 'views/LogMember/Market/LogData'
 import LogEditData from 'views/LogEditUser/Market/LogEditData'
+import { useNavigate } from 'react-router-dom'
 import {
     HiCheck,
     HiMinusCircle,
     HiCurrencyDollar,
     HiCalendar,
-    HiPencilAlt,
+    HiPencil,
     HiOutlineDocumentText
 } from 'react-icons/hi'
 import { RiFileHistoryFill } from "react-icons/ri";
@@ -29,8 +30,12 @@ const statusColor = {
 
 const ActionColumn = ({ row }) => {
     const dispatch = useDispatch()
+    const navigate = useNavigate();
+
     const onEdit = () => {
-        dispatch(setDrawerOpen())
+        const pathA = window.location.pathname;
+        const pathSegments = pathA.split('/');
+        navigate(`/editMemberSub/${pathSegments[3]}/${pathSegments[4]}`)
         dispatch(setSelectedCustomer(row))
     }
 
@@ -61,7 +66,7 @@ const ActionColumn = ({ row }) => {
     return (
         <div className="ltr:text-right rtl:text-left">
             <div>
-                <Button variant="solid" icon={<HiPencilAlt />} onClick={() => onEdit()} />
+                <Button variant="solid" color="blue-600" icon={<HiPencil />} onClick={() => onEdit()} />
                 <Button variant="solid" color="green-600" icon={<HiOutlineDocumentText />} onClick={() => onViewOpen(row)} />
                 <Button variant="solid" color="yellow-600" icon={<RiFileHistoryFill />} onClick={() => onViewOpenLog(row)}/>
             </div>
@@ -157,20 +162,6 @@ const columns = [
     },
 
     {
-        header: 'NameAgent',
-        cell: (props) => {
-            const row = props.row.original
-            return (
-                <div className="flex items-center">
-                    <span className="ml-2 rtl:mr-2 capitalize">
-                        {row.username_agent}
-                    </span>
-                </div>
-            )
-        },
-    },
-
-    {
         header: 'Name',
         cell: (props) => {
             const row = props.row.original
@@ -187,7 +178,16 @@ const columns = [
     
     {
         header: 'UserName',
-        accessorKey: 'username',
+        cell: (props) => {
+            const row = props.row.original
+            return (
+                <div className="flex items-center">
+                    <span className="ml-2 rtl:mr-2 capitalize">
+                        {row.username}
+                    </span>
+                </div>
+            )
+        },
     },
 
     {
@@ -323,8 +323,6 @@ const Customers = () => {
                 onSelectChange={onSelectChange}
                 onSort={onSort}
             />
-            <CustomerEditDialog />
-            <CustomerAddDialog />
         </>
     )
 }

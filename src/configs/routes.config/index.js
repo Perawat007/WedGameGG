@@ -83,6 +83,14 @@ export const protectedRoutes = [
         component: React.lazy(() => import('views/editdataagent/Customers/EditAgent')),
         authority: [],
     },
+    //AddAgent
+    {
+        key: 'groupMenu.editAgent.item2',
+        path: '/AddAgent',
+        component: React.lazy(() => import('views/editdataagent/Customers/components/CustomerAddDialog')),
+        authority: [],
+    },
+
     {
         key: 'groupMenu.collapse.item1',
         path: '/group-collapse-menu-item-view-1',
@@ -156,5 +164,46 @@ export const protectedRoutes = [
         component: React.lazy(() => import('views/editdataagent/memberSub/Customers/memberSubAg')),
         authority: [],
     },
+
+    //editAgent pang
+    {
+        key: 'groupMenu.editAgent.item3',
+        path: '/editAgent/:agentId',
+        component: React.lazy(() => import('views/editdataagent/Customers/components/CustomerEditDialog')),
+        authority: [],
+    },
+
+    //editSubAgent pang
+    {
+        key: 'groupMenu.editSubAgent.item1',
+        path: '/editAgentSub/:agentId',
+        component: React.lazy(() => import('views/editdataagent/subAgent/Customers/components/CustomerEditDialog')),
+        authority: [],
+    },
+
+    //editMemberSub pang
+    {
+        key: 'groupMenu.editMemberSub.item1',
+        path: '/editMemberSub/:agentId/:subagentId',
+        component: React.lazy(() => import('views/editdataagent/memberSub/Customers/components/CustomerEditDialog')),
+        authority: [],
+    },
+
+    //editAddMemberSub pang
+    {
+        key: 'groupMenu.AddMemberSub.item2',
+        path: '/AddMemberSub/:agentId/:subagentId',
+        component: React.lazy(() => import('views/editdataagent/memberSub/Customers/components/CustomerAddDialog')),
+        authority: [],
+    },
+
+    //editAddMemberSub pang
+    {
+        key: 'groupMenu.AddMemberSub.item2',
+        path: '/AddAgentSub/:agentId',
+        component: React.lazy(() => import('views/editdataagent/subAgent/Customers/components/CustomerAddDialog')),
+        authority: [],
+    },
+
 ]
 

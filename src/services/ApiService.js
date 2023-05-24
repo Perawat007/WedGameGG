@@ -1,6 +1,6 @@
 import BaseService from './BaseService'
 
-const baseURL = 'https://relaxtimecafe.fun/'
+const baseURL = 'http://localhost:5000/'
 const ApiService = {
   //Login Admin
   loginAdmin(param) {
@@ -259,6 +259,7 @@ const ApiService = {
         body: JSON.stringify({
           username: param.data.username,
           name: param.data.name,
+          password: param.data.password,
           status: param.data.status,
           contact_number: param.data.phoneNumber,
           credit: param.data.credit,
@@ -365,6 +366,43 @@ const ApiService = {
     });
   },
 
+  //AddAgent
+  addSubAgent(param) {
+    return new Promise((resolve, reject) => {
+      console.log(param);
+      fetch(baseURL + 'post/singUpSubAgent', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          id_agent: param.data.id,
+          username: param.data.username,
+          password: param.data.password,
+          name: param.data.name,
+          contact_number: param.data.contact_number,
+          credit: param.data.credit,
+          currency: param.data.currency,
+          positiontype: param.data.rank,
+          level: param.data.level
+        })
+      })
+        .then(response => {
+          if (response) {
+            return response.json();
+          } else {
+            throw new Error('Error: ' + response.statusText);
+          }
+        })
+        .then(data => {
+          resolve(data);
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
+    });
+  },
+
   //AddAdmin
   addAdmin(param) {
     return new Promise((resolve, reject) => {
@@ -406,10 +444,11 @@ const ApiService = {
         },
         body: JSON.stringify({
           agent_id: param.data.agent_id,
-          member_code: param.data.member_code,
+          member_code: param.data.username,
           name: param.data.name,
           username: param.data.username,
           password: param.data.password,
+          credit: param.data.credit,
         })
       })
         .then(response => {

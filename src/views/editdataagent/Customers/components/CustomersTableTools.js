@@ -7,21 +7,27 @@ import CustomerTableSearch from './CustomerTableSearch'
 import CustomerTableFilter from './CustomerTableFilter'
 import { useDispatch, useSelector } from 'react-redux'
 import cloneDeep from 'lodash/cloneDeep'
-
+import { useLocation, useNavigate } from 'react-router-dom'
 import {setDrawerOpen} from '../store/addSlice'
 
 
 const CustomersTableTools = () => {
 
     const dispatch = useDispatch()
+    const location = useLocation()
+    const navigate = useNavigate()
 
-    const ActionColumn = () => { //สั่งทำงาน Edit
-        dispatch(setDrawerOpen())
+    const pathA = window.location.pathname;
+    const pathSegments = pathA.split('/');
+    
+    const ActionColumn = () => { //สั่งทำงาน Add
+        navigate(`/AddAgent`) //:agentId/:subagentId
+        //dispatch(setDrawerOpen())
     }
 
     const inputRef = useRef()
 
-    const tableData = useSelector((state) => state.crmCustomers.data.tableData)
+    const tableData = useSelector((state) => state.crmEditAgentCustomers.data.tableData)
 
     const handleInputChange = (val) => {
         const newTableData = cloneDeep(tableData)

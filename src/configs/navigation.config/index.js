@@ -208,6 +208,16 @@ const navigationConfig = [
                         authority: [],
                         subMenu: [],
                     },
+                    {
+                        key: 'groupMenu.editAgent.item2',
+                        path: '/AddAgent',
+                        title: 'Menu item 1',
+                        translateKey: 'nav.groupMenu.editAgent.item2',
+                        icon: '',
+                        type: NAV_ITEM_TYPE_ITEM,
+                        authority: [],
+                        subMenu: [],
+                    },
                 ],
             },
            /* {

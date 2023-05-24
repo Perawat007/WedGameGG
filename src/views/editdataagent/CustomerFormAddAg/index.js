@@ -54,7 +54,7 @@ const CustomerFormAddAg = forwardRef((props, ref) => {
                 setSubmitting(false)
             }}
         >
-            {({ touched, errors, resetForm }) => (
+            {({ values, touched, errors, resetForm }) => (
                 <Form>
                     <FormContainer>
                         <Tabs defaultValue="personalInfo">
@@ -68,6 +68,7 @@ const CustomerFormAddAg = forwardRef((props, ref) => {
                                     <PersonalInfoForm
                                         touched={touched}
                                         errors={errors}
+                                        values = {values}
                                     />
                                 </TabContent>
                             </div>

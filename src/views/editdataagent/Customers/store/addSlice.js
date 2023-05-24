@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const addSlice = createSlice({
-    name: 'crmCustomers/addAgent',
+    name: 'crmEditAgentCustomers/addAgent',
     initialState: {
         drawerOpen: false,
     },

@@ -79,16 +79,27 @@ const CustomerForm = forwardRef((props, ref) => {
     const idUser = idAdmin.id
     
     const validationSchema = Yup.object().shape({
+
+        id: Yup.string()
+            .min(1, 'Too Short!')
+            .max(30, 'Too Long!')
+            .matches(/^[A-Za-z0-9-]*$/, 'Only Letters & Numbers Allowed')
+            .required('Name Required'),
+        username: Yup.string()
+            .min(1, 'Too Short!')
+            .max(30, 'Too Long!')
+            .matches(/^[A-Za-z0-9-]*$/, 'Only Letters & Numbers Allowed')
+            .required('Name Required'),
         name: Yup.string()
             .min(1, 'Too Short!')
             .max(30, 'Too Long!')
             .matches(/^[A-Za-z0-9-]*$/, 'Only Letters & Numbers Allowed')
             .required('Name Required'),
-        password: Yup.string()
+        /*password: Yup.string()
             .required('Password Required')
             .min(8, 'Too Short!')
             .max(20, 'Too Long!')
-            .matches(/^[A-Za-z0-9_-]*$/, 'Only Letters & Numbers Allowed'),
+            .matches(/^[A-Za-z0-9_-]*$/, 'Only Letters & Numbers Allowed'),*/
         phoneNumber: Yup.string()
             .required('Password Required')
             .matches(/^\d{10}$/, 'Invalid phone number'),
@@ -104,6 +115,7 @@ const CustomerForm = forwardRef((props, ref) => {
             initialValues={{
                 id : customer.id || '',
                 username: customer.username || '',
+                password: '',
                 name: customer.name || '',
                 phoneNumber: customer.contact_number|| '',
                 status: customer.status || '',
@@ -178,6 +190,21 @@ const CustomerForm = forwardRef((props, ref) => {
                     component={Input}
                     prefix={<HiUserCircle className="text-xl" />}
                     disabled 
+                />
+            </FormItem>
+
+            <FormItem
+                label="Password"
+                invalid={errors.password && touched.password}
+                errorMessage={errors.password}
+            >
+                <Field
+                    type="password"
+                    autoComplete="off"
+                    name="password"
+                    placeholder="Password ถ้าไม่มีการเปลี่ยนแปลง สามารถเว้นว่างได้"
+                    component={Input}
+                    prefix={<HiUserCircle className="text-xl" />}
                 />
             </FormItem>
 

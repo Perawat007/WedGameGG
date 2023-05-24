@@ -51,7 +51,7 @@ const CustomerTableFilter = () => {
     const dispatch = useDispatch()
 
     const { status } = useSelector(
-        (state) => state.crmCustomers.data.filterData
+        (state) => state.crmEditAgentCustomers.data.filterData
     )
 
     const onStatusFilterChange = (selected) => {

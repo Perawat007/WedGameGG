@@ -1,40 +1,50 @@
-import React, { forwardRef } from 'react'
+import React, { forwardRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { setCustomerList, putCustomer } from '../store/dataSliceSubAgent'
+import { setCustomerList, updateSubAgent } from '../store/dataSliceSubAgent'
 import { setDrawerClose } from '../store/stateSlice'
 import cloneDeep from 'lodash/cloneDeep'
 import isEmpty from 'lodash/isEmpty'
-import CustomerForm from 'views/membergame/CustomerForm/index'
+import CustomerForm from '../../CustomerForm'
+import { useNavigate } from 'react-router-dom'
+import { Button, Dialog } from 'components/ui'
 
 const CustomerEditContent = forwardRef((_, ref) => {
-    
+
     const dispatch = useDispatch()
+    const navigate = useNavigate();
+
+    const [dialogIsOpen, setIsOpen] = useState(false)
+    const [okay, setOkay] = useState(false)
+    const [dataEdit, setDataEdit] = useState('')
 
     const customer = useSelector(
-        (state) => state.crmCustomers.state.selectedCustomer
+        (state) => state.crmSubAgent.state.selectedCustomer
     )
-    const data = useSelector((state) => state.crmCustomers.data.customerList)
-    const { id } = customer
+    const data = useSelector((state) => state.crmSubAgent.data.customerList)
     const onFormSubmit = (values) => {
         const {
             id,
-            member_code,
+            contact_number,
             name,
             username,
+            password,
             status,
             credit,
-            idUser,
+            level,
+            rank,
         } = values
 
-        const basicInfo = {member_code, name, username, status, credit,idUser }
+        const basicInfo = { contact_number, name, username, password, status, credit, level, rank }
         const personalInfo = {
             id,
-            member_code,
+            contact_number,
             username,
             name,
+            password,
             status,
             credit,
-            idUser
+            level,
+            rank,
         }
         let newData = cloneDeep(data)
         let editedCustomer = {}
@@ -46,22 +56,65 @@ const CustomerEditContent = forwardRef((_, ref) => {
             }
             return elm.personalInfo
         })
-        if (!isEmpty(editedCustomer)) {
-            if (values.name !== '' && values.username !== '' && values.password !== ''& values.contact_number !== '' & values.credit !== '' ){
-                dispatch(putCustomer(values))
-                dispatch(setDrawerClose())
-            }else{
+
+        if (values) {
+            if (values.rank !== '' && values.level !== '') {
+                setIsOpen(true)
+                setDataEdit(values);
+            } else {
                 alert("กรุณากรอกข้อมูลให้ครบ");
-            } 
+            }
         }
+
+
+    }
+
+    const editDataSUb = () => {
+        dispatch(updateSubAgent(dataEdit))
+        navigate(`/editSutAgent/${customer.id_agent}`)
+    }
+
+    const onDialogClose = (e) => {
+        setOkay(false)
+        setIsOpen(false)
+    }
+
+    const onDialogOk = (e) => {
+        setIsOpen(false)
+        editDataSUb();
     }
 
     return (
-        <CustomerForm
-            ref={ref}
-            onFormSubmit={onFormSubmit}
-            customer={customer}
-        />
+        <div>
+            <Dialog
+                isOpen={dialogIsOpen}
+                onClose={onDialogClose}
+                onRequestClose={onDialogClose}
+            >
+                <h5 className="mb-4">การแจ้งเตือน</h5>
+                <p>
+                    คุณต้องการแก้ไขข้อมูลตามนี้หรือไม่
+                </p>
+                <div className="text-right mt-6">
+                    <Button
+                        className="ltr:mr-2 rtl:ml-2"
+                        variant="plain"
+                        onClick={onDialogClose}
+                    >
+                        ยกเลิก
+                    </Button>
+                    <Button variant="solid" onClick={onDialogOk}>
+                        แก้ไข
+                    </Button>
+                </div>
+            </Dialog>
+
+            <CustomerForm
+                ref={ref}
+                onFormSubmit={onFormSubmit}
+                customer={customer}
+            />
+        </div>
     )
 })
 

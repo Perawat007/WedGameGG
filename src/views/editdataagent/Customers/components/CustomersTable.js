@@ -21,7 +21,9 @@ import {
     HiCurrencyDollar,
     HiPencilAlt,
     HiOutlineDocumentText,
-    HiOutlineUserGroup,
+    HiPencil,
+    HiUsers,
+
 } from 'react-icons/hi'
 import { TiFolderOpen } from "react-icons/ti";
 const statusColor = {
@@ -33,11 +35,11 @@ const ActionColumn = ({ row }) => {
     const { textTheme } = useThemeClass()
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const onEdit = () => {
-        dispatch(setDrawerOpen())
-        dispatch(setSelectedCustomer(row))
-    }
 
+    const onEdit = () => {
+        dispatch(setSelectedCustomer(row))
+        navigate(`/editAgent/${row.id}`)
+    }
     const onSubAgent = () => {
         navigate(`/editSutAgent/${row.id}`)
     }
@@ -56,7 +58,7 @@ const ActionColumn = ({ row }) => {
 
     const [viewLogOpen, setViewLogOpen] = useState(false)
     const [rowLogIdLog, setSeeLogId] = useState();
-    
+
     const onViewOpenLog = (rowId) => {
         setSeeLogId(rowId.id)
         setViewLogOpen(true)
@@ -66,12 +68,16 @@ const ActionColumn = ({ row }) => {
         setViewLogOpen(false)
     }
 
+    const Style = {
+        color: 'red',
+    };
+
     return (
         <div className="ltr:text-right rtl:text-left">
             <div>
-                <Button variant="solid" icon={<HiPencilAlt />} onClick={() => onEdit()} />
-                <Button variant="solid" color="green-600" icon={<HiOutlineDocumentText />} onClick={() => onViewOpen(row)} />
-                <Button variant="solid" color="blue-600" icon={<HiOutlineUserGroup />} onClick={() => onSubAgent(row)} />
+                <Button variant="solid" color="green-600" icon={<HiUsers />} onClick={() => onSubAgent(row)} />
+                <Button variant="solid" color="blue-600" icon={<HiPencil />} onClick={() => onEdit()} />
+                <Button variant="solid" color="yellow-500" icon={<HiOutlineDocumentText/>} onClick={() => onViewOpen(row)}/>
             </div>
 
             <Dialog
@@ -79,10 +85,10 @@ const ActionColumn = ({ row }) => {
                 onClose={onDialogClose}
                 onRequestClose={onDialogClose}
             >
-            <div className="w-full">
-                <h1>Log Edit</h1>
-                <LogEditData idLog = {rowIdLog} typeLog = {'agent'} />
-            </div>  
+                <div className="w-full">
+                    <h1>Log Edit</h1>
+                    <LogEditData idLog={rowIdLog} typeLog={'agent'} />
+                </div>
             </Dialog>
 
             <Dialog
@@ -91,14 +97,14 @@ const ActionColumn = ({ row }) => {
                 onRequestClose={onDialogLogClose}
                 bodyClass="p-0"
             >
-            <div className="w-full">
-                <div className="flex flex-col h-full justify-between">
-                    <div className="overflow-y-auto">
-                        <h1>Member</h1>
-                        <LogAgMember idLog = {rowLogIdLog}/>
+                <div className="w-full">
+                    <div className="flex flex-col h-full justify-between">
+                        <div className="overflow-y-auto">
+                            <h1>Member</h1>
+                            <LogAgMember idLog={rowLogIdLog} />
+                        </div>
                     </div>
                 </div>
-            </div>  
             </Dialog>
 
         </div>
@@ -110,7 +116,7 @@ const NameColumn = ({ row }) => {
 
     return (
         <div className="flex items-center">
-           { row.id}
+            {row.id}
         </div>
     )
 }
@@ -124,10 +130,20 @@ const columns = [
             return <NameColumn row={row} />
         },
     },
-     
+
     {
         header: 'UserName',
-        accessorKey: 'username',
+        cell: (props) => {
+            const row = props.row.original
+            return (
+                <div className="flex items-center">
+                    <Avatar size={28} shape="circle" src={"/img/avatars/thumb-1.jpg"} />
+                    <span className="ml-2 rtl:mr-2 capitalize">
+                        {row.username}
+                    </span>
+                </div>
+            )
+        },
     },
 
     {
@@ -136,7 +152,7 @@ const columns = [
             const row = props.row.original
             return (
                 <div className="flex items-center">
-                     <Avatar size={28} shape="circle" src={"/img/avatars/thumb-1.jpg"} />
+                    <Avatar size={28} shape="circle" src={"/img/avatars/thumb-1.jpg"} />
                     <span className="ml-2 rtl:mr-2 capitalize">
                         {row.name}
                     </span>
@@ -151,11 +167,11 @@ const columns = [
             const row = props.row.original
             return (
                 <div className="flex items-center">
-                <HiPhone className="text-emerald-500 text-xl" />
-                <span className="ml-2 rtl:mr-2 capitalize">
-                    {row.contact_number}
-                </span>
-            </div>
+                    <HiPhone className="text-emerald-500 text-xl" />
+                    <span className="ml-2 rtl:mr-2 capitalize">
+                        {row.contact_number}
+                    </span>
+                </div>
             )
         },
     },
@@ -164,7 +180,7 @@ const columns = [
         header: 'Status',
         cell: (props) => {
             const row = props.row.original
-            if (row.status === 'Y'){
+            if (row.status === 'Y') {
                 return (
                     <div className="flex items-center">
                         <HiCheck className="text-emerald-500 text-xl" />
@@ -174,7 +190,7 @@ const columns = [
                     </div>
                 )
             }
-            else{
+            else {
                 return (
                     <div className="flex items-center">
                         <HiMinusCircle className={statusColor['blocked']} />
@@ -183,7 +199,7 @@ const columns = [
                         </span>
                     </div>
                 )
-            
+
             }
         },
     },
@@ -193,7 +209,7 @@ const columns = [
             const row = props.row.original
             return (
                 <div className="flex items-center">
-                    <HiCurrencyDollar className="text-emerald-500 text-xl"/>
+                    <HiCurrencyDollar className="text-emerald-500 text-xl" />
                     <span className="ml-2 rtl:mr-2 capitalize">
                         {row.credit}
                     </span>
@@ -209,14 +225,14 @@ const columns = [
 ]
 const Customers = () => {
     const dispatch = useDispatch()
-    const data = useSelector((state) => state.crmCustomers.data.customerList)
-    const loading = useSelector((state) => state.crmCustomers.data.loading)
+    const data = useSelector((state) => state.crmEditAgentCustomers.data.customerList)
+    const loading = useSelector((state) => state.crmEditAgentCustomers.data.loading)
     const filterData = useSelector(
-        (state) => state.crmCustomers.data.filterData
+        (state) => state.crmEditAgentCustomers.data.filterData
     )
 
     const { pageIndex, pageSize, sort, query, total } = useSelector(
-        (state) => state.crmCustomers.data.tableData
+        (state) => state.crmEditAgentCustomers.data.tableData
     )
 
     const fetchData = useCallback(() => {
@@ -264,8 +280,6 @@ const Customers = () => {
                 onSelectChange={onSelectChange}
                 onSort={onSort}
             />
-            <CustomerEditDialog />
-            <CustomerAddDialog />
         </>
     )
 }

@@ -15,9 +15,13 @@ const CustomersTableTools = () => {
 
     const dispatch = useDispatch()
     const location = useLocation()
+    const navigate = useNavigate()
 
+    const pathA = window.location.pathname;
+    const pathSegments = pathA.split('/');
     const ActionColumn = () => { //สั่งทำงาน Edit
-        dispatch(setDrawerOpen())
+        navigate(`/AddAgentSub/${pathSegments[2]}`) //:agentId/:subagentId
+        //dispatch(setDrawerOpen())
     }
 
     const inputRef = useRef()
