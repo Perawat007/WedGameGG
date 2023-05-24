@@ -163,10 +163,10 @@ const CustomerForm = forwardRef((props, ref) => {
                     name: customer.name || '',
                     contact_number: customer.contact_number || '',
                     status: customer.status || '',
-                    rank: customer.rank || '',
+                    rank: customer.ranksubAgent || '',
                     level: customer.level || '',
-                    credit: customer.credit || '',
-                    currency: customer.currency || '',
+                    credit: customer.creditsub || '',
+                    currency: customer.currencysubagent || '',
                 }}
                 validationSchema={validationSchema}
                 onSubmit={(values, { setSubmitting }) => {
