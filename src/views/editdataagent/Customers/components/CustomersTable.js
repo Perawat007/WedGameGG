@@ -1,5 +1,5 @@
 import React, { useEffect, useCallback, useMemo, useState } from 'react'
-import { Avatar, Badge, Button, Dialog } from 'components/ui'
+import { Avatar, Badge, Dialog, Button } from 'components/ui'
 import { DataTable } from 'components/shared'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
@@ -25,7 +25,7 @@ import {
     HiUsers,
 
 } from 'react-icons/hi'
-import { TiFolderOpen } from "react-icons/ti";
+
 const statusColor = {
     active: 'bg-emerald-500',
     blocked: 'bg-red-500',
@@ -69,7 +69,7 @@ const ActionColumn = ({ row }) => {
     }
 
     const Style = {
-        color: 'red',
+        color: '#FFFF99',
     };
 
     return (
@@ -77,7 +77,7 @@ const ActionColumn = ({ row }) => {
             <div>
                 <Button variant="solid" color="green-600" icon={<HiUsers />} onClick={() => onSubAgent(row)} />
                 <Button variant="solid" color="blue-600" icon={<HiPencil />} onClick={() => onEdit()} />
-                <Button variant="solid" color="yellow-500" icon={<HiOutlineDocumentText/>} onClick={() => onViewOpen(row)}/>
+                <Button style={Style} icon={<HiOutlineDocumentText/>} onClick={() => onViewOpen(row)}/>
             </div>
 
             <Dialog

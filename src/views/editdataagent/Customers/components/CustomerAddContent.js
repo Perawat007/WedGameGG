@@ -70,7 +70,7 @@ const CustomerAddContent = forwardRef((_, ref) => {
             >
                 <h5 className="mb-4">การแจ้งเตือน</h5>
                 <p>
-                    คุณต้องการ Agent ตามนี้ใช้หรือไม่
+                    คุณต้องการเพิ่ม Agent ตามนี้ใช่หรือไม่
                 </p>
                 <div className="text-right mt-6">
                     <Button
@@ -81,7 +81,7 @@ const CustomerAddContent = forwardRef((_, ref) => {
                         ยกเลิก
                     </Button>
                     <Button variant="solid" onClick={onDialogOk}>
-                        แก้ไข
+                        เพิ่ม Agent
                     </Button>
                 </div>
             </Dialog>
