@@ -4,7 +4,7 @@ import CustomerEditContent from './CustomerEditContent'
 import { useDispatch, useSelector } from 'react-redux'
 import { setDrawerClose, setSelectedCustomer } from '../store/stateSlice'
 import { DeleteMemBer } from '../store/dataSliceSubAgent'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate} from 'react-router-dom'
 
 import {
     HiPhone,
@@ -31,9 +31,12 @@ const CustomerEditDialog = () => {
     const customer = useSelector(
         (state) => state.crmSubAgent.state.selectedCustomer
     )
-    
+
     const onDrawerClose = () => {
-        navigate(`/editSutAgent/${customer.id_agent}`)
+        const pathA = window.location.pathname;
+        const pathSegments = pathA.split('/');
+        
+        navigate(`/editSutAgent/${pathSegments[2]}/${customer.id_agent}`)
         dispatch(setSelectedCustomer({}))
     }
 

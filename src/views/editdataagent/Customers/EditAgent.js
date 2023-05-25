@@ -11,6 +11,8 @@ const CollapseMenuItemView2 = () => {
     return (
         <>
             <AdaptableCard className="h-full" bodyClass="h-full">
+                <h4>Agent</h4>
+                <br/>
                 <CustomersTableTools />
                 <CustomersTable />
             </AdaptableCard>

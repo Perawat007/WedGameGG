@@ -54,7 +54,9 @@ const CustomerAddContent = forwardRef((_, ref) => {
     }
     const editDataSUb = () => {
         dispatch(AddSutAgent(dataEdit)) 
-        navigate(`/editSutAgent/${dataEdit.id}`)
+        const pathA = window.location.pathname;
+        const pathSegments = pathA.split('/');
+        navigate(`/editSutAgent/${pathSegments[2]}/${dataEdit.id}`)
     }
 
     const onDialogClose = (e) => {

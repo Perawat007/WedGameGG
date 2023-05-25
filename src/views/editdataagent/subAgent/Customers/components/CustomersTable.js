@@ -33,12 +33,17 @@ const ActionColumn = ({ row }) => {
     const dispatch = useDispatch()
     const navigate = useNavigate();
     const onEdit = () => {
-        navigate(`/editAgentSub/${row.id}`)
+        const pathA = window.location.pathname;
+        const pathSegments = pathA.split('/');
+        navigate(`/editAgentSub/${pathSegments[2]}/${row.name}/${row.id}`)
         dispatch(setSelectedCustomer(row))
     }
 
     const onmemberSubAgent = () => {
-        navigate(`/editSutAgent/memberSub/${row.id_agent}/${row.id}`)
+        const pathA = window.location.pathname;
+        const pathSegments = pathA.split('/');
+
+        navigate(`/memberSub/${pathSegments[2]}/${row.name}/${row.id_agent}/${row.id}`)
     }
 
     const [viewOpen, setViewOpen] = useState(false)

@@ -35,7 +35,7 @@ const CustomerFormAddAg = forwardRef((props, ref) => {
     const pathSegments = pathA.split('/');
 
     const level = [
-        { value: 'Stater', label: 'Stater', icon: HiOutlineUser },
+        { value: 'Starter', label: 'Stater', icon: HiOutlineUser },
         { value: 'VIP', label: 'VIP' },
         { value: 'VVIP', label: 'VVIP' },
     ]
@@ -117,7 +117,7 @@ const CustomerFormAddAg = forwardRef((props, ref) => {
             <Formik
                 innerRef={ref}
                 initialValues={{
-                    id: pathSegments[2] || '',
+                    id: pathSegments[3] || '',
                     username: '',
                     password: '',
                     name:  '',
@@ -293,7 +293,7 @@ const CustomerFormAddAg = forwardRef((props, ref) => {
                                                 label="ยอดเงิน"
                                             >
                                                 <Field
-                                                    type="text"
+                                                    type="Number"
                                                     autoComplete="off"
                                                     name="credit"
                                                     placeholder="ยอดเงิน"

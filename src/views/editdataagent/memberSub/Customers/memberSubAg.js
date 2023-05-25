@@ -21,7 +21,7 @@ const MemberSubAgent = () => {
     const [IdAgent, setIdAgent] = useState([]);
     const [isClickedA, setIsClickedA] = useState(false);
     const [isClickedB, setIsClickedB] = useState(true);
-
+    const [nameSub, setnameSub] = useState('');
    /* const tableData = useSelector((state) => state.crmMemSubAgent.data.customerList)
     console.log(tableData);*/
     /*const fetchData = (data) => {
@@ -37,12 +37,16 @@ const MemberSubAgent = () => {
      )*/
 
     const BackPang = () => {
+        const pathA = window.location.pathname;
+        const pathSegments = pathA.split('/');
         setIsClickedA(true);
         setIsClickedB(false);
-        navigate(`/editSutAgent/${IdAgent}`)
+        navigate(`/editSutAgent/${pathSegments[2]}/${pathSegments[4]}`)
     }
 
     const BackPangAgent = () => {
+        const pathA = window.location.pathname;
+        const pathSegments = pathA.split('/');
         setIsClickedA(true);
         setIsClickedB(false);
         navigate(`/editDataAgent`)
@@ -76,14 +80,15 @@ const MemberSubAgent = () => {
         const pathSegments = pathA.split('/');
         const rquestParam = { id: path }
         setId(rquestParam.id);
-        setIdAgent(pathSegments[3])
+        setIdAgent(pathSegments[5])
+        setnameSub(pathSegments[3])
         //fetchData(rquestParam)
     }, [location.pathname])
 
     return (
 
         <AdaptableCard className="h-full" bodyClass="h-full">
-            <h4>MemberSubAgent Id {id}</h4>
+            <h4>Member ของ SubAgent {nameSub} Id {id}</h4>
             <br/>
             <CustomersTableTools />
             

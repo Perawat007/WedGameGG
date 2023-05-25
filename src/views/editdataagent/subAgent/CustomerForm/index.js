@@ -41,7 +41,7 @@ const PaymentControl = ({ children, ...props }) => {
 }
 
 const level = [
-    { value: 'Stater', label: 'Stater', icon: HiOutlineUser },
+    { value: 'Starter', label: 'Stater', icon: HiOutlineUser },
     { value: 'VIP', label: 'VIP' },
     { value: 'VVIP', label: 'VVIP' },
 ]
@@ -367,7 +367,7 @@ const CustomerForm = forwardRef((props, ref) => {
                                                 label="ยอดเงิน"
                                             >
                                                 <Field
-                                                    type="text"
+                                                    type="Number"
                                                     autoComplete="off"
                                                     name="credit"
                                                     placeholder="ยอดเงิน"

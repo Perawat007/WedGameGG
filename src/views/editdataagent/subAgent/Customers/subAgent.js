@@ -19,7 +19,7 @@ const SubAgent = () => {
     const navigate = useNavigate()
 
     const [id, setId] = useState('');
-    const [IdAgent, setIdAgent] = useState([]);
+    const [nameAgent, setnameAgent] = useState('');
     const [isClickedA, setIsClickedA] = useState(false);
     const [isClickedB, setIsClickedB] = useState(true);
 
@@ -60,7 +60,11 @@ const SubAgent = () => {
         const path = location.pathname.substring(
             location.pathname.lastIndexOf('/') + 1
         )
+
+        const pathA = window.location.pathname;
+        const pathSegments = pathA.split('/');
         const rquestParam = { id: path }
+        setnameAgent(pathSegments[2])
         setId(rquestParam.id);
         //fetchData(rquestParam)
     }, [location.pathname])
@@ -68,7 +72,7 @@ const SubAgent = () => {
     return (
         <>
             <AdaptableCard className="h-full" bodyClass="h-full">
-                <h4>MemberSubAgent Id {id}</h4>
+                <h5>SubAgent... {nameAgent} Id {id}</h5>
                 <br />
                 <CustomersTableTools />
                 <h6 style={Style}>กลับ</h6>

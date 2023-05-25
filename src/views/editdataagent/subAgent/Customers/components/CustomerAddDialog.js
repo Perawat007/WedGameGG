@@ -25,7 +25,7 @@ const CustomerAddDialog = () => {
     const onDrawerClose = () => {
         const pathA = window.location.pathname;
         const pathSegments = pathA.split('/');
-        navigate(`/editSutAgent/${pathSegments[2]}}`)
+        navigate(`/editSutAgent/${pathSegments[2]}/${pathSegments[3]}`)
     }
 
     const formikRef = useRef()

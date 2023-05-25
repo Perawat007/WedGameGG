@@ -35,7 +35,7 @@ const ActionColumn = ({ row }) => {
     const onEdit = () => {
         const pathA = window.location.pathname;
         const pathSegments = pathA.split('/');
-        navigate(`/editMemberSub/${pathSegments[3]}/${pathSegments[4]}`)
+        navigate(`/editMemberSub/${pathSegments[2]}/${pathSegments[3]}/${pathSegments[4]}/${pathSegments[5]}`)
         dispatch(setSelectedCustomer(row))
     }
 

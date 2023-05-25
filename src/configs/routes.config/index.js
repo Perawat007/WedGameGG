@@ -150,17 +150,17 @@ export const protectedRoutes = [
         ),
         authority: [],
     },
-
+    //ดู SubAgent ของ Agent
     {
         key: 'groupMenu.editAgent.item3',
-        path: '/editSutAgent/:subagentId',
+        path: '/editSutAgent/:nameAgent/:subagentId',
         component: React.lazy(() => import('views/editdataagent/subAgent/Customers/subAgent')),
         authority: [],
     },
-
+     //ดู MemberSubAgent ของ Agent
     {
         key: 'groupMenu.editAgent.item3',
-        path: '/editSutAgent/memberSub/:agentId/:subagentId',
+        path: '/memberSub/:nameAgent/:nameSub/:agentId/:subagentId',
         component: React.lazy(() => import('views/editdataagent/memberSub/Customers/memberSubAg')),
         authority: [],
     },
@@ -176,7 +176,7 @@ export const protectedRoutes = [
     //editSubAgent pang
     {
         key: 'groupMenu.editSubAgent.item1',
-        path: '/editAgentSub/:agentId',
+        path: '/editAgentSub/:nameAgent/:nameSubAgent/:agentId',
         component: React.lazy(() => import('views/editdataagent/subAgent/Customers/components/CustomerEditDialog')),
         authority: [],
     },
@@ -184,23 +184,23 @@ export const protectedRoutes = [
     //editMemberSub pang
     {
         key: 'groupMenu.editMemberSub.item1',
-        path: '/editMemberSub/:agentId/:subagentId',
+        path: '/editMemberSub/:nameAgent/:nameSubAgent/:agentId/:subagentId',
         component: React.lazy(() => import('views/editdataagent/memberSub/Customers/components/CustomerEditDialog')),
         authority: [],
     },
 
-    //editAddMemberSub pang
+    //AddMemberSub pang
     {
         key: 'groupMenu.AddMemberSub.item2',
-        path: '/AddMemberSub/:agentId/:subagentId',
+        path: '/AddMemberSub/:nameAgent/:nameSubAgent/:agentId/:subagentId',
         component: React.lazy(() => import('views/editdataagent/memberSub/Customers/components/CustomerAddDialog')),
         authority: [],
     },
 
-    //editAddMemberSub pang
+    //AddSubAgent pang
     {
         key: 'groupMenu.AddMemberSub.item2',
-        path: '/AddAgentSub/:agentId',
+        path: '/AddAgentSub/:nameAgent/:agentId',
         component: React.lazy(() => import('views/editdataagent/subAgent/Customers/components/CustomerAddDialog')),
         authority: [],
     },

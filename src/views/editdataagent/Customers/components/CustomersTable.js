@@ -26,6 +26,7 @@ import {
 
 } from 'react-icons/hi'
 
+
 const statusColor = {
     active: 'bg-emerald-500',
     blocked: 'bg-red-500',
@@ -41,7 +42,7 @@ const ActionColumn = ({ row }) => {
         navigate(`/editAgent/${row.id}`)
     }
     const onSubAgent = () => {
-        navigate(`/editSutAgent/${row.id}`)
+        navigate(`/editSutAgent/${row.name}/${row.id}`)
     }
 
     const [viewOpen, setViewOpen] = useState(false)
@@ -77,7 +78,7 @@ const ActionColumn = ({ row }) => {
             <div>
                 <Button variant="solid" color="green-600" icon={<HiUsers />} onClick={() => onSubAgent(row)} />
                 <Button variant="solid" color="blue-600" icon={<HiPencil />} onClick={() => onEdit()} />
-                <Button style={Style} icon={<HiOutlineDocumentText/>} onClick={() => onViewOpen(row)}/>
+                <Button variant="solid" color="yellow-600" icon={<HiOutlineDocumentText/>} onClick={() => onViewOpen(row)}/>
             </div>
 
             <Dialog

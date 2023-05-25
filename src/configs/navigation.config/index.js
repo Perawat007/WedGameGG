@@ -63,7 +63,7 @@ const navigationConfig = [
                     authority: [],
                     subMenu: [],
                 },
-                {
+                /*{
                     key: 'collapseReports.item4',
                     path: '/receivedPercentage',
                     title: 'Reports 4',
@@ -72,7 +72,7 @@ const navigationConfig = [
                     type: NAV_ITEM_TYPE_ITEM,
                     authority: [],
                     subMenu: [],
-                },
+                },*/
                 {
                     key: 'collapseReports.item5',
                     path: '/userRank',

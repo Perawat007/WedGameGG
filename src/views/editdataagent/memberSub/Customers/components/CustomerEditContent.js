@@ -20,8 +20,6 @@ const CustomerEditContent = forwardRef((_, ref) => {
     const [okay, setOkay] = useState(false)
     const [dataEdit, setDataEdit] = useState('')
 
-
-    console.log(customer);
     const data = useSelector((state) => state.crmMemSubAgent.data.customerList)
     const { id } = customer
     const onFormSubmit = (values) => {
@@ -67,9 +65,9 @@ const CustomerEditContent = forwardRef((_, ref) => {
 
     const editDataSUb = () => {
          dispatch(putCustomer(dataEdit))
-        const pathA = window.location.pathname;
-        const pathSegments = pathA.split('/');
-        navigate(`/editSutAgent/memberSub/${pathSegments[2]}/${pathSegments[3]}`)
+         const pathA = window.location.pathname;
+         const pathSegments = pathA.split('/');
+         navigate(`/memberSub/${pathSegments[2]}/${pathSegments[3]}/${pathSegments[4]}/${pathSegments[5]}`)
         dispatch(setSelectedCustomer({}))
     }
 

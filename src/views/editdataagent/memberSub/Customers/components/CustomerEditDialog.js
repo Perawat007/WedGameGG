@@ -39,7 +39,7 @@ const CustomerEditDialog = () => {
     const onDrawerClose = () => {
         const pathA = window.location.pathname;
         const pathSegments = pathA.split('/');
-        navigate(`/editSutAgent/memberSub/${pathSegments[2]}/${pathSegments[3]}`)
+        navigate(`/memberSub/${pathSegments[2]}/${pathSegments[3]}/${pathSegments[4]}/${pathSegments[5]}`)
         dispatch(setSelectedCustomer({}))
     }
 

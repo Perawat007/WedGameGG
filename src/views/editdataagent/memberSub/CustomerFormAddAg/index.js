@@ -72,7 +72,7 @@ const CustomerFormAddAg = forwardRef((props, ref) => {
         <Formik
             innerRef={ref}
             initialValues={{
-                agent_id: pathSegments[3] || '',
+                agent_id: pathSegments[5] || '',
                 member_code: '',
                 name: '',
                 username: '',

@@ -21,6 +21,7 @@ const CustomersTableTools = () => {
     const pathSegments = pathA.split('/');
     
     const ActionColumn = () => { //สั่งทำงาน Add
+        
         navigate(`/AddAgent`) //:agentId/:subagentId
         //dispatch(setDrawerOpen())
     }

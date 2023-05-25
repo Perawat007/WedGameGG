@@ -71,7 +71,9 @@ const CustomerEditContent = forwardRef((_, ref) => {
 
     const editDataSUb = () => {
         dispatch(updateSubAgent(dataEdit))
-        navigate(`/editSutAgent/${customer.id_agent}`)
+        const pathA = window.location.pathname;
+        const pathSegments = pathA.split('/');
+        navigate(`/editSutAgent/${pathSegments[2]}/${customer.id_agent}`)
     }
 
     const onDialogClose = (e) => {
