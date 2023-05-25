@@ -88,7 +88,7 @@ const MemberSubAgent = () => {
     return (
 
         <AdaptableCard className="h-full" bodyClass="h-full">
-            <h4>Member ของ SubAgent {nameSub} Id {id}</h4>
+            <h4>Member... {nameSub} Id {id}</h4>
             <br/>
             <CustomersTableTools />
             
