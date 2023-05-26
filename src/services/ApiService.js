@@ -29,7 +29,7 @@ const ApiService = {
           resolve(data);
         })
         .catch(error => {
-          console.error('Error:', error);
+          resolve('No Login');
         });
     });
   },
