@@ -1,10 +1,10 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import {getCustomerValis} from 'services/CrmService'
+import { getCustomer, getCommissionGame } from 'services/CrmService'
 
 export const getCryptoDashboardData = createAsyncThunk(
     'cryptoDashboard/data/getCryptoDashboardData',
     async (data) => {
-        const response = await getCustomerValis(data)
+        const response = await getCommissionGame(data)
         return response
     }
 )
@@ -12,17 +12,17 @@ export const getCryptoDashboardData = createAsyncThunk(
 const dataSlice = createSlice({
     name: 'cryptoDashboard/data',
     initialState: {
-        loading: true,
+        loadingAll: true,
         dashboardData: {},
     },
     reducers: {},
     extraReducers: {
         [getCryptoDashboardData.fulfilled]: (state, action) => {
-            state.loading = false
+            state.loadingAll = false
             state.dashboardData = action.payload
         },
         [getCryptoDashboardData.pending]: (state) => {
-            state.loading = true
+            state.loadingAll = true
         },
     },
 })

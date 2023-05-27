@@ -79,7 +79,9 @@ const ApiService = {
             resolve(data);
           })
           .catch(error => {
-            //window.location.reload();
+            localStorage.removeItem('admin');
+            localStorage.removeItem('token');
+            window.location.reload();
             console.error('Error:', error);
           });
       }
@@ -133,6 +135,8 @@ const ApiService = {
           resolve(data);
         })
         .catch(error => {
+          localStorage.removeItem('admin');
+          localStorage.removeItem('token');
           window.location.reload();
           console.error('Error:', error);
         });
@@ -173,6 +177,8 @@ const ApiService = {
           resolve(data);
         })
         .catch(error => {
+          localStorage.removeItem('admin');
+          localStorage.removeItem('token');
           window.location.reload();
           console.error('Error:', error);
         });
@@ -183,7 +189,7 @@ const ApiService = {
   fetchDataSubAg(param) {
     return new Promise((resolve, reject) => {
       //const token = localStorage.getItem("token");
-      fetch(baseURL + 'post/listSubAgent/'+ param.data.idUser, {
+      fetch(baseURL + 'post/listSubAgent/' + param.data.idUser, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -212,7 +218,9 @@ const ApiService = {
           resolve(data);
         })
         .catch(error => {
-          //window.location.reload();
+          localStorage.removeItem('admin');
+          localStorage.removeItem('token');
+          window.location.reload();
           console.error('Error:', error);
         });
     })

@@ -9,14 +9,14 @@ import { injectReducer } from 'store/index'
 import { getCryptoDashboardData } from './store/dataSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { DatePicker } from 'components/ui'
+import DayCommission from './day_commission/indexday'
 
 injectReducer('cryptoDashboard', reducer)
 
 const Daily_overview = () => {
     const dispatch = useDispatch()
     const [dateValue, setDateValue] = useState(new Date())
-    const {
-        dataGame,logGame,logDayGame,
+    const {dataGame,logGame,logDayGame,
     } = useSelector((state) => state.cryptoDashboard.data.dashboardData)
 
     const statisticData = useSelector((state) => state.cryptoDashboard.data.dashboardData)
@@ -31,6 +31,7 @@ const Daily_overview = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
+    //console.log(logDayGame[0]);
     const fetchData = (formattedDateB) => {
         dispatch(getCryptoDashboardData(formattedDateB));
     }
@@ -50,28 +51,31 @@ const Daily_overview = () => {
         const banDate = [0]
         return banDate.includes(date.getDate())
     }
-
-    return (
-        <div className="flex flex-col gap-4 h-full">
-            <div className="flex flex-col lg:flex-row lg:items-center gap-3">
-                <DatePicker
-                   value={dateValue}
-                   placeholder="กรุณาเลือกวัน"
-                   onChange={onCertainPeriodChange}
-                   disableDate={disableCertainDate}
-                />
+    if(logDayGame !== undefined)
+    {
+        return (
+            <div className="flex flex-col gap-4 h-full">
+                <div className="flex flex-col lg:flex-row lg:items-center gap-3">
+                    <DatePicker
+                       value={dateValue}
+                       placeholder="กรุณาเลือกวัน"
+                       onChange={onCertainPeriodChange}
+                       disableDate={disableCertainDate}
+                    />
+                </div>
+              <div className="grid grid-cols-1 xl:grid-cols-11 gap-4">
+                     <FastTrade className="2xl:col-span-3 xl:col-span-4" />
+                </div>
+            <Holding data={logDayGame[0]} dataview={statisticData} />
+            <DayCommission />
+            <MarketValue
+                className="2xl:col-span-8 xl:col-span-7"
+                data={logGame}
+            />
             </div>
-          <div className="grid grid-cols-1 xl:grid-cols-11 gap-4">
-                 <FastTrade className="2xl:col-span-3 xl:col-span-4" />
-            </div>
-        <Holding data={logDayGame} dataview={statisticData} />
-
-        <MarketValue
-            className="2xl:col-span-8 xl:col-span-7"
-            data={logGame}
-        />
-        </div>
-    )
+        )
+    }
+    
 }
 
 export default Daily_overview

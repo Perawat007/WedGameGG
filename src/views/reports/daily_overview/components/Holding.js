@@ -8,8 +8,8 @@ import {
     HiOutlineUserGroup,
 } from 'react-icons/hi'
 import dayjs from 'dayjs'
-const HoldingCard = ({ data = {} }) => {
 
+const HoldingCard = ({ data = {} }) => {
     return (
         <Card className="bg-gray-50 dark:bg-gray-700 border-0">
             <div className="flex items-center justify-between my-2">
@@ -88,10 +88,10 @@ const StatisticCard = ({ data ,avatarClass , label, valuePrefix, date }) => {
 
 const Holding = ({ data = [], dataview }) => {
     const navigate = useNavigate()
+
     const startDate = useSelector(
         (state) => state.cryptoDashboard.state.startDate
     )
-
     return (
         <Card>
             <div className="flex justify-between items-center mb-4">
@@ -99,7 +99,7 @@ const Holding = ({ data = [], dataview }) => {
             </div>
             <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 mb-6">
                 {data.map((holding) => (
-                    <HoldingCard key={holding.id} data={holding} />
+                    <HoldingCard key={holding.game_id} data={holding} />
                 ))}
 
             <StatisticCard
