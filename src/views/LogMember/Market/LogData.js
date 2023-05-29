@@ -44,7 +44,6 @@ const LogData = (id) => {
     const fetchData = () => {
         const pathA = window.location.pathname;
         const pathSegments = pathA.split('/');
-        console.log(pathSegments[6])
         dispatch(getMarketData({ tab: selectedTab, ...tableData, id: pathSegments[6] }))
     }
 
