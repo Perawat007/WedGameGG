@@ -1,4 +1,4 @@
-import React, { forwardRef, useState } from 'react'
+import React, { forwardRef, useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { AddSutAgent } from '../store/dataSliceSubAgent'
 import { setDrawerClose } from '../store/addSlice'
@@ -7,6 +7,7 @@ import isEmpty from 'lodash/isEmpty'
 import CustomerFormAddAg from '../../CustomerFormAddAg'
 import { useNavigate } from 'react-router-dom'
 import { Button, Dialog } from 'components/ui'
+import { apiGetGame } from 'services/CrmService'
 
 const CustomerAddContent = forwardRef((_, ref) => {
     
@@ -17,7 +18,18 @@ const CustomerAddContent = forwardRef((_, ref) => {
     const [dialogIsOpen, setIsOpen] = useState(false)
     const [okay, setOkay] = useState(false)
     const [dataEdit, setDataEdit] = useState('')
-    const onFormSubmit = (values) => {
+
+    const [data, setData] = useState([])
+
+    useEffect(() => {
+        fetchData();
+    }, [])
+    const fetchData = async () => {
+        const success = await apiGetGame()
+        setData(success.data);
+    }
+
+    const onFormSubmit = (values, dataPercent, dataActive) => {
         const {
             id,
             contact_number,
@@ -29,7 +41,7 @@ const CustomerAddContent = forwardRef((_, ref) => {
             rank,
         } = values
 
-        const basicInfo = {contact_number, name, username, password, credit,level, rank}
+        const basicInfo = {id, contact_number, name, username, password, credit,level, rank, dataPercent, dataActive}
         const personalInfo = {
             id,
             contact_number,
@@ -45,7 +57,7 @@ const CustomerAddContent = forwardRef((_, ref) => {
         if (values) {
             if (values.rank !== "" && values.level !== ""){
                 setIsOpen(true)
-                setDataEdit(values);
+                setDataEdit(basicInfo);
             }
             else{
                 alert("กรุณากรอกข้อมูลให้ครบ");
@@ -98,6 +110,7 @@ const CustomerAddContent = forwardRef((_, ref) => {
                 ref={ref}
                 onFormSubmit={onFormSubmit}
                 customer={customer}
+                data = {data}
             />
         </div>
     )

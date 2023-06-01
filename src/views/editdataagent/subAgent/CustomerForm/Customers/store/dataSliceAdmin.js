@@ -19,6 +19,7 @@ export const getCustomers = createAsyncThunk(
     'crmCustomers/data/getCustomers',
     async (params) => {
         const response = await apiGetCrmMember(params)
+        console.log(response);
         return response
         
     }

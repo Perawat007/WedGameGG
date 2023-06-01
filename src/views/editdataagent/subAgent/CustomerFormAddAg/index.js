@@ -22,7 +22,7 @@ import {
 } from 'react-icons/hi'
 import { AdaptableCard } from 'components/shared'
 import './DropdownList.css';
-
+import FormsAddPercent from './FormPercent'
 dayjs.extend(customParseFormat)
 
 const { TabNav, TabList, TabContent } = Tabs
@@ -34,6 +34,8 @@ const CustomerFormAddAg = forwardRef((props, ref) => {
     const pathA = window.location.pathname;
     const pathSegments = pathA.split('/');
 
+    let dataPercent = [];
+    let dataActive = []; 
     const level = [
         { value: 'Starter', label: 'Stater', icon: HiOutlineUser },
         { value: 'VIP', label: 'VIP' },
@@ -112,6 +114,11 @@ const CustomerFormAddAg = forwardRef((props, ref) => {
         )
     }
 
+    const createPercent = (dataPercentarray, dataActivearray)=>{
+        dataPercent = dataPercentarray 
+        dataActive = dataActivearray
+    }
+
     return (
         <>
             <Formik
@@ -129,7 +136,7 @@ const CustomerFormAddAg = forwardRef((props, ref) => {
                 }}
                 validationSchema={validationSchema}
                 onSubmit={(values, { setSubmitting }) => {
-                    onFormSubmit?.(values)
+                    onFormSubmit?.(values, dataPercent, dataActive)
                     setSubmitting(false)
                 }}
             >
@@ -328,6 +335,10 @@ const CustomerFormAddAg = forwardRef((props, ref) => {
                     )
                 }}
             </Formik>
+            <FormsAddPercent
+                data={props.data}
+                createPercent ={createPercent}
+            />
         </>
     )
 })

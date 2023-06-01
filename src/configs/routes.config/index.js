@@ -181,6 +181,14 @@ export const protectedRoutes = [
         authority: [],
     },
 
+    //editPercentSutAgent pang
+    {
+        key: 'groupMenu.editSubAgent.item1',
+        path: '/editPercentSutAgent/:nameAgent/:nameSubAgent/:id/:agentId',
+        component: React.lazy(() => import('views/editdataagent/subAgent/FormsEditPercent/EditPercent')),
+        authority: [],
+    },
+
     //editMemberSub pang
     {
         key: 'groupMenu.editMemberSub.item1',

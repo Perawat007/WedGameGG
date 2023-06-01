@@ -1,5 +1,5 @@
 import React, { useEffect, useCallback, useMemo, useState } from 'react'
-import { Avatar, Badge, Button, Dialog } from 'components/ui'
+import { Avatar, Button, Dialog } from 'components/ui'
 import { DataTable } from 'components/shared'
 import { useDispatch, useSelector } from 'react-redux'
 import { getCustomers, setTableData } from '../store/dataSliceAdmin'
@@ -7,9 +7,6 @@ import {
     setSelectedCustomer,
     setDrawerOpen,
 } from '../store/stateSlice'
-import useThemeClass from 'utils/hooks/useThemeClass'
-import CustomerEditDialog from './CustomerEditDialog'
-import CustomerAddDialog from './CustomerAddDialog'
 import cloneDeep from 'lodash/cloneDeep'
 import LogData from 'views/LogMember/Market/LogData'
 import LogEditData from 'views/LogEditUser/Market/LogEditData'
@@ -97,48 +94,7 @@ const ActionColumn = ({ row }) => {
     )
 }
 
-/*const ActionColumnLog = (row) => {
-    const [viewLogOpen, setViewLogOpen] = useState(false)
-    const [rowLogIdLog, setSeeLogId] = useState();
-
-    const onViewOpenLog = (rowId) => {
-        setSeeLogId(rowId.rowLog.id)
-        setViewLogOpen(true)
-    }
-
-    const onDialogLogClose = () => {
-        setViewLogOpen(false)
-    }
-
-    return (
-        <>
-        <div className="ltr:text-right rtl:text-left">
-            <Button variant="solid" color="yellow-600" icon={<RiFileHistoryFill />} onClick={() => onViewOpenLog(row)}/>
-        </div>
-
-        <Dialog
-                isOpen={viewLogOpen}
-                onClose={onDialogLogClose}
-                onRequestClose={onDialogLogClose}
-                bodyClass="p-0"
-            >
-            <div className="w-full">
-                <div className="flex flex-col h-full justify-between">
-                    <div className="overflow-y-auto">
-                        <h1>Log</h1>
-                        <LogData idLog = {rowLogIdLog} />
-                    </div>
-                </div>
-            </div>  
-        </Dialog>
-    </>
-    )
-}*/
-
-
 const NameColumn = ({ row }) => {
-    const { textTheme } = useThemeClass()
-
     return (
         <div className="flex items-center">
            { row.id}
@@ -292,6 +248,7 @@ const Customers = () => {
     )
 
     const onPaginationChange = (page) => {
+        console.log('on');
         const newTableData = cloneDeep(tableData)
         newTableData.pageIndex = page
         dispatch(setTableData(newTableData))
@@ -323,8 +280,6 @@ const Customers = () => {
                 onSelectChange={onSelectChange}
                 onSort={onSort}
             />
-            <CustomerEditDialog />
-            <CustomerAddDialog />
         </>
     )
 }

@@ -1,6 +1,6 @@
 
-//const baseURL = 'http://localhost:5000/'
-const baseURL = 'https://relaxtimecafe.fun/'
+const baseURL = 'http://localhost:5000/'
+//const baseURL = 'https://relaxtimecafe.fun/'
 const ApiPutuser = {
 
      //data Delete
@@ -85,6 +85,29 @@ const ApiPutuser = {
           });
       })
     },  
+
+    putPercentSubAgent(param) {
+      return new Promise((resolve, reject) => {
+        fetch(baseURL + 'post/EditPercentSubAgent/',{
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            id : param.id,
+            dataPercent : param.data,
+            dataActive : param.dataActive,
+          })
+        })
+          .then(response => response.json())
+          .then(data => {
+            resolve(data);
+          })
+          .catch(error => {
+            console.error(error);
+          });
+      })
+    },
 }
 
 export default ApiPutuser

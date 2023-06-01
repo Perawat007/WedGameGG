@@ -8,12 +8,11 @@ import {
     setDrawerOpen,
 } from '../store/stateSlice'
 import useThemeClass from 'utils/hooks/useThemeClass'
-import CustomerEditDialog from './CustomerEditDialog'
-import CustomerAddDialog from './CustomerAddDialog'
 import cloneDeep from 'lodash/cloneDeep'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import LogData from 'views/LogMember/Market/LogData'
 import LogEditData from 'views/LogEditUser/Market/LogEditData'
+import { FiPercent } from "react-icons/fi";
 import {
     HiCheck,
     HiMinusCircle,
@@ -46,6 +45,12 @@ const ActionColumn = ({ row }) => {
         navigate(`/memberSub/${pathSegments[2]}/${row.name}/${row.id_agent}/${row.id}`)
     }
 
+    const onEditPercent = () => {
+        const pathA = window.location.pathname;
+        const pathSegments = pathA.split('/');
+        navigate(`/editPercentSutAgent/${pathSegments[2]}/${row.name}/${row.id_agent}/${row.id}`)
+    }
+
     const [viewOpen, setViewOpen] = useState(false)
     const [rowIdLog, setLogId] = useState();
 
@@ -75,6 +80,7 @@ const ActionColumn = ({ row }) => {
             <div>
                 <Button variant="solid" color="green-600" icon={<HiOutlineUserGroup />} onClick={() => onmemberSubAgent()} />
                 <Button variant="solid" color="blue-600" icon={<HiPencil />} onClick={() => onEdit()} />
+                <Button variant="solid" color="red-600" icon={<FiPercent />} onClick={() => onEditPercent()} />
                 <Button variant="solid" color="yellow-600" icon={<HiOutlineDocumentText />} onClick={() => onViewOpen(row)} />
             </div>
 
@@ -255,22 +261,27 @@ const Customers = () => {
     const filterData = useSelector(
         (state) => state.crmSubAgent.data.filterData
     )
-
+    const location = useLocation()
+    const path = location.pathname.substring(
+        location.pathname.lastIndexOf('/') + 1
+    )
+    const rquestParam = { id: path }
+    const idUser = rquestParam.id
     const { pageIndex, pageSize, sort, query, total } = useSelector(
         (state) => state.crmSubAgent.data.tableData
     )
 
-    /*const fetchData = useCallback(() => {
-        dispatch(getCustomers({ pageIndex, pageSize, sort, query, filterData }))
-    }, [pageIndex, pageSize, sort, query, filterData, dispatch])
+    const fetchData = useCallback(() => {
+        dispatch(getCustomers({ pageIndex, pageSize, sort, query, filterData, idUser}))
+    }, [pageIndex, pageSize, sort, query, filterData, idUser, dispatch])
 
     useEffect(() => {
         fetchData()
-    }, [fetchData, pageIndex, pageSize, sort, filterData])*/
+    }, [fetchData, pageIndex, pageSize, sort, filterData, idUser])
 
     const tableData = useMemo(
-        () => ({ pageIndex, pageSize, sort, query, total }),
-        [pageIndex, pageSize, sort, query, total]
+        () => ({ pageIndex, pageSize, sort, query, total, idUser}),
+        [pageIndex, pageSize, sort, query, total, idUser]
     )
 
     const onPaginationChange = (page) => {

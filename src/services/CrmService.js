@@ -29,7 +29,19 @@ export async function apiGetSubAgent(data) {
     })
 }
 
-//get SubAgent
+//get apiGetGame
+export async function apiGetGame() {
+    return ApiService.getDataGame()
+}
+
+//get percentageGameSubAgent
+export async function apiPercentageGameSubAgent(data) {
+    return ApiService.getPercentDataGame({
+        data
+    })
+}
+
+//get MemberSubAgent
 export async function apiGetMemberSubAgent(data) {
     return ApiService.fetchDataSubMemberAg({
         data
@@ -120,6 +132,13 @@ export async function apPutDeleteMember(data, type) {
     return ApiPutuser.deleteData({
         data,
         type
+    })
+}
+
+//PutPercentSubAgent
+export async function editPercentSubAgent(data) {
+    return ApiPutuser.putPercentSubAgent({
+        data
     })
 }
 

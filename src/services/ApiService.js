@@ -1,7 +1,7 @@
 import BaseService from './BaseService'
 
-//const baseURL = 'http://localhost:5000/'
-const baseURL = 'https://relaxtimecafe.fun/'
+const baseURL = 'http://localhost:5000/'
+//const baseURL = 'https://relaxtimecafe.fun/'
 const ApiService = {
   //Login Admin
   loginAdmin(param) {
@@ -393,7 +393,9 @@ const ApiService = {
           credit: param.data.credit,
           currency: param.data.currency,
           positiontype: param.data.rank,
-          level: param.data.level
+          level: param.data.level,
+          dataPercent: param.data.dataPercent,
+          dataActive: param.data.dataActive
         })
       })
         .then(response => {
@@ -545,6 +547,38 @@ const ApiService = {
         .catch(error => console.error(error))
     })
   },
+
+  //GetDataGame
+  getDataGame() {
+    return new Promise((resolve, reject) => {
+      const tokenA = localStorage.getItem("token");
+      fetch(baseURL + 'post/game', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${tokenA}`
+        }
+      })
+        .then(response => response.json())
+        .then(data => {
+          resolve(data);
+        })
+        .catch(error => console.error(error))
+    })
+  },
+
+  //GetPercentDataGame
+  getPercentDataGame(param) {
+    return new Promise((resolve, reject) => {
+      fetch(baseURL + 'post/GetPercentSubAgent/' + param.data.id)
+        .then(response => response.json())
+        .then(data => {
+          resolve(data);
+        })
+        .catch(error => console.error(error))
+    })
+  },
+
 
   getValusDataPost(param) {
     return new Promise((resolve, reject) => {
