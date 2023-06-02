@@ -44,24 +44,26 @@ const level = [
     }
 ]
 
+const dataPercentarray = [];
+const dataActivearray = [];
+
 const FormsEditPercent = ({ data = [], valus = '' }) => {
     const location = useLocation()
     const navigate = useNavigate()
-    const dataPercentarray = [];
-    const dataActivearray = [];
     const [sorting, setSorting] = React.useState([])
     const popupRef = useRef(null);
-    console.log('on');
-    if (popupRef.current) {
-        popupRef.current.style.display = 'none';
-    }
+    useEffect(() => {
+        if (popupRef.current) {
+            popupRef.current.style.display = 'none';
+        }
+    }, []);
+
     if (dataPercentarray.length === 0) {
         for (let i = 0; i < valus; i++) {
             const dataPercentStart = {
                 namegame: data[i].gamename,
                 PercentValus: data[i].hold_percentage,
             };
-
             const dataActiveStart = {
                 namegame: data[i].gamename,
                 activeValue: data[i].status_game,
@@ -102,22 +104,25 @@ const FormsEditPercent = ({ data = [], valus = '' }) => {
             setNewValues(90 - valusPercent + '%')
         }
         return (
-            <div>
-                <div>
+            <div className="container">
+                <div className="select-container">
+                    <p>เปอร์เซ็นของเรา</p>
                     <Select
                         defaultValue={valueStart[0].options[0]}
                         onChange={handleChanges}
                         placeholder="Type something..."
                         options={level}
                     />
-                </div>
-                <div className="flex items-center">
+                </div >
+                <div className="input-container">
+                    <p>ส่วนแบ่ง</p>
                     <Input
                         value={values}
                         onChange={handleSelectChange}
                         placeholder={'0%'}
                         disabled
                         readOnly
+                        className="input-container_input"
                     />
                 </div>
             </div>
@@ -180,10 +185,11 @@ const FormsEditPercent = ({ data = [], valus = '' }) => {
             {
                 header: 'ลำดับ',
                 cell: (props) => {
-
+                    let number = props.row.id;
+                    const myNumber = parseFloat(number);
                     return (
                         <div className="flex items-center gap-3">
-                            <span>{1}</span>
+                            <span>{myNumber + 1}</span>
                         </div>
                     )
                 },
@@ -227,7 +233,7 @@ const FormsEditPercent = ({ data = [], valus = '' }) => {
             },
 
             {
-                header: 'ให้ถือเปอร์เซนต์   เปอร์เซนต์ของเรา',
+                header: 'การกำหนดส่วน',
                 cell: (props) => {
                     return (
                         <div>
@@ -250,7 +256,7 @@ const FormsEditPercent = ({ data = [], valus = '' }) => {
         getCoreRowModel: getCoreRowModel(),
         getSortedRowModel: getSortedRowModel(),
     })
-    
+
     const togglePopup = async () => {
         const path = location.pathname.substring(
             location.pathname.lastIndexOf('/') + 1
@@ -263,6 +269,7 @@ const FormsEditPercent = ({ data = [], valus = '' }) => {
             dataActive: dataActivearray,
         })
         console.log(dataPercent)
+
         const success = await updatePercent(dataPercent)
         if (success.message) {
             const pathA = window.location.pathname;
